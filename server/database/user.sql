@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    userId serial PRIMARY KEY NOT NULL,
+    userName VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(15) NOT NULL,
+    city VARCHAR(30) NOT NULL,
+    PASSWORD TEXT NOT NULL
+);

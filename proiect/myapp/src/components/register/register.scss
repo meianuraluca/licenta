@@ -1,0 +1,223 @@
+@mixin error-input {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+    box-sizing: border-box;
+    margin-top:3%;
+  }
+@mixin valid-input {
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding: 6px 30px;
+    box-sizing: border-box;
+    margin-top:10%;
+  }
+@mixin valid-label {
+    position:absolute;
+    left: 0;
+    top: 60%;
+    color:#222;   
+}
+@mixin error-label {
+    position:absolute;
+    left: 0;
+    top: 40%;
+    color:#222;   
+}
+
+body{
+    font-size: 13px;
+    line-height: 1.8;
+    color: #222;
+    background: #f8f8f8;
+    font-weight: 400;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+.sign-up{
+    margin-top: 1%;
+}
+.register{
+    margin-top: 3%;
+}
+.register-image{
+    margin-top: 3%;
+
+}
+.signup-container {
+    width: 900px;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px; 
+}
+
+.signup-content{
+    padding:3% 0;
+    display: flex;
+    flex-direction: row;
+}
+
+.signup-form{
+    margin-left:7%;
+    margin-right: 7%;
+    padding-left: 4%;
+    flex-basis: 50%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.signup-form-group{
+    position: relative;
+    margin-bottom: 0px;
+    overflow: hidden;
+}
+.signup-form-group:last-child{
+    margin-bottom: 0;
+}
+
+.signup-form-group .lab-{
+    @include valid-label()
+}
+.signup-form-group .inpt-{
+    @include valid-input()
+}
+
+.signup-icons{
+    font-size: 18px;
+    display: inline-block;
+    text-rendering: auto;
+}
+.signup-form-title{
+    margin-bottom: 33px;
+    line-height: 1.66;
+    margin: 0;
+    padding-bottom: 3%;
+    font-weight: 700;
+    color: #222;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 36px;
+}
+
+#signup{
+    margin-top: 7%;
+}
+.form-submit:hover{
+    background:#4292dc;
+}
+.form-submit{
+    padding-top: 6%;
+    display: inline-block;
+    background:#6dabe4;
+    color:#fff;
+    border: none;
+    width: auto;
+    padding: 15px 39px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-form-submit:hover:hover{
+    background:#4292dc;
+}
+.register-form-submit{
+    padding-top: 40%;
+    display: inline-block;
+    background:#6dabe4;
+    color:#fff;
+    border: none;
+    width: auto;
+    padding: 15px 39px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.signup-image{
+    margin-top: 8%;
+}
+
+.changePage{
+    font-size: 20px;
+    color:#222;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+.signup-form-group .inpt-name{
+    @include error-input()
+}
+.signup-form-group .inpt-email{
+    @include error-input()
+}
+
+.signup-form-group .inpt-phone{
+    @include error-input()
+}
+.signup-form-group .inpt-city{
+    @include error-input()
+}
+.signup-form-group .inpt-passwordLung{
+    @include error-input()
+}
+.signup-form-group .inpt-passwordMaj{
+    @include error-input()
+}
+.signup-form-group .inpt-passwordMin{
+    @include error-input()
+}
+.signup-form-group .inpt-passwordNr{
+    @include error-input()
+}
+
+.signup-form-group .inpt-required{
+    @include error-input()
+}
+
+.signup-form-group .lab-required{
+    @include error-label()
+}
+
+.signup-form-group .lab-name{
+    @include error-label()
+}
+.signup-form-group .lab-email{
+    @include error-label()
+}
+.signup-form-group .lab-phone{
+    @include error-label()
+}
+.signup-form-group .lab-city{
+    @include error-label()
+}
+.signup-form-group .lab-passwordLung{
+    @include error-label()
+}
+.signup-form-group .lab-passwordMaj{
+    @include error-label()
+}
+.signup-form-group .lab-passwordMin{
+    @include error-label()
+}
+.signup-form-group .lab-passwordNr{
+    @include error-label()
+}
+
+#register{
+    margin-top: 15%;
+}
+
+

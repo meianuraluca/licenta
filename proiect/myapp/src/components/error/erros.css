@@ -1,0 +1,12 @@
+.style-error{
+    font-size: 10px;
+    font-style: italic;
+    color:red;
+    margin: 0;
+    padding:0;
+}
+.error-container{
+    margin: 0;
+    padding: 10px 0 0 0 ;
+    align-items: flex-start;
+}

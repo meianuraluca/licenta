@@ -1,0 +1,171 @@
+import psycopg2
+import json
+import psycopg2.extras
+from flask import jsonify
+from flask import Flask, render_template, request, send_file,jsonify
+from flask_jwt_extended import (JWTManager, create_access_token, get_jwt_identity, jwt_required)
+from flask_cors import CORS
+from function.crypto import *
+from datetime import datetime
+import base64
+from function.query import *
+
+
+app = Flask(__name__, template_folder="templates")
+app.config['JWT_SECRET_KEY'] = 'please-change-me'
+jwt = JWTManager(app)
+CORS(app)
+
+
+def connectToDB():
+    connectionString = 'dbname=postgres user=postgres password=licenta host=localhost'
+    try:
+        return psycopg2.connect(connectionString)
+    except:
+        print("Can't connect to database")
+
+@app.route('/login', methods=["POST"])
+def login():
+    login_json = request.get_json()
+    if not  login_json: 
+        return jsonify({'msg':'Missing json'}),400
+    email = login_json.get('email')
+    password = login_json.get('password')
+    if not email:
+        return jsonify({'msg':'Email is missing'}),400
+    if not password:
+        return jsonify({'msg':'Password is missing'}),400
+    user_password = getPassword(email)
+    if not user_password or verify_password(user_password,password):
+        return jsonify({'msg':'Bad username or password'}),401
+    access_token = create_access_token(identity=email)
+    return jsonify({'access_token':access_token}),200
+
+@app.route('/protected',methods=['GET'])
+@jwt_required
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
+@app.route('/announce', methods=["POST"])
+def addAnnouce():
+    print("inserez un anunt")
+    response = request.get_json()
+    conn = connectToDB()
+    cursor = conn.cursor()
+    today = datetime.now()
+    cursor.execute("INSERT INTO announces (userId,announceDate,title,category,announceDescription,personContact,announceEmail, phone,userLocation) VALUES(%s, %s, %s,%s,%s,%s,%s,%s,%s) RETURNING announceId", (2,today,response[0],response[1],response[2],response[3],response[4],response[5],response[6]))
+    results = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return str(results[0][0])
+
+
+@app.route('/images', methods=["POST"])
+def index():
+    print("in the upload file")
+    idd = request.form.to_dict()
+    iddValue = idd['idd']
+    file = request.files['file'].read()
+    conn = connectToDB()
+    cursor = conn.cursor()
+    today = datetime.now()
+    cursor.execute("INSERT INTO imagesAdd (announceId,image) VALUES(%s, %s) RETURNING announceId", (iddValue,file))
+    results = cursor.fetchall()
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return "done"
+
+@app.route('/listAnnounces')
+def showAnnounces():
+    print("afisez anunturil")
+    conn = connectToDB()
+    cur = conn.cursor()
+    try:
+        cur.execute("Select announceId,title,announceDescription from announces")
+    except:
+        print("Error executing select")
+    results = cur.fetchall()
+    
+    json_data = [] 
+    row_headers=[x[0] for x in cur.description]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
+    return json.dumps(json_data)
+
+@app.route('/listAssociations')
+def showAssociations():
+    print("afisez asociatii")
+    conn = connectToDB()
+    cur = conn.cursor()
+    try:
+        cur.execute("Select associationId,associationName,associationsDescription from associations")
+    except:
+        print("Error executing select")
+    results = cur.fetchall()
+    json_data = [] 
+    row_headers=[x[0] for x in cur.description]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
+    return json.dumps(json_data)
+
+@app.route('/registerUser', methods = ['POST'])
+def registerUser():   
+    login_json = request.get_json()
+    if not  login_json: 
+        return jsonify({'msg':'Missing json'}),400
+    email = login_json.get('email')
+    password = login_json.get('password')
+    phone = login_json.get('phone')
+    city = login_json.get('city')
+    name = login_json.get('name')
+    if not email:
+        return jsonify({'msg':'Email is missing'}),400
+    if not phone:
+        return jsonify({'msg':'Phone is missing'}),400
+    if not password:
+        return jsonify({'msg':'Password is missing'}),400
+    if not name:
+        return jsonify({'msg':'Name is missing'}),400
+    if not city :
+        return jsonify({'msg':'City is missing'}),400
+    exitUser = checkUser(email)
+    if exitUser == False:
+        addUserDb(name,email,phone,city,password)
+        access_token = create_access_token(identity=email)
+        return jsonify({'access_token':access_token}),200
+    else:
+        return jsonify({'msg':'The user already exists'}),400
+
+@app.route('/registerAssociation', methods = ['POST'])
+def registerAssociation():   
+    print("adaug asociatia")
+    login_json = request.get_json()
+    print(login_json)
+    if not  login_json: 
+        return jsonify({'msg':'Missing json'}),400
+    email = login_json.get('email')
+    password = login_json.get('password')
+    phone = login_json.get('phone')
+    name = login_json.get('name')
+    if not email:
+        return jsonify({'msg':'Email is missing'}),400
+    if not phone:
+        return jsonify({'msg':'Phone is missing'}),400
+    if not password:
+        return jsonify({'msg':'Password is missing'}),400
+    if not name:
+        return jsonify({'msg':'Name is missing'}),400
+    exitAssoc = checkAssociation(email)
+    if exitAssoc == False:
+        print('adaug in baza de date')
+        addAssociationDb(name,email,phone,password)
+        access_token = create_access_token(identity=email)
+        return jsonify({'access_token':access_token}),200
+    else:
+        return jsonify({'msg':'The association already exists'}),400
+
+if __name__ == "__main__":
+    app.run()

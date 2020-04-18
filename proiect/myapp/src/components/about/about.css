@@ -1,0 +1,27 @@
+.about-container{
+    text-align: center;
+    width: 100%;
+    height: 80vh;
+
+}
+.about-content{
+    margin-left:15% ;
+    margin-right: 15%;
+    display: flex;
+    flex-direction: row;
+    border:1px solid #ccc;
+    box-shadow:5px 5px 5px 5px #999;
+
+}
+.about-content-text{
+    text-align: center;
+    flex-basis: 40%;
+    margin-right: 5%;
+    margin-left: 5%;
+    
+}
+.about-content-image{
+    width: 40%;
+    height: 600px;
+    flex-basis: 50%;
+}

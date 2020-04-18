@@ -1,0 +1,23 @@
+
+.App {
+  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  background-image: url("./images/01.jpg");
+  background-repeat: repeat-y;
+  background-size:cover ;
+  background-position: center;
+  // background-attachment: fixed;
+
+}
+
+
+.menu{
+  flex-basis: 100%;
+}
+
+
+

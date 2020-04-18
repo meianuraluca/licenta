@@ -1,0 +1,129 @@
+/* by Jamal Hassouni*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+body{
+  margin: 0;
+  padding: 0;
+ font-family: 'Roboto', sans-serif !important;
+}
+section{
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          padding: 0;
+  //margin-top: 2%;
+  margin-left: 2%;
+}
+.card{
+  text-align: center;
+  position: relative;
+  width: 220px;
+  height: 240px;
+  background: linear-gradient(-45deg,#24ff72,#9a4eff);
+  border-radius: 15px;
+  margin:0px 0px 30px 50px;
+  padding: 5px 20px;
+  -webkit-box-shadow: 0 10px 15px rgba(0,0,0,.1) ;
+          box-shadow: 0 10px 15px rgba(0,0,0,.1) ;
+-webkit-transition: .5s;
+transition: .5s;
+}
+.card:hover{
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+
+.title .fa{
+  color:#fff;
+  font-size: 60px;
+  width: 80px;
+  height: 60px;
+  border-radius:  50%;
+  text-align: center;
+  line-height: 100px;
+  -webkit-box-shadow: 0 10px 10px rgba(0,0,0,.1) ;
+          box-shadow: 0 10px 10px rgba(0,0,0,.1) ;
+
+}
+.hand{
+    width: 80px;
+    height: 60px;
+}
+.title h2 {
+  position: relative;
+  margin: 20px  0 0;
+  margin-bottom: 15px;
+  padding: 0;
+  color: #fff;
+  font-size: 28px;
+ z-index: 2;
+}
+.option{
+  position: relative;
+  z-index: 2;
+}
+
+.card a {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  color : black;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 40px;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  margin: 20px auto 0 ;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+
+}
+.card a:hover{
+    font-style: italic;
+}
+
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.post-container{
+    padding-bottom: 0px;
+}
+.post-description{
+    height: 33%;
+    font-size: 15px;
+}
+
+
+.pagination {
+  margin: 0px;
+  display: flex;
+  list-style: none;
+  outline: none;
+}
+.pagination > .active > a{
+  background-color: black ;
+  border-color: black ;
+  color: #fff;
+}
+.pagination > li > a{
+  border: 1px solid black ;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+  background-color: #47ccde ;
+  border-color: #47ccde;
+  outline: none ;
+}
+.pagination > li > a, .pagination > li > span{
+  color: black
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+  border-radius: unset
+}

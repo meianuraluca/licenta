@@ -1,0 +1,36 @@
+.photo{
+    display: flex;
+    flex-direction: column;
+}
+.photo-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 5%;
+}
+.add-photo-container{
+    margin-right: 25px;
+    width:100px;
+    height: 100px;
+    border:1px dotted black;
+    background-color:#F1F1F1;
+    display: flex;
+    align-items: center;
+    justify-content: center 
+
+}
+.uploadImage{
+    margin-top: 10px;
+    width:90px;
+    height: 90px;
+}
+.add-photo-container > input
+{
+    display: none;
+}
+.add-icon{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+

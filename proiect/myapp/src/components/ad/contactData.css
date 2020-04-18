@@ -1,0 +1,21 @@
+.contact{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+.contact-form-group{
+    margin-right: 30px;
+    width: 30%;
+}
+.contact-form-group > label{
+    left: 0;
+    color:#222;
+}
+.contact-form-group >input,textarea{
+    border: none;
+    border-bottom: 1px solid #999;
+    padding-top:10px;
+    box-sizing: border-box;
+}
