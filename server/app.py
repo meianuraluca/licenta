@@ -8,6 +8,7 @@ from flask_cors import CORS
 from function.crypto import *
 from datetime import datetime
 import base64
+from io import BytesIO
 from function.query import *
 
 
@@ -49,7 +50,6 @@ def protected():
 
 @app.route('/announce', methods=["POST"])
 def addAnnouce():
-    print("inserez un anunt")
     response = request.get_json()
     conn = connectToDB()
     cursor = conn.cursor()
@@ -64,15 +64,13 @@ def addAnnouce():
 
 @app.route('/images', methods=["POST"])
 def index():
-    print("in the upload file")
     idd = request.form.to_dict()
     iddValue = idd['idd']
     file = request.files['file'].read()
     conn = connectToDB()
     cursor = conn.cursor()
     today = datetime.now()
-    cursor.execute("INSERT INTO imagesAdd (announceId,image) VALUES(%s, %s) RETURNING announceId", (iddValue,file))
-    results = cursor.fetchall()
+    cursor.execute("INSERT INTO imagesAdd (announceId,image) VALUES(%s, %s)", (iddValue,file))
     conn.commit()
     cursor.close()
     conn.close()
@@ -80,7 +78,6 @@ def index():
 
 @app.route('/listAnnounces')
 def showAnnounces():
-    print("afisez anunturil")
     conn = connectToDB()
     cur = conn.cursor()
     try:
@@ -97,7 +94,6 @@ def showAnnounces():
 
 @app.route('/listAssociations')
 def showAssociations():
-    print("afisez asociatii")
     conn = connectToDB()
     cur = conn.cursor()
     try:
@@ -141,7 +137,6 @@ def registerUser():
 
 @app.route('/registerAssociation', methods = ['POST'])
 def registerAssociation():   
-    print("adaug asociatia")
     login_json = request.get_json()
     print(login_json)
     if not  login_json: 
@@ -160,12 +155,33 @@ def registerAssociation():
         return jsonify({'msg':'Name is missing'}),400
     exitAssoc = checkAssociation(email)
     if exitAssoc == False:
-        print('adaug in baza de date')
         addAssociationDb(name,email,phone,password)
         access_token = create_access_token(identity=email)
         return jsonify({'access_token':access_token}),200
     else:
         return jsonify({'msg':'The association already exists'}),400
+
+
+@app.route('/allImages/', methods = ['GET'])
+def showImages():
+    addId = request.args.get('id', '')
+    idd = idFirstImage(addId)
+    num = numberImages(addId)
+    response = dict(minId=idd,numberImage=num)
+    return response
+
+@app.route('/oneImage',methods=['GET'])
+def backImage():
+    imageId = request.args.get('id','')
+    conn = connectToDB()
+    cur = conn.cursor()
+    print(imageId)
+    stmt = "SELECT image FROM imagesadd WHERE imageId = %s"
+    imgIdd = (imageId,)
+    result = cur.execute(stmt, imgIdd)
+    results = cur.fetchall()
+    result = results[0][0]
+    return send_file(BytesIO(result), attachment_filename="image.jpg",mimetype='image/jpg',as_attachment=True, cache_timeout=0)
 
 if __name__ == "__main__":
     app.run()

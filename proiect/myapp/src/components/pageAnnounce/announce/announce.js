@@ -7,12 +7,13 @@ class Announce extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            id : this.props.infoAd.announceId,
+            id : this.props.infoAd.announceid,
             title: this.props.infoAd.title,
             description: this.props.infoAd.announcedescription
         }
     }
     render(){
+        //console.log(this.state)
         return(
             <div className="col-sm-4">
             <div className="card text-center">
@@ -24,7 +25,10 @@ class Announce extends React.Component{
                         {this.state.description}
                     </ShowMoreText>
                 </div>   
-                <Link to={'/showAdd'}>Vezi anuntul </Link>
+                <Link to={{
+                    pathname:'/showAdd',
+                    aboutProps:{id:this.state.id,title:this.state.title,description:this.state.description}
+                }}>Vezi anuntul </Link>
             </div>
             </div>
 

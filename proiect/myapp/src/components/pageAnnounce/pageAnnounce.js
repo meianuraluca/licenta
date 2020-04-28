@@ -19,7 +19,6 @@ class pageAnnounce extends React.Component{
   }
 
   render(){
-    console.log(this.state.announces)
     return (
       <div>
         <section>
@@ -33,7 +32,7 @@ class pageAnnounce extends React.Component{
               </div>
             </div>
           </section>
-          <ReactPaginate
+          {/* <ReactPaginate
                     previousLabel={"prev"}
                     nextLabel={"next"}
                     breakLabel={"..."}
@@ -44,7 +43,7 @@ class pageAnnounce extends React.Component{
                     onPageChange={this.handlePageClick}
                     containerClassName={"pagination"}
                     subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/>
+                    activeClassName={"active"}/> */}
       </div>
     )
   }

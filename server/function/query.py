@@ -12,6 +12,26 @@ def connectToDB():
     except:
         print("Can't connect to database")
 
+def numberImages(addId):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT count(image) FROM imagesadd WHERE announceId = %s"
+    addIdd = (addId,)
+    result = cur.execute(stmt, addIdd)
+    results = cur.fetchall()
+    return results[0][0]
+
+    
+def idFirstImage(addId):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT min(imageId) FROM imagesadd WHERE announceId = %s"
+    addIdd = (addId,)
+    result = cur.execute(stmt, addIdd)
+    results = cur.fetchall()
+    return results[0][0]
+
+
 def getPassword(email):
     conn = connectToDB()
     cur = conn.cursor()

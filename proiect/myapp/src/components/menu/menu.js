@@ -13,11 +13,9 @@ class Menu extends React.Component {
   }
   componentDidMount(){
     if (localStorage.getItem('accessToken') !== null) {
-      console.log("dada")
       let access = window.localStorage.getItem('accessToken');
       access = this.getClaims(access);
       let result = access.identity;
-      console.log(result)
       this.setState({accessToken: result})
     }
   }
@@ -28,7 +26,6 @@ class Menu extends React.Component {
       return JSON.parse(window.atob(base64));
     };
     render() {
-    console.log(this.state.accessToken)
       return(
        <div className="container">
           <Link to={'/home'} className="link">Acasa</Link>
