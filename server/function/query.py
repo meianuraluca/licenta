@@ -89,3 +89,41 @@ def addAssociationDb(name,email,phone,password):
     conn.commit()
     cursor.close()
     conn.close()
+
+def addMottoAssociation(email, motto):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "UPDATE associations SET motto = %s WHERE associationsEmail=%s;"
+    result = cur.execute(stmt, (motto,email))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+def addLinkAssociation(email, link):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "UPDATE associations SET linkSite = %s WHERE associationsEmail=%s;"
+    result = cur.execute(stmt, (link,email))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+def addEmailContactAssociation(email, emailContact):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "UPDATE associations SET contactEmail = %s WHERE associationsEmail=%s;"
+    result = cur.execute(stmt, (emailContact,email))
+    conn.commit()
+    cur.close()
+    conn.close()
+    
+
+def addDescriptionAssociation(email, description):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "UPDATE associations SET associationsDescription = %s WHERE associationsEmail=%s;"
+    result = cur.execute(stmt, (description,email))
+    conn.commit()
+    cur.close()
+    conn.close()
+

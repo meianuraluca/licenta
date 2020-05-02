@@ -94,10 +94,11 @@ def showAnnounces():
 
 @app.route('/listAssociations')
 def showAssociations():
+    print("lista asociatii")
     conn = connectToDB()
     cur = conn.cursor()
     try:
-        cur.execute("Select associationId,associationName,associationsDescription,logo from associations")
+        cur.execute("Select associationId,associationName,associationsDescription from associations")
     except:
         print("Error executing select")
     results = cur.fetchall()
@@ -182,6 +183,76 @@ def backImage():
     results = cur.fetchall()
     result = results[0][0]
     return send_file(BytesIO(result), attachment_filename="image.jpg",mimetype='image/jpg',as_attachment=True, cache_timeout=0)
+
+
+@app.route('/infoAssociation', methods=['GET'])
+def infoAssociation():
+    print("informatii asociatiei")
+    emailAssoc = request.args.get('email','')
+    print(emailAssoc)
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT associationName,associationsDescription,linkSite,motto,contactEmail,phone FROM associations WHERE associationsEmail=%s;"
+    username = (emailAssoc,)
+    result = cur.execute(stmt, username)
+    results = cur.fetchall()
+    print(results)
+    json_data = [] 
+    row_headers=[x[0] for x in cur.description]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
+    print(json_data)
+    return json.dumps(json_data)
+
+@app.route('/editProfile', methods=['POST'])
+def editProfile():
+    print("intru in edit")
+    response = request.get_json()
+    email = response[0]
+    if(response[1] !=''):
+        addMottoAssociation(email,response[1])
+    if(response[2] !=''):
+        addLinkAssociation(email,response[2])
+    if(response[3] !=''):
+        addEmailContactAssociation(email,response[3])
+    if(response[4] !=''):
+        addDescriptionAssociation(email,response[4])
+    return 'done'
+
+@app.route('/addLogo', methods=['POST'])
+def addLogo():
+    print("intru in logo")
+    data = request.form.to_dict()
+    email = data['email']
+    print(email)
+    file = request.files['file'].read()
+    conn = connectToDB()
+    cursor = conn.cursor()
+    stmt = "UPDATE associations SET logo = %s WHERE associationsEmail=%s;"
+    result = cursor.execute(stmt, (file,email))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return "done"
+
+@app.route('/profileLogoAssociation',methods=['GET'])
+def profileLogoAssociation():
+    emailAssoc = request.args.get('email','')
+    conn = connectToDB()
+    cur = conn.cursor()
+    print(emailAssoc)
+    stmt = "SELECT logo FROM associations WHERE associationsEmail = %s"
+    email = (emailAssoc,)
+    result = cur.execute(stmt, email)
+    results = cur.fetchall()
+    print(results)
+    result = results[0][0]
+    return send_file(BytesIO(result), attachment_filename="image.jpg",mimetype='image/jpg',as_attachment=True, cache_timeout=0)
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run()

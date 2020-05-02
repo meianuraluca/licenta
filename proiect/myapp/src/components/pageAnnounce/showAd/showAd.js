@@ -63,11 +63,11 @@ class showAd extends React.Component{
                                 {this.state.images.map((elem,index)=>{
                                         // return <img key={index} className="uploadImage" src={elem} alt="upload"></img>
                                         return(  
-                                            <div key={index} class="card_announce_image">
+                                            <div key={index} className="card_announce_image">
                                                 <div class="imgBx">
                                                     <img className="uploadImage" src={elem} alt="upload"></img>
                                                 </div>
-                                                <div class="announce_details">
+                                                <div className="announce_details">
                                                     <h2>SomeOne Famous</h2>
                                                 </div>
                                             </div>

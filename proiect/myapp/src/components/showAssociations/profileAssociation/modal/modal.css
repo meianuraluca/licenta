@@ -1,11 +1,4 @@
-h1{
-    color: white;
-    text-shadow:
-     -1px -1px 0 #000,  
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-       1px 1px 0 #000;
-}
+
 
 .modal {
     position: fixed;
@@ -104,9 +97,23 @@ h1{
 }
 
 .modal-buttons{
+    margin-top: 6%;
     margin-left: 20%;
     margin-right: 20%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.modal-title{
+  margin-top:2%;
+  margin-bottom:2%; 
+  margin-left:10%;
+  margin-right:10%;
+  color: white;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
