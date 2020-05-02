@@ -8,6 +8,7 @@ CREATE TABLE associations (
     motto VARCHAR(500),
     associationType VARCHAR(500),
     associationsEmail VARCHAR(500) NOT NULL,
+    contactEmail VARCHAR(500),
     phone VARCHAR(500) NOT NULL,
     PASSWORD TEXT NOT NULL
 );

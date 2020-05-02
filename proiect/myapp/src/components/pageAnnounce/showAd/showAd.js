@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './showAd.scss'
-import { useParams } from 'react-router-dom';
+import './showAd.scss';
 
 class showAd extends React.Component{
     constructor(props){

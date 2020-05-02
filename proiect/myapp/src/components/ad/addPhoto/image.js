@@ -1,7 +1,7 @@
 import React from 'react';
 import { MdAddAPhoto} from 'react-icons/md'
 import './addPhoto.css'
-import { render } from 'react-dom';
+
 
 class Image extends React.Component{
     constructor(props){

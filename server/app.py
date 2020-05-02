@@ -97,7 +97,7 @@ def showAssociations():
     conn = connectToDB()
     cur = conn.cursor()
     try:
-        cur.execute("Select associationId,associationName,associationsDescription from associations")
+        cur.execute("Select associationId,associationName,associationsDescription,logo from associations")
     except:
         print("Error executing select")
     results = cur.fetchall()

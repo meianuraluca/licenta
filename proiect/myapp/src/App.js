@@ -12,6 +12,7 @@ import showAd from './components/pageAnnounce/showAd/showAd'
 import Protected from './components/protected/protected';
 import showAssociations from './components/showAssociations/showAssociations';
 import Contact from './components/contact/contact'
+import ProfileAssociation from './components/showAssociations/profileAssociation/profileAssociation';
 
 class App extends React.Component {
   render(){
@@ -30,6 +31,7 @@ class App extends React.Component {
               <Route path='/showAdd'  component={showAd}/>
               <Route exact path='/announces' component={pageAnnounce}/>
               <Route exact path='/associations' component={showAssociations}/>
+              <Route exact path='/profileAssociation' component={ProfileAssociation}/>
               <Route exact path='/registerAssoc' component={RegisterAssociation}/>
             </Switch>
             

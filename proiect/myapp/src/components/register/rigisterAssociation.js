@@ -118,7 +118,8 @@ class RegisterAssociation extends React.Component {
               .then(json => {
                 const accessToken = json.access_token;
                 window.localStorage.setItem('accessToken', accessToken);
-                this.props.history.push('/home');
+                window.localStorage.setItem('firstTime','true')
+                this.props.history.push('/profileAssociation');
               })
               .catch(error => {
                 console.log(error)
