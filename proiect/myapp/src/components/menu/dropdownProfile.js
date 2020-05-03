@@ -7,7 +7,7 @@ function DropdownProfile() {
       window.localStorage.clear('accessToken');
   }
   return (
-    <div className="dropdown-content">
+    <div id="myDropdown" className="dropdown-content">
     <div><Link to={'/'} className="dropdown-link">Profil</Link></div>
     <div onClick={logout}><Link to={'/'} className="dropdown-link">Iesi din cont</Link></div>
   </div>

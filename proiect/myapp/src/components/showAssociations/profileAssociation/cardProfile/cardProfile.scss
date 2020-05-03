@@ -19,9 +19,9 @@
 
 .profile-association-card-additional {
   position: absolute;
-  width: 25%;
+  width: 20%;
   height: 100%;
-  background: linear-gradient(#dE685E, #EE786E);
+  background: linear-gradient(#e5c5b4,#e4bcb3);
   transition: width 0.4s;
   overflow: hidden;
   z-index: 2;
@@ -34,34 +34,77 @@
 }
 
 .profile-association-card-user-card {
-  width: 25%;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #000;
   height: 100%;
   position: relative;
   float: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .profile-association-card .profile-association-card-additional .profile-association-card-user-card::after {
   content: "";
   display: block;
   position: absolute;
-  top: 10%;
   right: -2px;
   height: 80%;
-  border-left: 2px solid rgba(0,0,0,0.025);
 }
 
-.profile-association-card .profile-association-card-general .more {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  font-size: 0.9em;
+.profile-association-card-general{
+  color:black;
+  font-weight: bold;
+  padding: 0.125rem 0.75rem;
+  margin-left: 22%;
+  margin-top: 2%;
 }
+.profile-association-card-general-info{
+  margin-left: 2%;
+}
+.profile-association-card-general-title{
+  color: black;
+  letter-spacing: 2px;
+  font-weight:500px;
+  font-size: 1rem;
+
+}
+
+.more-info{
+  text-align: center;
+
+}
+
 .profile_logo {
     width: 200px;
     height: 200px;
-    margin-top: 10%;
     border-radius: 100px;
     border: 4px solid transparent;
     }
+
+.profile-card-name{
+  color: white;
+  letter-spacing: 3px;
+  text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+
+}
+
+  .profile-card-name, .profile-card-motto{
+    top: 15%;
+    color:black;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.125rem 0.75rem;
+    border-radius: 100px;
+  }
+  .profile-card-motto{
+    font-size: 1em;
+    margin-top: 10%;
+  }
 
 

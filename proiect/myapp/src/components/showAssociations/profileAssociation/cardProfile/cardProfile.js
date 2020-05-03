@@ -5,22 +5,37 @@ import {MdPerson} from 'react-icons/md'
 class CardProfile extends React.Component{
 
     render(){
+      console.log(this.props)
         return(
-            <div class="profile-association-card">
-            <div class="profile-association-card-additional">
-                    <div class="profile-association-card-user-card">
-                                 {this.props.logo === null?
-                                        <MdPerson className="profile_logo"></MdPerson> :
-                                        <img src={this.props.logo} className="profile_logo"></img>
-                                }
+            <div className="profile-association-card">
+                <div className="profile-association-card-additional">
+                    <div className="profile-association-card-user-card">
+                        <h2 className="profile-card-name">{this.props.name}</h2>
+                        {this.props.logo === null?
+                              <MdPerson className="profile_logo"></MdPerson> :
+                              <img src={this.props.logo} alt="" className="profile_logo"></img>
+                        }
+                        <div className="more-info"v>
+                            <p>{this.props.contactEmail}</p>
+                            <p>{this.props.phone}</p>
+                            <div className="container-profile-link">
+                                  <a className="profile-link" href={this.props.link}>Pagina oficiala</a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="more-info">
+                    <div className="profile-association-card-additional-photos">
+      
                     </div>
-            </div>
-            <div class="profile-association-card-general">
-              <h1>Jane Doe</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a volutpat mauris, at molestie lacus. Nam vestibulum sodales odio ut pulvinar.</p>
-              <span class="more">Mouse over the card for more info</span>
+                </div>
+            <div className="profile-association-card-general">
+            <div>
+                    <label className="profile-association-card-general-title">Motto Asociatie</label>
+                    <p className="profile-association-card-general-info">{this.props.motto}</p>
+                    </div>
+                    <div>
+                    <label className="profile-association-card-general-title">Despre Asociatie</label>
+                    <p className="profile-association-card-general-info">{this.props.description}</p>
+                    </div>
             </div>
           </div>
         );

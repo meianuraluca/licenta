@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS associations;
 CREATE TABLE associations (
     associationId serial PRIMARY KEY NOT NULL,
     associationName VARCHAR(500) NOT NULL,
-    associationsDescription VARCHAR(500),
+    associationsDescription VARCHAR(3000),
     linkSite VARCHAR(500),
     logo BYTEA,
     motto VARCHAR(500),

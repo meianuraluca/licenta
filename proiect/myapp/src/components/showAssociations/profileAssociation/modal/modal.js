@@ -37,7 +37,6 @@ class Modal extends React.Component{
     }
     sendData = () =>{
         console.log("trimit datete")
-        let ok = 0;
         if (localStorage.getItem('accessToken') !== null) {
             let access = window.localStorage.getItem('accessToken');
             access = getClaims(access);

@@ -8,7 +8,9 @@ class Menu extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      accessToken: ''
+      accessToken: '',
+      show:false
+
     }
   }
   componentDidMount(){
@@ -25,6 +27,12 @@ class Menu extends React.Component {
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
       return JSON.parse(window.atob(base64));
     };
+    showDropdown = ()=>{
+      if(this.state.show === true)
+        this.setState({show:false})
+      else
+        this.setState({show:true})
+    }
     render() {
       return(
        <div className="container">
@@ -34,10 +42,16 @@ class Menu extends React.Component {
           <Link to={'/associations'}  className="link">Asociatii</Link>
           <Link to={'/contact'} className="link">Contact</Link>
           <Link to={'/addPost'} className="link">Doneaza</Link>
-         <div className="dropdown">
+          <div className="dropdown">
+            <Link onclick={this.showDropdown} className="link">Cont</Link>
+            <DropdownConect show={this.state.show}></DropdownConect>
+            {/* <button onclick="myFunction()" className="dropbtn">Dropdown</button> */}
+ 
+          </div>
+         {/* <div className="dropdown">
             <Link  to={'/login'} className="link">Cont</Link>
             {this.state.accessToken === '' ? <DropdownConect/> : <DropdownProfile/>}
-        </div>
+        </div> */}
        </div>
       );
     }

@@ -224,7 +224,6 @@ def addLogo():
     print("intru in logo")
     data = request.form.to_dict()
     email = data['email']
-    print(email)
     file = request.files['file'].read()
     conn = connectToDB()
     cursor = conn.cursor()
@@ -237,15 +236,14 @@ def addLogo():
 
 @app.route('/profileLogoAssociation',methods=['GET'])
 def profileLogoAssociation():
+    print("aduc imaginea")
     emailAssoc = request.args.get('email','')
     conn = connectToDB()
     cur = conn.cursor()
-    print(emailAssoc)
     stmt = "SELECT logo FROM associations WHERE associationsEmail = %s"
     email = (emailAssoc,)
     result = cur.execute(stmt, email)
     results = cur.fetchall()
-    print(results)
     result = results[0][0]
     return send_file(BytesIO(result), attachment_filename="image.jpg",mimetype='image/jpg',as_attachment=True, cache_timeout=0)
 

@@ -1,7 +1,5 @@
 import React from 'react'
 import './profileAssociation.scss'
-import {MdPerson} from 'react-icons/md'
-import Carousel from './carousel/carousel'
 import Modal from './modal/modal'
 import axios from 'axios'
 import getClaims from '../../../utils/utils'
@@ -15,6 +13,7 @@ class ProfileAssociation extends React.Component{
             name:"",
             logo:null,
             description:"",
+            phone:"",
             link:"",
             motto:"",
             contactEmail:"",
@@ -27,55 +26,40 @@ class ProfileAssociation extends React.Component{
             localStorage.setItem('firstTime','false');
           }
         if(localStorage.getItem("accessToken") !== null){
-            let info;
-        let access = window.localStorage.getItem('accessToken');
-        access = getClaims(access);
-        axios
-        .get("http://localhost:5000/infoAssociation",{
-            params:{email:access.identity},
-        })
-        .then((response) => response.data)
-        .then(infoAsocc => { 
-            info = infoAsocc;
-            axios.get('http://localhost:5000/profileLogoAssociation', {
-                params:{email:access.identity},
-                responseType:'arraybuffer'  
-            })
-            .then(res => {
-                let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
-                let url = URL.createObjectURL(matrixBlob)
-                console.log(url)
-                this.setState({logo:url,name:info.associationName,description:info.associationsDescription,link:info.linkSite,motto:info.motto,contactEmail:info.contactEmail, firstTime:false });
-            })
-            .catch(err => console.warn(err));
-        });
+            this.dataFromBackend(0);
         }
       
     }
-    hideModal = () => {
-        console.log("intru in hideModal")
-        let info;
+    dataFromBackend=(ok)=>{
         let access = window.localStorage.getItem('accessToken');
         access = getClaims(access);
         axios
         .get("http://localhost:5000/infoAssociation",{
             params:{email:access.identity},
         })
-        .then((response) => response.data)
-        .then(infoAsocc => { 
-            info = infoAsocc;
+        .then((response) => response.data[0])
+        .then(info => { 
+            console.log("ce naiba")
+            this.setState({name:info.associationname,description:info.associationsdescription,link:info.linksite,motto:info.motto,contactEmail:info.contactemail,phone:info.phone});
             axios.get('http://localhost:5000/profileLogoAssociation', {
                 params:{email:access.identity},
                 responseType:'arraybuffer'  
             })
             .then(res => {
                 let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
-                let url = URL.createObjectURL(matrixBlob)
-                console.log(url)
-                this.setState({logo:url,name:info.associationName,description:info.associationsDescription,link:info.linkSite,motto:info.motto,contactEmail:info.contactEmail, firstTime:false });
+                let url = URL.createObjectURL(matrixBlob);
+                if(ok===1)
+                    this.setState({logo:url, firstTime:false });
+                else
+                    this.setState({logo:url})
             })
             .catch(err => console.warn(err));
         });
+
+    }
+    hideModal = () => {
+        console.log("intru in hideModal")
+        this.dataFromBackend(1);
      };
     render(){
         console.log(this.state)
@@ -84,6 +68,7 @@ class ProfileAssociation extends React.Component{
                 {this.state.firstTime === true 
                 ? <Modal show={this.state.firstTime} handleClose={this.hideModal}></Modal>
                 : <CardProfile name ={this.state.name}
+                               phone={this.state.phone} 
                                link = {this.state.link} 
                                logo = {this.state.logo}
                                motto = {this.state.motto}

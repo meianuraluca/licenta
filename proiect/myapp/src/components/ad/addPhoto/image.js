@@ -25,7 +25,7 @@ class Image extends React.Component{
     //     }
     // }
     displayImage=()=>{
-        if(this.props.photo!= undefined){
+        if(this.props.photo!== undefined){
             var fileReader = new FileReader();
             fileReader.onloadend = () => { 
                 if(this.state.image ===null)
