@@ -13,7 +13,10 @@ function ErrorMessage(props) {
           case 'passwordMin': return "* Parola trebuie sa contina cel putin o litera mica ";
           case 'passwordNr': return "* Parola trebuie sa contina cel putin o cifra ";
           case 'againPass': return "* Parolele nu se potrivesc";
-          case 'required': return "* Campul este obligatoriu"
+          case 'required': return "* Campul este obligatoriu";
+          case 'missing' : return "* Parola sau email-ul lipseste";
+          case 'bad': return "* Parola sau email-ul este gresit";
+          case 'emailExist': return "* Exista deja un user cu acest email"
           default: return "Campul este obligatoriu"
       }
   }

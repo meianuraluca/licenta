@@ -36,11 +36,14 @@ def login():
         return jsonify({'msg':'Email is missing'}),400
     if not password:
         return jsonify({'msg':'Password is missing'}),400
-    user_password = getPassword(email)
-    if not user_password or verify_password(user_password,password):
-        return jsonify({'msg':'Bad username or password'}),401
+    typeCont = getTypeCont(email)
+    if typeCont == "not":
+        return jsonify({'msg':'Bad username'}),401
+    user_password = getPassword(email,typeCont)
+    if not user_password or verify_password(user_password,password)==False:
+        return jsonify({'msg':'Bad password'}),401
     access_token = create_access_token(identity=email)
-    return jsonify({'access_token':access_token}),200
+    return jsonify({'access_token':access_token,"type":typeCont}),200
 
 @app.route('/protected',methods=['GET'])
 @jwt_required
@@ -76,6 +79,20 @@ def index():
     conn.close()
     return "done"
 
+@app.route('/imagesAssoc', methods=["POST"])
+def imagesAsscoc():
+    idd = request.form.to_dict()
+    emailAssoc = idd['email']
+    iddValue = getIdAssoc(emailAssoc)
+    file = request.files['file'].read()
+    conn = connectToDB()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO imagesAsscoc (associationId,image) VALUES(%s, %s)", (iddValue,file))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return "done"
+
 @app.route('/listAnnounces')
 def showAnnounces():
     conn = connectToDB()
@@ -98,7 +115,7 @@ def showAssociations():
     conn = connectToDB()
     cur = conn.cursor()
     try:
-        cur.execute("Select associationId,associationName,associationsDescription from associations")
+        cur.execute("Select associationId,associationName,associationsDescription,associationsEmail from associations")
     except:
         print("Error executing select")
     results = cur.fetchall()
@@ -139,7 +156,6 @@ def registerUser():
 @app.route('/registerAssociation', methods = ['POST'])
 def registerAssociation():   
     login_json = request.get_json()
-    print(login_json)
     if not  login_json: 
         return jsonify({'msg':'Missing json'}),400
     email = login_json.get('email')
@@ -176,8 +192,29 @@ def backImage():
     imageId = request.args.get('id','')
     conn = connectToDB()
     cur = conn.cursor()
-    print(imageId)
     stmt = "SELECT image FROM imagesadd WHERE imageId = %s"
+    imgIdd = (imageId,)
+    result = cur.execute(stmt, imgIdd)
+    results = cur.fetchall()
+    result = results[0][0]
+    return send_file(BytesIO(result), attachment_filename="image.jpg",mimetype='image/jpg',as_attachment=True, cache_timeout=0)
+
+@app.route('/allImagesAssociation', methods = ['GET'])
+def showImagesAssoc():
+    print("aduc toate imaginile")
+    iddAssoc = request.args.get('id', '')
+    print(iddAssoc)
+    idd = idFirstImageAssoc(iddAssoc)
+    num = numberImagesAssoc(iddAssoc)
+    response = dict(minId=idd,numberImage=num)
+    return response
+
+@app.route('/oneImageAssociation',methods=['GET'])
+def backImageAssoc():
+    imageId = request.args.get('id','')
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT image FROM imagesAsscoc WHERE imageId = %s"
     imgIdd = (imageId,)
     result = cur.execute(stmt, imgIdd)
     results = cur.fetchall()
@@ -188,20 +225,22 @@ def backImage():
 @app.route('/infoAssociation', methods=['GET'])
 def infoAssociation():
     print("informatii asociatiei")
-    emailAssoc = request.args.get('email','')
-    print(emailAssoc)
+    if 'email' in request.args:
+        paramRequest = request.args.get('email','')
+        stmt = "SELECT associationId, associationsEmail,associationName,associationsDescription,linkSite,motto,contactEmail,phone FROM associations WHERE associationsEmail=%s;"
+    else:
+        if 'id' in request.args:
+            paramRequest = request.args.get('id','')
+            stmt = "SELECT associationId,associationsEmail, associationName,associationsDescription,linkSite,motto,contactEmail,phone FROM associations WHERE associationId=%s;"
     conn = connectToDB()
     cur = conn.cursor()
-    stmt = "SELECT associationName,associationsDescription,linkSite,motto,contactEmail,phone FROM associations WHERE associationsEmail=%s;"
-    username = (emailAssoc,)
-    result = cur.execute(stmt, username)
+    param = (paramRequest,)
+    result = cur.execute(stmt, param)
     results = cur.fetchall()
-    print(results)
     json_data = [] 
     row_headers=[x[0] for x in cur.description]
     for result in results:
         json_data.append(dict(zip(row_headers,result)))
-    print(json_data)
     return json.dumps(json_data)
 
 @app.route('/editProfile', methods=['POST'])

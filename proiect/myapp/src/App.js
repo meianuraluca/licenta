@@ -13,6 +13,7 @@ import Protected from './components/protected/protected';
 import showAssociations from './components/showAssociations/showAssociations';
 import Contact from './components/contact/contact'
 import ProfileAssociation from './components/showAssociations/profileAssociation/profileAssociation';
+import ProfileAssociationForUser from './components/showAssociations/profileAssociation/profileAssociationForUser';
 
 class App extends React.Component {
   render(){
@@ -32,6 +33,7 @@ class App extends React.Component {
               <Route exact path='/announces' component={pageAnnounce}/>
               <Route exact path='/associations' component={showAssociations}/>
               <Route exact path='/profileAssociation' component={ProfileAssociation}/>
+              <Route exact path='/profileAssociationForUser' component={ProfileAssociationForUser}/>
               <Route exact path='/registerAssoc' component={RegisterAssociation}/>
             </Switch>
             

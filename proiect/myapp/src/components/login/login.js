@@ -4,6 +4,7 @@ import {GiReturnArrow} from 'react-icons/gi'
 import {MdEmail, MdLock} from 'react-icons/md'
 import signin from '../../images/signin-image.jpg'
 import { Link,withRouter } from 'react-router-dom';
+import ErrorMessage from '../error/erros'
 
 
 
@@ -12,13 +13,28 @@ class Login extends React.Component {
         super(props);
         this.state = {
             email:'',
-            password:''
+            password:'',
+            error:''
         }
     }
-    changeInput=(e)=>{
+
+
+  changeInput=(e)=>{
         this.setState({[e.target.name] : e.target.value})
     }
+  validateForm =()=>{
+    let ok = true;
+    for (let key in this.state) {
+        if(this.state[key] === " "){
+          this.setState({error:"missing"})
+          return false;
+        }
+    }
+    this.setState({error:""})
+    return ok;
+  }
     handleLogin = e => {
+      if(this.validateForm() === true){
         e.preventDefault();
         fetch('http://localhost:5000/login', {
           method: 'POST',
@@ -33,14 +49,24 @@ class Login extends React.Component {
         })
           .then(response => response.json())
           .then(json => {
-            const accessToken = json.access_token;
-            window.localStorage.setItem('accessToken', accessToken);
-            this.props.history.push('/home');
-
+            if("msg" in json){
+              if(json.msg === "Email is missing" || json.msg === "Password is missing")
+                this.setState({error:"missing"})
+              else
+                this.setState({error:"bad"})
+            }
+            else{
+              const accessToken = json.access_token;
+              const typeUser = json.type;
+              window.localStorage.setItem('accessToken', accessToken);
+              window.localStorage.setItem('typeUser',typeUser)
+              this.props.history.push('/home');
+            }
           })
           .catch(error => {
             console.log(error)
           });
+      }
       };
     render() {
       return(
@@ -61,12 +87,12 @@ class Login extends React.Component {
                                 <label htmlFor="email"><MdEmail className="signin-icons"></MdEmail></label>
                                 <input type="text" name="email" id="email" placeholder="Adresa de email" onChange={this.changeInput}/>
                             </div>
-                            <div className="signin-form-group">
+                            <div className="signin-form-group" style={{marginBottom:"0px"}}>
                                 <label htmlFor="password"><MdLock className="signin-icons"></MdLock></label>
                                 <input type="password" name="password" id="password" placeholder="Parola" onChange={this.changeInput}/>
                             </div>
-
-                            <div className="form-group form-button">
+                            {this.state.error !== '' && <ErrorMessage type_name={this.state.error}/>}
+                            <div className="form-group form-button" style={{marginTop:"5%"}}>
                                 <input type="button" name="signin" id="signin" className="signin-form-submit" value="Autentificare" onClick={this.handleLogin}/>
                             </div>
                         </form>

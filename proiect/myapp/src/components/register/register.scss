@@ -190,6 +190,13 @@ body{
 .signup-form-group .lab-required{
     @include error-label()
 }
+.signup-form-group .inpt-emailExist{
+    @include error-input()
+}
+
+.signup-form-group .lab-emailExist{
+    @include error-label()
+}
 
 .signup-form-group .lab-name{
     @include error-label()

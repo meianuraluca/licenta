@@ -5,11 +5,10 @@ import axios from 'axios'
 import getClaims from '../../../utils/utils'
 import CardProfile from './cardProfile/cardProfile'
 
-class ProfileAssociation extends React.Component{
+class ProfileAssociationForUser extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            firstTime:false,
             id:-1,
             name:"",
             logo:null,
@@ -22,10 +21,6 @@ class ProfileAssociation extends React.Component{
         }
     }
     componentDidMount(){
-        if (localStorage.getItem('firstTime') === 'true') {
-            this.setState({firstTime: true})
-            localStorage.setItem('firstTime','false');
-          }
         if(localStorage.getItem("accessToken") !== null){
             this.dataFromBackend(0);
         }
@@ -37,7 +32,7 @@ class ProfileAssociation extends React.Component{
             access = getClaims(access);
             axios
             .get("http://localhost:5000/infoAssociation",{
-                params:{email:access.identity},
+                params:{id:this.props.location.aboutProps.id},
             })
             .then((response) => response.data[0])
             .then(info => { 
@@ -46,7 +41,7 @@ class ProfileAssociation extends React.Component{
                 else
                     this.setState({isPersonLog:false, id:info.associationid,name:info.associationname,description:info.associationsdescription,link:info.linksite,motto:info.motto,contactEmail:info.contactemail,phone:info.phone});
                 axios.get('http://localhost:5000/profileLogoAssociation', {
-                    params:{email:access.identity},
+                    params:{email:info.associationsemail},
                     responseType:'arraybuffer'  
                 })
                 .then(res => {
@@ -69,9 +64,7 @@ class ProfileAssociation extends React.Component{
     render(){
         return(
             <div>
-                {this.state.firstTime === true 
-                ? <Modal show={this.state.firstTime} handleClose={this.hideModal}></Modal>
-                : this.state.id!==-1 &&<CardProfile 
+                {this.state.id!==-1 &&<CardProfile 
                                id={this.state.id}
                                isPersonLog={this.state.isPersonLog}
                                name ={this.state.name}
@@ -90,4 +83,4 @@ class ProfileAssociation extends React.Component{
     }
 }
 
-export default ProfileAssociation;
+export default ProfileAssociationForUser;

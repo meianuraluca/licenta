@@ -31,17 +31,62 @@ def idFirstImage(addId):
     results = cur.fetchall()
     return results[0][0]
 
-
-def getPassword(email):
+def numberImagesAssoc(assocId):
     conn = connectToDB()
     cur = conn.cursor()
-    stmt = "SELECT PASSWORD FROM users WHERE email = %s"
-    username = (email,)
-    result = cur.execute(stmt, username)
+    stmt = "SELECT count(image) FROM imagesAsscoc WHERE associationId = %s"
+    assocId = (assocId,)
+    result = cur.execute(stmt, assocId)
     results = cur.fetchall()
-    password = results[0][0]
-    print(results)
-    return password
+    return results[0][0]
+
+    
+def idFirstImageAssoc(assocId):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT min(imageId) FROM imagesAsscoc WHERE associationId = %s"
+    assocId = (assocId,)
+    result = cur.execute(stmt, assocId)
+    results = cur.fetchall()
+    return results[0][0]
+
+def getTypeCont(email):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT password FROM users WHERE email = %s"
+    emailUser = (email,)
+    result = cur.execute(stmt, emailUser)
+    results = cur.fetchall()
+    if not results:
+        stmt = "SELECT password FROM associations WHERE associationsEmail = %s"
+        emailUser = (email,)
+        result = cur.execute(stmt, emailUser)
+        results = cur.fetchall()
+        if not results:
+            return "not"
+        else:
+            return "association"
+    else:
+        return "user"
+
+
+def getPassword(email,typeCont):
+    conn = connectToDB()
+    cur = conn.cursor()
+    if typeCont == "user":
+        stmt = "SELECT PASSWORD FROM users WHERE email = %s"
+        username = (email,)
+        result = cur.execute(stmt, username)
+        results = cur.fetchall()
+        password = results[0][0]
+        return password
+    if typeCont == "association":
+        stmt = "SELECT PASSWORD FROM associations WHERE associationsEmail = %s"
+        username = (email,)
+        result = cur.execute(stmt, username)
+        results = cur.fetchall()
+        password = results[0][0]
+        return password
 
 def getId(email):
     conn = connectToDB()
@@ -53,23 +98,36 @@ def getId(email):
     userId = results[0][0]
     return userId
 
+def getIdAssoc(email):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT associationId FROM associations WHERE associationsEmail = %s"
+    username = (email,)
+    result = cur.execute(stmt, username)
+    results = cur.fetchall()
+    assocId = results[0][0]
+    return assocId
+
 def checkUser(email):
     conn = connectToDB()
     cur = conn.cursor()
     stmt = "SELECT 1 FROM users WHERE email = %s"
     username = (email,)
     result = cur.execute(stmt, username)
-    if (result == None):
+    results = cur.fetchall()
+    if (results == []):
         return False
     return True
 
 def checkAssociation(email):
     conn = connectToDB()
     cur = conn.cursor()
-    stmt = "SELECT 1 FROM associations WHERE associationsEmail = %s"
+    print(email)
+    stmt = "SELECT associationId FROM associations WHERE associationsEmail = %s"
     username = (email,)
     result = cur.execute(stmt, username)
-    if (result == None):
+    results = cur.fetchall()
+    if (results == []):
         return False
     return True
 

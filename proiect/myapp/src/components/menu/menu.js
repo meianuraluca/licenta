@@ -3,37 +3,28 @@ import './menu.scss'
 import { Link } from 'react-router-dom';
 import DropdownConect from './dropdownConect';
 import DropdownProfile from './dropdownProfile';
+import DropdownProfileAssocitation from './dropdownProfileAssociation';
 
 class Menu extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      accessToken: '',
-      show:false
-
+      dropdown: <DropdownConect/>,
     }
   }
   componentDidMount(){
-    if (localStorage.getItem('accessToken') !== null) {
-      let access = window.localStorage.getItem('accessToken');
-      access = this.getClaims(access);
-      let result = access.identity;
-      this.setState({accessToken: result})
+    if (localStorage.getItem('typeUser') !== null) {
+      if(localStorage.getItem('typeUser') === "user")
+        this.setState({dropdown: <DropdownProfile/>})
+      else
+        this.setState({dropdown: <DropdownProfileAssocitation/>})
+    }
+    else{
+      this.setState({dropdown: <DropdownConect/>})
     }
   }
-  getClaims = accessToken => {
-      if (!accessToken) return {};
-      const base64Url = accessToken.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      return JSON.parse(window.atob(base64));
-    };
-    showDropdown = ()=>{
-      if(this.state.show === true)
-        this.setState({show:false})
-      else
-        this.setState({show:true})
-    }
     render() {
+
       return(
        <div className="container">
           <Link to={'/home'} className="link">Acasa</Link>
@@ -42,16 +33,10 @@ class Menu extends React.Component {
           <Link to={'/associations'}  className="link">Asociatii</Link>
           <Link to={'/contact'} className="link">Contact</Link>
           <Link to={'/addPost'} className="link">Doneaza</Link>
-          <div className="dropdown">
-            <Link onclick={this.showDropdown} className="link">Cont</Link>
-            <DropdownConect show={this.state.show}></DropdownConect>
-            {/* <button onclick="myFunction()" className="dropbtn">Dropdown</button> */}
- 
-          </div>
-         {/* <div className="dropdown">
+         <div className="dropdown">
             <Link  to={'/login'} className="link">Cont</Link>
-            {this.state.accessToken === '' ? <DropdownConect/> : <DropdownProfile/>}
-        </div> */}
+            {this.state.dropdown}
+        </div>
        </div>
       );
     }

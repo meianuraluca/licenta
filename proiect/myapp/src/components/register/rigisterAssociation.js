@@ -116,10 +116,20 @@ class RegisterAssociation extends React.Component {
             })
               .then(response => response.json())
               .then(json => {
-                const accessToken = json.access_token;
-                window.localStorage.setItem('accessToken', accessToken);
-                window.localStorage.setItem('firstTime','true')
-                this.props.history.push('/profileAssociation');
+                if("msg" in json){
+                    if(json.msg === 'The association already exists')
+                      this.setState({error:{...this.state.error,email:'emailExist'}})
+
+                  }else{
+                    this.setState({error:{...this.state.error,email:''}})
+                    const accessToken = json.access_token;
+                    window.localStorage.setItem('accessToken', accessToken);
+                    window.localStorage.setItem('firstTime','true')
+                    window.localStorage.setItem('typeUser', "association");
+                    this.props.history.push('/profileAssociation');
+
+                  }
+
               })
               .catch(error => {
                 console.log(error)

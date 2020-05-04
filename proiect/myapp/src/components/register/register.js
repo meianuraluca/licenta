@@ -125,9 +125,16 @@ class Register extends React.Component {
             })
               .then(response => response.json())
               .then(json => {
+                if("msg" in json){
+                    if(json.msg === 'The user already exists')
+                      this.setState({error:{...this.state.error,email:'emailExist'}})
+
+                }else{
                 const accessToken = json.access_token;
                 window.localStorage.setItem('accessToken', accessToken);
+                window.localStorage.setItem('typeUser', "user");
                 this.props.history.push('/home');
+                  }
               })
               .catch(error => {
                 console.log(error)
