@@ -30,6 +30,7 @@
 
 .profile-association-card:hover .profile-association-card-additional {
   width: 100%;
+  
   border-radius: 0 5px 5px 0;
 }
 
@@ -131,22 +132,45 @@
     font-size: 1em;
     margin-top: 10%;
   }
+  .profile-association-card-additional-photos{
+    text-align: center;
+  }
 
 
   .profil-card-add-photo-container{
     float: right;
-    margin-right: 3%;
     color: black;
+    margin-right: 3%;
+    bottom: 0px;
   }
 
   .profil-card-add-photo-container > input{
     display: none;
   }
-
-  .associations-photos-style{
-    width: 20%;
-    height: 20%;
+  .associations-photos{
+    display: flex;
+    flex-direction:row ;
+    flex-wrap: wrap;
   }
-
+  .associations-photos-style{
+      border: 1px solid black;
+      border-radius: 4px;
+      padding: 5px;
+      margin-left: 3%;
+      margin-right: 3%;
+      margin-top: 10%;
+      margin-bottom: 5%;
+      background-color: white;
+      width:300px;
+      height: 300px;
+  } 
+  .associations-photos-style:hover {
+      box-shadow: 0 0 2px 1px rgba(0, 10, 14, 0.5);
+  }
+ .arrow-icon{
+   width: 40px;
+   height: 40px;
+   margin-top: 25%;
+ }
 
 

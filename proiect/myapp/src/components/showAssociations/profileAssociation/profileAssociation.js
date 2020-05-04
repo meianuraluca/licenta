@@ -4,6 +4,7 @@ import Modal from './modal/modal'
 import axios from 'axios'
 import getClaims from '../../../utils/utils'
 import CardProfile from './cardProfile/cardProfile'
+import isEmptyArrayBuffer from 'is-empty-array-buffer'
 
 class ProfileAssociation extends React.Component{
     constructor(props){
@@ -31,6 +32,13 @@ class ProfileAssociation extends React.Component{
         }
       
     }
+    componentDidUpdate(){
+        if (localStorage.getItem('firstTime') === 'true') {
+            this.setState({firstTime: true})
+            localStorage.setItem('firstTime','false');
+          }
+
+    }
     dataFromBackend=(ok)=>{
         let access = window.localStorage.getItem('accessToken');
         if(access !== null){
@@ -50,8 +58,14 @@ class ProfileAssociation extends React.Component{
                     responseType:'arraybuffer'  
                 })
                 .then(res => {
-                    let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
-                    let url = URL.createObjectURL(matrixBlob);
+                    let url;
+                    if(isEmptyArrayBuffer(res.data))
+                        url = null
+                    else{
+                        let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
+                        url = URL.createObjectURL(matrixBlob);
+                    }
+
                     if(ok===1)
                         this.setState({logo:url, firstTime:false });
                     else
@@ -69,9 +83,8 @@ class ProfileAssociation extends React.Component{
     render(){
         return(
             <div>
-                {this.state.firstTime === true 
-                ? <Modal show={this.state.firstTime} handleClose={this.hideModal}></Modal>
-                : this.state.id!==-1 &&<CardProfile 
+                {this.state.firstTime === false 
+                ? this.state.id!==-1 &&<CardProfile 
                                id={this.state.id}
                                isPersonLog={this.state.isPersonLog}
                                name ={this.state.name}
@@ -82,6 +95,7 @@ class ProfileAssociation extends React.Component{
                                description ={this.state.description} 
                                contactEmail = {this.state.contactEmail}
                 ></CardProfile>
+                : this.props.location.aboutProps !== undefined ?<Modal show={this.state.firstTime} handleClose={this.hideModal} edit={true}></Modal> :<Modal show={this.state.firstTime} handleClose={this.hideModal} edit={false}></Modal>
                 }
             </div>
 

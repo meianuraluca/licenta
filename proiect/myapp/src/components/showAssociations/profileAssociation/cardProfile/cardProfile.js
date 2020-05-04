@@ -2,14 +2,17 @@ import React from 'react'
 import './cardProfile.scss'
 import axios from 'axios'
 import {MdPerson, MdPhotoCamera} from 'react-icons/md'
+import {AiFillCaretRight,AiFillCaretLeft} from 'react-icons/ai'
 import {FaFolderPlus} from 'react-icons/fa'
 import getClaims from '../../../../utils/utils'
+import isEmptyArrayBuffer from 'is-empty-array-buffer'
 import { withRouter } from 'react-router-dom'
 
 class CardProfile extends React.Component{
     constructor(props){
         super(props);
         this.state={
+            start:0,
             logo:null,
             title:"Cateva poze cu noi",
             images:[],
@@ -36,10 +39,15 @@ class CardProfile extends React.Component{
                     responseType:'arraybuffer'  
                 })
             .then(res => {
+                if(isEmptyArrayBuffer(res.data))
+                    this.setState({images:[...this.state.images,null]})
+                else{
                 let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
                 let url = URL.createObjectURL(matrixBlob)
                 console.log(url)
                 this.setState({images:[...this.state.images,url]})
+                }
+
             })
             .catch(err => console.warn(err));
             }
@@ -57,6 +65,15 @@ class CardProfile extends React.Component{
                 this.setState({ logo: [fileReader.result] }); 
         }
         fileReader.readAsDataURL(element);
+    }
+    moveRight = () => {
+        console.log(this.state.images.length)
+        if(this.state.start+2 < this.state.images.length) 
+            this.setState({start:this.state.start+2})
+    }
+    moveLeft = () => {
+        if(this.state.start !==0 )
+            this.setState({start:this.state.start-2})
     }
 
     addImageToState=(images)=>{
@@ -142,12 +159,12 @@ class CardProfile extends React.Component{
                     <div className="profile-association-card-additional-photos">
                         <h1>{this.state.title}</h1>
                         <div className="associations-photos">
-
+                            <AiFillCaretLeft onClick={this.moveLeft} style={{marginLeft:"5%"}} className="arrow-icon"/>
                             {this.state.images !== [] &&
-                            this.state.images.map((element,index)=>{
+                            this.state.images.slice(this.state.start,this.state.start+2).map((element,index)=>{
                                 return <img className="associations-photos-style" src={element} key={index} alt=""/>
                             })}
-
+                            <AiFillCaretRight onClick={this.moveRight} className="arrow-icon"/>
                         </div> 
                         {this.props.isPersonLog === true &&
                                                 <div className="profil-card-add-photo-container">

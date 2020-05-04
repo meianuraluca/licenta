@@ -117,3 +117,9 @@
     -1px 1px 0 #000,
      1px 1px 0 #000;
 }
+
+.modal-image-profile{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}

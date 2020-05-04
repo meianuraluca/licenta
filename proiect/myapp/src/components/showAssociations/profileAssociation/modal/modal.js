@@ -11,6 +11,7 @@ class Modal extends React.Component{
         super(props);
         this.state={
             logo:null,
+            displayLogo:null,
             motto:"",
             link:"",
             email:"",
@@ -21,13 +22,31 @@ class Modal extends React.Component{
     changeInput=(e)=>{
         if(e.target.name === 'logo'){
             var file = e.target.files[0]
-            this.setState({[e.target.name] : file})
+            var element = file;
+            var fileReader = new FileReader();
+            fileReader.onloadend = () => { 
+                if(this.state.logo ===null)
+                    this.setState({ displayLogo: [fileReader.result],logo: file }); 
+            }
+            fileReader.readAsDataURL(element);
+            this.setState({})
+            //this.displayPhoto(file)
+            
         }
         else{
             console.log(e.target.name)
             this.setState({[e.target.name] : e.target.value})
         }
         
+    }
+
+    displayPhoto=(element)=>{
+        var fileReader = new FileReader();
+        fileReader.onloadend = () => { 
+            if(this.state.logo ===null)
+                this.setState({ displayLogo: [fileReader.result] }); 
+        }
+        fileReader.readAsDataURL(element);
     }
 
     validateEmail = (event)=>{
@@ -81,22 +100,32 @@ class Modal extends React.Component{
             <div className={showHideClassName}>
               <section className="modal-main">
                 <div className="modal-container">
-                    <h1 className="modal-title">Buna! Acum ca te-ai inregistrat hai sa adaugam cateva informatii ca profilul dumneavostra sa prinda contur!</h1>
+                    {this.props.edit === false 
+                     ? <h1 className="modal-title">Buna! Acum ca te-ai inregistrat hai sa adaugam cateva informatii ca profilul dumneavostra sa prinda contur!</h1>
+                     : <h1 style={{marginBottom:"5%"}} className="modal-title">Modifica datele profilului</h1>
+                    }   
                     <div className="modal-container-content">
                         <div className="modal-container-content-one">
-                            <div className="modal-add-photo-container">
-                                <label htmlFor="logo"> <MdAddAPhoto className="modal-add-icon"></MdAddAPhoto></label>
+                            {this.props.edit ===false
+                            && <div className="modal-add-photo-container">
+                                {this.state.displayLogo ===null ? <label htmlFor="logo"> <MdAddAPhoto className="modal-add-icon"></MdAddAPhoto></label> : <img className="modal-image-profile" src={this.state.displayLogo}/>}
                                 <input id="logo" name="logo" type="file" onChange={this.changeInput} />
                             </div>
+                            }
                             <input className="modal-input" type="text" id="motto" name="motto" placeholder="Motto al asociatiei.." onChange={this.changeInput}/>
     
                             <input className="modal-input" type="text" id="link" name="link" placeholder="Link catre pagina oficiala a asociatiei" onChange={this.changeInput}/>   
                             <input className="modal-input" style={{marginBottom:"0px"}} type="text" id="email" name="email" placeholder="Email ul de contact" onChange={this.changeInput} onBlur={this.validateEmail}/>
                             {this.state.validEmail === false && <ErrorMessage style={{paddingTop:"0px"}} type_name="email"/>}
                         </div>
-                        <div className="modal-container-content-two">
-                            <textarea className="modal-input" id="description" name="description" placeholder="Despre asociatie" rows={10} onChange={this.changeInput}></textarea>
-                        </div>
+                        {this.props.edit === false
+                            ? <div className="modal-container-content-two">
+                                <textarea className="modal-input" id="description" name="description" placeholder="Despre asociatie" rows={10} onChange={this.changeInput}></textarea>
+                            </div>
+                            :<div style={{marginTop:"0px"}} className="modal-container-content-two">
+                                <textarea className="modal-input" id="description" name="description" placeholder="Despre asociatie" rows={10} onChange={this.changeInput}></textarea>
+                            </div>
+                        }   
                         
                     </div>    
                     <div className="modal-buttons">

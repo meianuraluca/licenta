@@ -7,6 +7,7 @@ import ShowMoreText from 'react-show-more-text';
 import isEmptyArrayBuffer from 'is-empty-array-buffer'
 
 
+
 class showAssociations extends React.Component{
   constructor(props){
     super(props);
