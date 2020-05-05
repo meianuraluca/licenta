@@ -10,6 +10,7 @@ from datetime import datetime
 import base64
 from io import BytesIO
 from function.query import *
+from function.smv import *
 
 
 app = Flask(__name__, template_folder="templates")
@@ -54,15 +55,20 @@ def protected():
 @app.route('/announce', methods=["POST"])
 def addAnnouce():
     response = request.get_json()
-    conn = connectToDB()
-    cursor = conn.cursor()
-    today = datetime.now()
-    cursor.execute("INSERT INTO announces (userId,announceDate,title,category,announceDescription,personContact,announceEmail, phone,userLocation) VALUES(%s, %s, %s,%s,%s,%s,%s,%s,%s) RETURNING announceId", (2,today,response[0],response[1],response[2],response[3],response[4],response[5],response[6]))
-    results = cursor.fetchall()
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return str(results[0][0])
+    print(response[2])
+    predict = predictCategory(response[2])
+    if predict == 0:
+        conn = connectToDB()
+        cursor = conn.cursor()
+        today = datetime.now()
+        cursor.execute("INSERT INTO announces (userId,announceDate,title,category,announceDescription,personContact,announceEmail, phone,userLocation) VALUES(%s, %s, %s,%s,%s,%s,%s,%s,%s) RETURNING announceId", (2,today,response[0],response[1],response[2],response[3],response[4],response[5],response[6]))
+        results = cursor.fetchall()
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return str(results[0][0])
+    else:
+        return "Is a sale ad"
 
 
 @app.route('/images', methods=["POST"])
