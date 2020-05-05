@@ -19,3 +19,18 @@
     padding-top:10px;
     box-sizing: border-box;
 }
+.contact-form-grouprequired >input,textarea ::placeholder{
+   color:red;
+}
+.contact-form-grouprequired{
+    margin-right: 30px;
+    width: 30%;
+}
+.contact-form-grouprequired > label{
+    left: 0;
+    color:#222;
+}
+.contact-form-grouprequired{
+    margin-right: 30px;
+    width: 30%;
+}

@@ -57,47 +57,9 @@ train_x_tfidf = tfidf_vect.transform(train_x)
 naive = naive_bayes.MultinomialNB()
 naive.fit(train_x_tfidf,train_y)
 
-#testarea 
-
-
-# testData = pd.read_csv(r"E:\FMI\Anul III\Licenta\chesti\acum.csv",encoding ="latin-1")
-# testData['text'].dropna(inplace=True)
-# print(testData['text'])
-# testData['text'] = [entry.lower() for entry in testData['text']]
-# testData['text'] = [word_tokenize(entry) for entry in testData['text']]
-
-
-
-# for index,entry in enumerate(testData['text']):   
-#     final_words_nou = []
-#     word_lemmatized_nou = WordNetLemmatizer()
-#     for word,tag in pos_tag(entry):
-#         if word not in stopwords and word.isalpha():
-#             word_final_nou = word_lemmatized_nou.lemmatize(word,tag_map[tag[0]])
-#             final_words_nou.append(word_final_nou)
-#             testData.loc[index,'text_final'] = str(final_words_nou)
-
-# text_x_nou = testData['text_final']
-# print(text_x_nou)
-
-# tfidf_vect_nou = TfidfVectorizer(max_features=5000)
-# print(tfidf_vect_nou)
-# tfidf_vect_nou.fit(testData['text_final'])
-# print(tfidf_vect_nou)
-# test_x_tfidf_nou = tfidf_vect.transform(text_x_nou)
-# print(test_x_tfidf_nou)
-
-# print(naive.predict(test_x_tfidf_nou))
-
-
-
-
-# testData = "Imi doresc sa donez o casuta de papusi pe care eu am iubit o super mult cand eram mica dar acum am crescut si as vrea sa faca fericta o alta fetita."
-#testData = "Am de vanzare un cuptor"
 
 def predictCategory(testData):
     testData =testData.lower()
-    print(testData)
     testData= word_tokenize(testData)
     final_words_nou = []
     word_lemmatized_nou = WordNetLemmatizer()

@@ -17,7 +17,6 @@ class AddPhoto extends React.Component{
   }
 
   render(){
-    console.log(this.state.images)
     return (
       <div className="photo">
         <div className="photo-container">

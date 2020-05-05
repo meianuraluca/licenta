@@ -3,16 +3,20 @@ import './addPost.css';
 import Select from 'react-select'
 import AddPhoto from './addPhoto/addPhoto'
 import ContactData from './contactData';
+import getClaims from '../../utils/utils'
 import axios from 'axios';
+import ErrorMessage from '../error/erros'
 import { withRouter } from 'react-router-dom';
+import WrongAd from './modalWrongAd/wrongAd';
 
 
 class AddPost extends React.Component{
     constructor(props){
         super(props)
         this.state={
+            wrongAd:false,
             showDateContact:false,
-            adInfo :{
+            adInfo :{ 
                 title:'',
                 categoty:'',
                 description:'',
@@ -21,6 +25,15 @@ class AddPost extends React.Component{
                 phone:'',
                 location:''
                 
+            },
+            error:{
+                title:'',
+                category:'',
+                description:'',
+                namePerson:'',
+                email:'',
+                phone:'',
+                location:''
             },
             photos:[],
             categoryOp:[
@@ -31,6 +44,35 @@ class AddPost extends React.Component{
               ]
         }
     }
+
+    componentDidMount(){
+        let access = window.localStorage.getItem("accessToken")
+        access  = getClaims(access)
+        axios.get('http://localhost:5000/userData', {
+            params:{email:access.identity},
+        })
+        .then(res => { console.log(res)
+            this.setState({adInfo:{...this.state.adInfo,
+                namePerson:res.data[0].name,
+                email:res.data[0].email,
+                phone:res.data[0].phone,
+                location:res.data[0].city}
+ 
+            })
+        })
+        .catch(err => console.warn(err));
+
+    }
+
+    validateField = (event)=>{
+        if(this.state.adInfo[event.target.name] ==='')
+            this.setState({error:{...this.state.error,[event.target.name]:'required'}})
+
+    }
+    errorContact = (name) =>{
+        this.setState({error:{...this.state.error,[name]:'required'}})
+    }
+
     changeInput=(e)=>{
         this.setState({ adInfo:{...this.state.adInfo,[e.target.name] : e.target.value}})
     }
@@ -48,56 +90,69 @@ class AddPost extends React.Component{
 
 
     sendData=()=>{
+        let access = window.localStorage.getItem("accessToken")
+        access  = getClaims(access)
         let data = [this.state.adInfo.title,
                     this.state.adInfo.categoty,
                     this.state.adInfo.description,
                     this.state.adInfo.namePerson,
                     this.state.adInfo.email,
                     this.state.adInfo.phone,
-                    this.state.adInfo.location]            
+                    this.state.adInfo.location,
+                    access.identity]            
         axios
           .post("http://localhost:5000/announce", data)
           .then(res => {
-            for (let index = 0; index < this.state.photos.length; index++) {
-                console.log("trimit poza")
-                const element = this.state.photos[index];
-                const fd = new FormData();
-                fd.append('idd',res.data);
-                fd.append('file',element,element.name );
-                axios.post('http://localhost:5000/images',fd , {
-                    onUploadProgress : ProgressEvent => {
-                        console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
-                    }
-                })
-            .then(res => console.log(res))
-            .catch(err => console.warn(err));
-        }
-
-
+              console.log(res)
+            if(res.data === "wrong announcement")
+                this.setState({wrongAd:true})
+            else{
+                for (let index = 0; index < this.state.photos.length; index++) {
+                    console.log("trimit poza")
+                    const element = this.state.photos[index];
+                    const fd = new FormData();
+                    fd.append('idd',res.data);
+                    fd.append('file',element,element.name );
+                    axios.post('http://localhost:5000/images',fd , {
+                        onUploadProgress : ProgressEvent => {
+                            console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
+                        }
+                    })
+                .then(res => console.log(res))
+                .catch(err => console.warn(err));
+            }
+            this.props.history.push('/home') 
+            }
           })
           .catch(err => console.warn(err));
-          this.props.history.push('/announces');
-
     }
 
-    render(){     
-        console.log('addpost')
+    hideModal = () => {
+        this.setState({ wrongAd: false});
+      };
+
+    render(){    
         return (
-            <div className="add-container">
-                <div className="add-form">
+        <div>
+            {this.state.wrongAd === true
+            ? <WrongAd  show={this.state.wrongAd} handleClose={this.hideModal}></WrongAd>
+            :<div className="add-container">
+                 <div className="add-form">
                     <form className="add-left">
-                        <div className="add-form-group">
+                        <div className={`add-form-group${this.state.error.title}`}>
                             <label htmlFor="title">Titlu:</label>
-                            <input type="text" name="title" id="title" onChange={this.changeInput}/>
+                            <input type="text" name="title" id="title" defaultValue={this.state.adInfo.title} onBlur={this.validateField} onChange={this.changeInput}/>
                         </div>
+                        {this.state.error.title !== '' && <ErrorMessage style={{marginBottom:"10px"}} type_name={this.state.error.title}/>}
                         <div className="select-option">
                             <label>Categoria</label>
-                            <Select options={this.state.categoryOp}  onChange={this.handleChange} />
+                            <Select options={this.state.categoryOp}  defaultValue={this.state.adInfo.categoty} onChange={this.handleChange} />
                         </div>
-                        <div className="add-form-group">
+                        <div className={`add-form-group${this.state.error.description}`}>
                             <label htmlFor="description">Descriere:</label>
-                            <textarea style={{resize:"none",marginTop:"40px"}} rows="2" cols="50"  name="description" id="description" onChange={this.changeInput}/>
+                            <textarea style={{resize:"none",marginTop:"40px"}} rows="2" cols="50"  name="description" id="description" onBlur={this.validateField} defaultValue={this.state.adInfo.description} onChange={this.changeInput}/>
                         </div>
+                        {this.state.error.description !== '' && <ErrorMessage type_name={this.state.error.description}/>}
                     </form>
                     <div className="add-right">
                         <label>Adauga fotografii:</label>
@@ -107,12 +162,15 @@ class AddPost extends React.Component{
                 <div className="add-contact">
                     <input type="checkbox" id="check" onChange={this.showContact} checked={this.state.showDateContact}/>
                     <label htmlFor="check">Vreau sa imi modific datele de contact</label><br/>
-                    {this.state.showDateContact === true && <ContactData changeInput ={this.changeInput}/> }
+                    {this.state.showDateContact === true && 
+                    <ContactData isError={this.state.error} namePerson={this.state.adInfo.namePerson} phone={this.state.adInfo.phone} location={this.state.adInfo.location} email={this.state.adInfo.email} changeInput ={this.changeInput} error={this.errorContact}/> }
                 </div>
                 <div className="add-button-submit">
                      <input type="submit" name="add" id="add" className="add-form-submit" value="Adauga anunt" onClick={this.sendData}/>
                 </div>
             </div>
+    }
+    </div>
           )
     }
 }

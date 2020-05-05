@@ -55,20 +55,21 @@ def protected():
 @app.route('/announce', methods=["POST"])
 def addAnnouce():
     response = request.get_json()
-    print(response[2])
+    print(response[7])
+    idUser = getId(response[7])
     predict = predictCategory(response[2])
     if predict == 0:
         conn = connectToDB()
         cursor = conn.cursor()
         today = datetime.now()
-        cursor.execute("INSERT INTO announces (userId,announceDate,title,category,announceDescription,personContact,announceEmail, phone,userLocation) VALUES(%s, %s, %s,%s,%s,%s,%s,%s,%s) RETURNING announceId", (2,today,response[0],response[1],response[2],response[3],response[4],response[5],response[6]))
+        cursor.execute("INSERT INTO announces (userId,announceDate,title,category,announceDescription,personContact,announceEmail, phone,userLocation) VALUES(%s, %s, %s,%s,%s,%s,%s,%s,%s) RETURNING announceId", (idUser,today,response[0],response[1],response[2],response[3],response[4],response[5],response[6]))
         results = cursor.fetchall()
         conn.commit()
         cursor.close()
         conn.close()
         return str(results[0][0])
     else:
-        return "Is a sale ad"
+        return "wrong announcement"
 
 
 @app.route('/images', methods=["POST"])
@@ -293,6 +294,20 @@ def profileLogoAssociation():
     return send_file(BytesIO(result), attachment_filename="image.jpg",mimetype='image/jpg',as_attachment=True, cache_timeout=0)
 
 
+@app.route('/userData',methods=['GET'])
+def userData():    
+    emailUser = request.args.get('email','')
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT userName,email,phone,city FROM users WHERE email = %s"
+    email = (emailUser,)
+    result = cur.execute(stmt, email)
+    results = cur.fetchall()
+    json_data = [] 
+    row_headers=[x[0] for x in cur.description]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
+    return json.dumps(json_data)
 
 
 

@@ -39,6 +39,11 @@
     margin-bottom: 10%;
     overflow: hidden;
 }
+.add-form-grouprequired{
+    position: relative;
+    margin-bottom: 1%;
+    overflow: hidden;
+}
 
 .add-form-group > label{
     
@@ -46,7 +51,23 @@
     left: 0;
     color:#222;
 }
+
+.add-form-grouprequired > label{
+    
+    position:absolute;
+    left: 0;
+    color:#222;
+}
 .add-form-group >input,textarea{
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding-top:10px;
+    box-sizing: border-box;
+    margin-top:7%;
+}
+.add-form-grouprequired >input,textarea{
     width: 100%;
     display: block;
     border: none;
