@@ -3,13 +3,16 @@ import './style.scss';
 import Announce from './announce/announce';
 import getClaims from '../../utils/utils'
 import axios from 'axios'
+import Pagination from '../pagination/pagination'
 
 
 class PageUserAnnounce extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      announces:[]
+      announces:[],
+      numberAnnounce:-1,
+      start:0
     }
   }
   componentDidMount(){
@@ -19,40 +22,31 @@ class PageUserAnnounce extends React.Component{
                 params:{email:aceess.identity},
             })
     .then(res => {
-        this.setState({announces:res.data})
+      let lung = res.data.length;
+      this.setState({announces:res.data,numberAnnounce:lung})
                 
 
             })
     .catch(err => console.warn(err));
   }
 
+  changeStart=(data)=>{
+    let next = this.state.start +(-1)*(data *12)
+    this.setState({start:next})
+}
+
   render(){
     return (
-      <div>
-        <section>
-          <div className="container-fluid">
-              <div className="post-container">
+      <React.Fragment>
                 <div className="row">
-                {this.state.announces.map((ad,index) => (
-                    <Announce key={index}  infoAd ={ad}/>
-                ))}        
+                {this.state.announces.map((ad,index) => {
+                      console.log(index)
+                      if(index>= this.state.start && index<(this.state.start+12))
+                          return <Announce key={index}  infoAd ={ad}/>
+                  })}           
                 </div>
-              </div>
-            </div>
-          </section>
-          {/* <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/> */}
-      </div>
+                {this.state.numberAnnounce >12 && <Pagination changeStart={this.changeStart} numberPerPage={12} numberElem={this.state.numberAnnounce} /> } 
+      </React.Fragment>
     )
   }
 
