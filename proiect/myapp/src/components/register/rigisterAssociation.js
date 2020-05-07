@@ -6,6 +6,8 @@ import {FaPhone} from 'react-icons/fa'
 import signup from '../../images/signup-image.jpg'
 import { Link } from 'react-router-dom';
 import ErrorMessage from '../error/erros'
+import {mailformat,phoneFormat} from '../../utils/regex';
+
 
 
 
@@ -53,8 +55,6 @@ class RegisterAssociation extends React.Component {
 
     validateField =(event)=>{
         let value = event.target.value;
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        let phone = /^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/;
         if(event.target.value === ''){
             this.setState({error:{...this.state.error,[event.target.name]:'required'}})
         }
@@ -67,7 +67,7 @@ class RegisterAssociation extends React.Component {
                     mailformat.test(value) === false ? this.setState({error:{...this.state.error,email:'email'}}) : this.setState({error:{...this.state.error,email:''}})
                     break;
                 case 'phone':
-                    phone.test(value) === false ? this.setState({error:{...this.state.error,phone:'phone'}}) : this.setState({error:{...this.state.error,phone:''}})
+                    phoneFormat.test(value) === false ? this.setState({error:{...this.state.error,phone:'phone'}}) : this.setState({error:{...this.state.error,phone:''}})
                     break;
                 case 'password':
                     this.validatePassField(value);
@@ -75,6 +75,7 @@ class RegisterAssociation extends React.Component {
                 case 'againPass':
                     value !== this.state.password ? this.setState({error:{...this.state.error,againPass:'againPass'}}) :this.setState({error:{...this.state.error,againPass:''}})
                     break;
+                default:  this.setState({error:{...this.state.error,[event.target.name]:''}})
             }
         }
     }

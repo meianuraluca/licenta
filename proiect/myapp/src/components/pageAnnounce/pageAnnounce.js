@@ -20,31 +20,13 @@ class pageAnnounce extends React.Component{
 
   render(){
     return (
-      <div>
-        <section>
-          <div className="container-fluid">
-              <div className="post-container">
+        <React.Fragment>
                 <div className="row">
                 {this.state.announces.map((ad,index) => (
                     <Announce key={index}  infoAd ={ad}/>
                 ))}        
                 </div>
-              </div>
-            </div>
-          </section>
-          {/* <ReactPaginate
-                    previousLabel={"prev"}
-                    nextLabel={"next"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={this.state.pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={this.handlePageClick}
-                    containerClassName={"pagination"}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}/> */}
-      </div>
+            </React.Fragment>
     )
   }
 

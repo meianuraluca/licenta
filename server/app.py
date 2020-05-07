@@ -116,6 +116,22 @@ def showAnnounces():
         json_data.append(dict(zip(row_headers,result)))
     return json.dumps(json_data)
 
+@app.route('/listUserAnnounces')
+def listUserAnnounces():
+    emailUser = request.args.get('email','')
+    idUser = getId(emailUser)
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "Select announceId,title,announceDescription from announces where userId=%s"
+    userId = (idUser,)
+    result = cur.execute(stmt, userId)
+    results = cur.fetchall()
+    json_data = [] 
+    row_headers=[x[0] for x in cur.description]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
+    return json.dumps(json_data)
+
 @app.route('/listAssociations')
 def showAssociations():
     print("lista asociatii")

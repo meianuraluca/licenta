@@ -1,6 +1,5 @@
 import React from 'react'
 import './profileAssociation.scss'
-import Modal from './modal/modal'
 import axios from 'axios'
 import getClaims from '../../../utils/utils'
 import CardProfile from './cardProfile/cardProfile'

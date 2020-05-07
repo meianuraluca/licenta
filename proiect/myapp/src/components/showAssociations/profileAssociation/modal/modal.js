@@ -4,6 +4,8 @@ import { MdAddAPhoto} from 'react-icons/md'
 import ErrorMessage from '../../../error/erros'
 import axios from 'axios'
 import getClaims from '../../../../utils/utils'
+import {mailformat} from '../../../../utils/regex';
+
 
 
 class Modal extends React.Component{
@@ -51,7 +53,6 @@ class Modal extends React.Component{
 
     validateEmail = (event)=>{
         let value = event.target.value;
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         mailformat.test(value) === false ? this.setState({validEmail:false}) : this.setState({validEmail:true})
     }
     sendData = () =>{
@@ -108,7 +109,7 @@ class Modal extends React.Component{
                         <div className="modal-container-content-one">
                             {this.props.edit ===false
                             && <div className="modal-add-photo-container">
-                                {this.state.displayLogo ===null ? <label htmlFor="logo"> <MdAddAPhoto className="modal-add-icon"></MdAddAPhoto></label> : <img className="modal-image-profile" src={this.state.displayLogo}/>}
+                                {this.state.displayLogo ===null ? <label htmlFor="logo"> <MdAddAPhoto className="modal-add-icon"></MdAddAPhoto></label> : <img className="modal-image-profile" alt="" src={this.state.displayLogo}/>}
                                 <input id="logo" name="logo" type="file" onChange={this.changeInput} />
                             </div>
                             }

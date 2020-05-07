@@ -52,12 +52,14 @@
     color:#222;
 }
 
-.add-form-grouprequired > label{
+/* .add-form-grouprequired > label{
     
     position:absolute;
     left: 0;
     color:#222;
-}
+} */
+
+
 .add-form-group >input,textarea{
     width: 100%;
     display: block;
@@ -67,6 +69,33 @@
     box-sizing: border-box;
     margin-top:7%;
 }
+.add-form-grouptitle >input,textarea{
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding-top:10px;
+    box-sizing: border-box;
+}
+.add-form-groupdescription >input,textarea{
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding-top:10px;
+    box-sizing: border-box;
+}
+.add-form-group >textarea{
+   margin-top: 40px;
+   resize: none;
+}
+.add-form-grouprequired >textarea{
+    margin-top: 0px;
+    resize: none;
+ }
+.add-form-groupdescription >textarea{
+margin-top: 0px;
+}
 .add-form-grouprequired >input,textarea{
     width: 100%;
     display: block;
@@ -74,11 +103,10 @@
     border-bottom: 1px solid #999;
     padding-top:10px;
     box-sizing: border-box;
-    margin-top:7%;
 }
 .css-2b097c-container{
     margin-top: 20px;
-    margin-bottom: 30px;
+
 }
 .add-contact{
     margin-left: 35px;
@@ -101,6 +129,13 @@
 
 .add-form-submit:hover{
     background:#4292dc;
+}
+
+.select-optiondescription{
+    margin-bottom: 20px;
+}
+.select-optionrequired{
+    margin-bottom: 20px;
 }
 
 

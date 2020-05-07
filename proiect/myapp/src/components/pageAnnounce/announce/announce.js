@@ -21,14 +21,14 @@ class Announce extends React.Component{
                 <h2>{this.state.title}</h2>
                 </div>
                 <div className="post-description">
-                    <ShowMoreText lines={3} more={null}>
+                    <ShowMoreText lines={4} more={null}>
                         {this.state.description}
                     </ShowMoreText>
-                </div>   
-                <Link to={{
+                </div>  
+                <Link className="show-ad" style={{display:"block"}}  to={{
                     pathname:'/showAdd',
                     aboutProps:{id:this.state.id,title:this.state.title,description:this.state.description}
-                }}>Vezi anuntul </Link>
+                }} >Vezi anuntul </Link>
             </div>
             </div>
 

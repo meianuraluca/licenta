@@ -1,27 +1,34 @@
 import React from 'react';
 import './menu.scss'
 import { Link } from 'react-router-dom';
-import DropdownConect from './dropdownConect';
-import DropdownProfile from './dropdownProfile';
-import DropdownProfileAssocitation from './dropdownProfileAssociation';
+import Dropdown from './dropdown';
 
 class Menu extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(){
+    super()
+    this.handleClick = this.handleClick.bind(this)
+    this.handleOutsiteClick = this.handleOutsiteClick.bind(this)
     this.state = {
-      dropdown: <DropdownConect/>,
-    }
+      show:false
+    };
   }
-  componentDidMount(){
-    if (localStorage.getItem('typeUser') !== null) {
-      if(localStorage.getItem('typeUser') === "user")
-        this.setState({dropdown: <DropdownProfile/>})
-      else
-        this.setState({dropdown: <DropdownProfileAssocitation/>})
+
+  handleClick(){
+    if(!this.state.show){
+      document.addEventListener('click',this.handleOutsiteClick,false)
+    }else{
+    document.removeEventListener('click',this.handleOutsiteClick,false);
     }
-    else{
-      this.setState({dropdown: <DropdownConect/>})
+    this.setState(prevState=>({
+      show:!prevState.show
+    }))
+  }
+
+  handleOutsiteClick=(e)=>{
+    if(this.node.contains(e.target)){
+      return
     }
+    this.handleClick()
   }
     render() {
 
@@ -33,9 +40,9 @@ class Menu extends React.Component {
           <Link to={'/associations'}  className="link">Asociatii</Link>
           <Link to={'/contact'} className="link">Contact</Link>
           <Link to={'/addPost'} className="link">Doneaza</Link>
-         <div className="dropdown">
-            <Link  to={'/login'} className="link">Cont</Link>
-            {this.state.dropdown}
+         <div className="dropdown" ref={node=>{this.node=node;}}>
+            <Link onClick={this.handleClick}  className="link">Contul meu</Link>
+            {this.state.show  && (<Dropdown nameClass={this.state.show}/>)}
         </div>
        </div>
       );

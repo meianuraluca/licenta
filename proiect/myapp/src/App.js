@@ -15,9 +15,11 @@ import Contact from './components/contact/contact'
 import ProfileAssociation from './components/showAssociations/profileAssociation/profileAssociation';
 import ProfileAssociationForUser from './components/showAssociations/profileAssociation/profileAssociationForUser';
 import Modal from './components/showAssociations/profileAssociation/modal/modal';
+import PageUserAnnounce from './components/pageAnnounce/pageUserAnnounce';
 
 class App extends React.Component {
   render(){
+    
     return (
       <div className="App">
         <Menu className="menu" ></Menu>
@@ -32,6 +34,7 @@ class App extends React.Component {
               <Route exact path='/register' component={Register}/>
               <Route path='/showAdd'  component={showAd}/>
               <Route exact path='/announces' component={pageAnnounce}/>
+              <Route exact path='/listUserAnnounces' component={PageUserAnnounce}/>
               <Route exact path='/associations' component={showAssociations}/>
               <Route exact path='/profileAssociation' component={ProfileAssociation}/>
               <Route exact path='/profileAssociationForUser' component={ProfileAssociationForUser}/>

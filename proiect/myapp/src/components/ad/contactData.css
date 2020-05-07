@@ -1,8 +1,8 @@
 .contact{
     display: flex;
     flex-direction: row;
-    margin-left: 10%;
-    margin-top: 3%;
+    margin-left: 4%;
+    margin-top: 1%;
 }
 
 .contact-form-group{
@@ -18,9 +18,13 @@
     border-bottom: 1px solid #999;
     padding-top:10px;
     box-sizing: border-box;
+    color: black;
 }
 .contact-form-grouprequired >input,textarea ::placeholder{
-   color:red;
+    border: none;
+    border-bottom: 1px solid #999;
+    padding-top:10px;
+    box-sizing: border-box;
 }
 .contact-form-grouprequired{
     margin-right: 30px;
