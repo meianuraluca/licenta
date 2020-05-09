@@ -1,13 +1,16 @@
 import React from 'react';
 import axios from 'axios';
+import image from '../../../images/Gift Giving.jpg'
+import Loader from 'react-loader-spinner'
 import './showAd.scss';
+import { withRouter } from 'react-router-dom';
 
 class showAd extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             images:[],
-            loading:false
+            loading:true
         }
     }
 
@@ -19,7 +22,10 @@ class showAd extends React.Component{
             })
             .then(response => {
                 let n = response.data.minId+response.data.numberImage;
+                if(n === 0)
+                    this.setState({loading:false})
                 for (let index= response.data.minId; index < n; index++) {
+                    console.log(index)
                     axios.get('http://localhost:5000/oneImage', {
                         params:{id:index},
                         responseType:'arraybuffer'  
@@ -27,8 +33,10 @@ class showAd extends React.Component{
                 .then(res => {
                     let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
                     let url = URL.createObjectURL(matrixBlob)
-                    console.log(url)
-                    this.setState({images:[...this.state.images,url]})
+                    if(index !== (n-1))
+                        this.setState({images:[...this.state.images,url]})
+                    else    
+                        this.setState({images:[...this.state.images,url],loading:false})
                 })
                 .catch(err => console.warn(err));
                 }
@@ -36,47 +44,51 @@ class showAd extends React.Component{
             })
             .catch(err => console.warn(err));
         }
-        this.setState({loading:true})
     }
 
 
     render(){
-        if(this.props.location.aboutProps !== undefined){
-            console.log(this.props.location.aboutProps.id)
-        }
-        console.log(this.state)
-        
         return(
             <div className="card_announce">
                 {this.state.images !==null && 
                 <div className="card_announce_container">
-                        {this.state.loading === true &&
                             <div>
                                 <div className="square_one">
                                     <div className="square_one_left"></div>
                                     <div className="square_one_right">
-                                        <h2>{this.props.location.aboutProps.title}</h2>
+                                        <h2 class="stars"><span><span>HEADLINE STYLING</span></span></h2>
+                                        {/* <h2 className="stars">{this.props.location.aboutProps.title}</h2> */}
+                                        {/* <h2 style={{textAlign:"center",marginBottom:"10px"}}>{this.props.location.aboutProps.title}</h2> */}
                                         <p>{this.props.location.aboutProps.description}</p>
                                     </div>
                                 </div>
-                                <div className="square_two">
-                                {this.state.images.map((elem,index)=>{
-                                        // return <img key={index} className="uploadImage" src={elem} alt="upload"></img>
+                                {this.state.images.length === 0 ?
+                                <img src={image} alt="" className="default-image"></img>
+                                :<div className="square_two">
+                                {this.state.loading === true ?
+                                <div style={{marginLeft:"42%" ,marginTop:'28%'}}><Loader type="Oval" color="#000" height={100} width={100}/></div>
+                                :this.state.images.map((elem,index)=>{
+                                    let type = ''
+                                    if(this.state.images.length ===1)
+                                        type = 'one'
+                                    if(this.state.images.length === 2)
+                                        type = 'two'
+                                    if(this.state.images.length === 3)
+                                        type = 'three'
                                         return(  
-                                            <div key={index} className="card_announce_image">
+                                            <div key={index} className={`card_announce_image${type}`}>
                                                 <div class="imgBx">
                                                     <img className="uploadImage" src={elem} alt="upload"></img>
-                                                </div>
-                                                <div className="announce_details">
-                                                    <h2>SomeOne Famous</h2>
                                                 </div>
                                             </div>
     
 );
-                                    })}
+                                    })
+                                    }
                                 </div>
+    }
                             </div>
-                        }
+                                
                     </div>
                 }
                 
@@ -86,4 +98,4 @@ class showAd extends React.Component{
     }
 }
 
-export default showAd;
+export default withRouter(showAd);

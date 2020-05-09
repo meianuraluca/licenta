@@ -36,7 +36,6 @@ class Pagination extends React.Component{
     }
     moveRight = () => {
         let index = this.state.activePage.indexOf('active');
-        console.log(index)
         if(index!==(this.state.nrPage-1)){
             let newState = this.state.activePage;
             newState[index]='';

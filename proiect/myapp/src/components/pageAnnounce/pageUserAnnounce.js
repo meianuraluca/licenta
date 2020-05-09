@@ -38,14 +38,14 @@ class PageUserAnnounce extends React.Component{
   render(){
     return (
       <React.Fragment>
-                <div className="row">
-                {this.state.announces.map((ad,index) => {
-                      console.log(index)
-                      if(index>= this.state.start && index<(this.state.start+12))
-                          return <Announce key={index}  infoAd ={ad}/>
-                  })}           
-                </div>
-                {this.state.numberAnnounce >12 && <Pagination changeStart={this.changeStart} numberPerPage={12} numberElem={this.state.numberAnnounce} /> } 
+          <div className="row">
+          {this.state.announces.map((ad,index) => {
+                console.log(index)
+                if(index>= this.state.start && index<(this.state.start+12))
+                    return <Announce key={index}  infoAd ={ad}/>
+            })}           
+          </div>
+          {this.state.numberAnnounce >12 && <Pagination changeStart={this.changeStart} numberPerPage={12} numberElem={this.state.numberAnnounce} /> } 
       </React.Fragment>
     )
   }

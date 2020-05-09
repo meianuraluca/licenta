@@ -40,10 +40,13 @@ class AddPost extends React.Component{
             },
             photos:[],
             categoryOp:[
+                { value: 'jucarii', label:'Jucarii'},
                 { value: 'mobila', label: 'Mobila' },
                 { value: 'electronice', label: 'Electronice' },
                 { value: 'haine', label: 'Haine' },
-                { value: 'altele', label: 'Altele'}
+                { value: 'ingrijire', label:'Ingrijire personala'},
+                { value: 'altele', label: 'Altele'},
+
               ]
         }
     }
