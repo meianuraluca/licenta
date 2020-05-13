@@ -7,6 +7,8 @@ function ErrorMessage(props) {
           case 'name': return '* Numele trebuie sa aiba cel putin 5 caractere';
           case 'title': return '* Titlul trebuie sa aiba cel putin 5 caractere';
           case 'description': return '* Descrierea trebuie sa aiba cel putin 10 caractere';
+          case 'subject': return '* Subiectul trebuie sa aiba cel putin 5 caractere';
+          case 'message': return '* Mesajul trebuie sa aiba cel putin 10 caractere';
           case 'email': return "* Adresa de email este invalida";
           case 'phone': return "* Numarul de telefon este invalid"
           case 'city': return "* Numele orasului trebuie sa aiba cel putin 3 caractere";

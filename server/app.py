@@ -7,6 +7,7 @@ from flask_jwt_extended import (JWTManager, create_access_token, get_jwt_identit
 from flask_cors import CORS
 from function.crypto import *
 from datetime import datetime
+from flask_mail import Mail, Message
 import base64
 from io import BytesIO
 from function.query import *
@@ -15,6 +16,13 @@ from function.smv import *
 
 app = Flask(__name__, template_folder="templates")
 app.config['JWT_SECRET_KEY'] = 'please-change-me'
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'suport.sender@gmail.com'
+app.config['MAIL_PASSWORD'] = 'licenta123'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 jwt = JWTManager(app)
 CORS(app)
 
@@ -46,6 +54,29 @@ def login():
     access_token = create_access_token(identity=email)
     return jsonify({'access_token':access_token,"type":typeCont}),200
 
+@app.route('/contactUs', methods=["POST"])
+def contactUs():
+    response = request.get_json()
+    name = response[0]
+    email = response[1]
+    phone = response[2]
+    subject = response[3]
+    message = response[4]
+    msg = Message(subject,sender='suport.sender@gmail.com', recipients=['emailsuport.donation@gmail.com'])
+    msg.body = "Destinar: "+str(name)+"\nNumar de telefon: " + str(phone) + "\nAdresa email:  " + str(email)+" \nMesaj: \n"+str(message)
+    mail.send(msg)
+    return "Sent"
+@app.route('/confirmEmail',methods=['POST'])
+def confirmEmail():
+    response = request.get_json()
+    email = response[0]
+    msg = Message("Confirmare Email",sender='suport.sender@gmail.com', recipients=[email])
+    msg.body = "Buna ziua !\n Mesajul dumneavoastra a fost primit si inregistrat iar in cel mai scurt tip cine din echipa se va ocupa de problema dumneavoastra!\nMultumim de informare!"
+    mail.send(msg)
+    return "Sent"
+
+
+
 @app.route('/protected',methods=['GET'])
 @jwt_required
 def protected():
@@ -55,7 +86,6 @@ def protected():
 @app.route('/announce', methods=["POST"])
 def addAnnouce():
     response = request.get_json()
-    print(response[7])
     idUser = getId(response[7])
     predict = predictCategory(response[2])
     if predict == 0:
