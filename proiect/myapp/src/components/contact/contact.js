@@ -63,7 +63,10 @@ class Contact extends React.Component {
                     ok = false
                 }
                 else{
-                    change.push('')
+                    if(this.state.error[key] === '')
+                        change.push('')
+                    else
+                        change.push(this.state.error[key])
                 }
         }
         }
@@ -103,7 +106,6 @@ class Contact extends React.Component {
 
   render(){
     return (
-      <div className="contact-page">
                 <div className="contact-parent">
                     <div className="contact-child child1">
 
@@ -149,7 +151,6 @@ class Contact extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
 
     );
   }

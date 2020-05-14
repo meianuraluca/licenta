@@ -8,12 +8,12 @@
     width: 60%;
     display:flex;
     margin-left: 20%;
+    margin-right: 20%;
     margin-top:10px;
     
     
 
 }
-
 .contact-child{
     display:flex;
     flex:1;
@@ -36,7 +36,7 @@
 }
 
 .child1{
-    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("https://cdn.pixabay.com/photo/2019/06/28/00/17/architecture-4303279_1280.jpg");
+    background:linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("../../images/architecture-4303279_1280.webp");
     background-size:cover;
     display:flex;
     flex-direction:column;
@@ -107,7 +107,9 @@
 @media screen and (max-width:991px){
     .contact-parent{
         display:block;
-        width:100%;
+        margin-left: 3%;
+        margin-right: 3%;
+        width:94%;
     }
 
     .child1{

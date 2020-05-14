@@ -40,8 +40,8 @@ class Menu extends React.Component {
           <Link to={'/associations'}  className="link">Asociatii</Link>
           <Link to={'/contact'} className="link">Contact</Link>
           <Link to={'/addPost'} className="link">Doneaza</Link>
-         <div className="dropdown" ref={node=>{this.node=node;}}>
-            <Link onClick={this.handleClick}  className="link">Contul meu</Link>
+         <div onClick={this.handleClick} className="dropdown" ref={node=>{this.node=node;}}>
+            <a  className="sub-link">Contul meu</a>
             {this.state.show  && (<Dropdown nameClass={this.state.show}/>)}
         </div>
        </div>
