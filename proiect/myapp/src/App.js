@@ -16,14 +16,19 @@ import ProfileAssociation from './components/showAssociations/profileAssociation
 import ProfileAssociationForUser from './components/showAssociations/profileAssociation/profileAssociationForUser';
 import Modal from './components/showAssociations/profileAssociation/modal/modal';
 import PageUserAnnounce from './components/pageAnnounce/pageUserAnnounce';
+import Bar from './components/bar/bar';
 
 class App extends React.Component {
   render(){
     
     return (
       <div className="App">
-        <Menu className="menu" ></Menu>
-        <div className="box">
+      
+        <div className="navBar">
+        <Bar/>
+          <Menu className="menu" ></Menu>
+          </div>
+          <div className="box">
           <Switch >
               <Route exact path='/' component={Home}/>
               <Route exact path='/home' component={Home}/>

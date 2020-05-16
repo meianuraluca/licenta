@@ -1,124 +1,341 @@
-.container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding-top: 10px;
-  padding-bottom: 30px;
+
+
+
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 750px) {
+/* Styles */
+.overlay-0 {
+  height: 0%;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-y: hidden;
+  transition: 0.5s;
+}
+.overlay-100 {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-y: hidden;
+  transition: 0.5s;
 }
 
+.container {
+  position: relative;
+  color:grey;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  font-size: 200%;
+  flex-direction: column;
+  justify-content:center;
+  padding-bottom: 10%;
+}
 .link{
-  margin-right: 10px;
-  padding:20px 20px;
+  text-decoration: none;
+  color:grey;
+  margin-left: 40%;
+}
+
+.link:hover{
+  color: white;
+}
+
+.icon-dropdown-0 {
+  margin-top:3%;
+  margin-right: 1%;
+  width: 50px;
+  height: 50px;
+  color:black;
+  cursor: pointer;
+}
+
+.icon-dropdown-100{
+  display: none;
+}
+.sub-link{
+  margin-left: 40%;
+}
+.sub-link:hover{
+  color:white;
+}
+
+.container-dropdown-link > a{
+  text-decoration: none;
+  color:grey;
+  margin-left: 42%;
+  display: list-item;          /* This has to be "list-item"                                               */
+  list-style-type: disc;       /* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+  list-style-position: inside;
+}
+
+.container-dropdown-link > a:hover{
+  color:white;
+}
+.close-dropdown{
+  float: right;
+  width: 50px;
+  height: 50px;
+  color:grey;
+}
+
+.close-dropdown:hover{
+  color: white;
+}
+
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 750px) {
+
+  .overlay-0 {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+  }
+  .overlay-100 {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-y: hidden;
+    transition: 0.5s;
+  }
+  
+  .container {
+    position: relative;
+    color:grey;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    font-size: 200%;
+    flex-direction: column;
+    justify-content:center;
+    padding-bottom: 10%;
+  }
+  .link{
+    text-decoration: none;
+    color:grey;
+    margin-left: 40%;
+  }
+
+  .link:hover{
+    color: white;
+  }
+  
+  .icon-dropdown-0 {
+    margin-top:9%;
+    width: 30px;
+    height: 30px;
+    color:black;
+    cursor: pointer;
+  }
+
+  .icon-dropdown-100{
+    display: none;
+  }
+  .sub-link{
+    margin-left: 40%;
+  }
+  .sub-link:hover{
+    color:white;
+  }
+
+  .container-dropdown-link > a{
+    text-decoration: none;
+    color:grey;
+    margin-left: 42%;
+    display: list-item;          /* This has to be "list-item"                                               */
+    list-style-type: disc;       /* See https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type     */
+    list-style-position: inside;
+  }
+
+  .container-dropdown-link > a:hover{
+    color:white;
+  }
+  .close-dropdown{
+    float: right;
+    width: 50px;
+    height: 50px;
+    color:grey;
+  }
+
+  .close-dropdown:hover{
+    color: white;
+  }
+  
+}
+
+
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1150px) {
+  .overlay-0 {
+    height: auto;
+    width: 100%;
+    position: relative;
+    background-color:transparent;
+    background-color: transparent;
+    overflow-y: unset;
+  }
+  .icon-dropdown-0{
+    display: none;
+  }
+  
+  .container{
+    color:black;
+    height: auto;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 20px;
+  }
+  
+  .link{
+    margin-left: 0px;
+    margin-right: 10px;
+    padding:10px 20px;
+    background: none;
+    border:none;
+    font-weight: bold;
+    font-size: .7em;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    color:#000;
+    position: relative;
+    background-image: linear-gradient(120deg, #B5E0E6 0%, #E6D3C2 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 85%;
+    transition: background-size 0.25s ease-in;
+    &:hover {
+      background-size: 100% 88%;
+  }
+  }
+
+  .dropdown-link{
+  
   background: none;
   border:none;
-  font-size: 1.3em;
+  font-size: 16px;
   font-weight: bold;
   letter-spacing: 3px;
   cursor: pointer;
   text-decoration: none;
   color:#000;
-  position: relative;
-  background-image: linear-gradient(120deg, #B5E0E6 0%, #E6D3C2 100%);
-  background-repeat: no-repeat;
-  background-size: 100% 0.2em;
-  background-position: 0 88%;
   transition: background-size 0.25s ease-in;
-  &:hover {
+  
+  }
+ 
+  .container-dropdown-link>a{
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color:black;
+    margin-left: 0px;
+    border:1px solid grey;
+  }
+  .container-dropdown-link>a:hover{
+    border-left: 2px solid black;
+    background-color: #F4F4F4;
+    color:black
+
+  }
+  
+  .sub-link{
+    display: inline-block;
+    padding:10px 20px;
+    background: none;
+    margin-left: 0px;
+    border:none;
+    font-size: .7em;
+    font-weight: bold;
+    letter-spacing: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    color:#000;
+    position: relative;
+      background-image: linear-gradient(120deg, #B5E0E6 0%, #E6D3C2 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 0.2em;
+    background-position: 0 88%;
+    transition: background-size 0.25s ease-in;
+    &:hover {
     background-size: 100% 88%;
+    }
+  }
+
+.link:hover, .sub-link:hover{
+  color:black
 }
+  
+.close-dropdown{
+  display: none;
 }
 
-.dropdown-link{
-
-background: none;
-border:none;
-font-size: 16px;
-font-weight: bold;
-letter-spacing: 3px;
-cursor: pointer;
-text-decoration: none;
-color:#000;
-transition: background-size 0.25s ease-in;
-
-}
-.container-dropdown-link{
- text-align: center;
- border:1px solid grey;
-}
-.container-dropdown-link:hover{
-  border-left: 2px solid black;
-  background-color: #F4F4F4;
-}
-
-.sub-link{
-  text-decoration: none;
-  font-weight: bold;
-  letter-spacing: 3px;
-  cursor: pointer;
-  color: black;
-}
-
-.dropdown {
-position: relative;
-display: inline-block;
-padding:20px 40px;
-background: none;
-border:none;
-font-size: 1.3em;
-font-weight: bold;
-letter-spacing: 3px;
-cursor: pointer;
-text-decoration: none;
-color:#000;
-position: relative;
-  background-image: linear-gradient(120deg, #B5E0E6 0%, #E6D3C2 100%);
-background-repeat: no-repeat;
-background-size: 100% 0.2em;
-background-position: 0 88%;
-transition: background-size 0.25s ease-in;
-&:hover {
-background-size: 100% 88%;
-}
-}
-
-
-.dropdown-content- {
-margin-top: 15%;
-display: none;
-position: absolute;
-right: 0;
-background-color: #b9e2e8;
-min-width: 200px;
-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-z-index: 10;
-}
-
-.dropdown-content- div {
-color: black;
-padding-bottom: 10px;
-padding-left: 15px;
-text-decoration: none;
-display: block;
-}
-
-.dropdown-content .link:hover {background-color:transparent;}
-.dropdown-content-true{
-  display: block;
-  margin-top: 15%;
+  .icon-dropdown{display: none;}
+  
+  
+  .dropdown-content- {
+  margin-right: 1%;
+  display: none;
   position: absolute;
   right: 0;
   background-color: #b9e2e8;
-  min-width: 200px;
+  width: 200px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 10;
+  }
+  
+  .dropdown-content- div {
+  color: black;
+  padding-bottom: 10px;
+  padding-left: 15px;
+  text-decoration: none;
+  display: block;
+  }
+  
+  .dropdown-content .link:hover {background-color:transparent;}
+  .dropdown-content-true{
+    display: block;
+    margin-right: 1%;
+    margin-top: .5%;
+    position: absolute;
+    right: 0;
+    background-color: #b9e2e8;
+    width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
+  }
+   
 }
 
-// .dropdown-content-true div {
-//   color: black;
-//   padding-bottom: 10px;
-//   padding-left: 15px;
-//   text-decoration: none;
-//   display: block;
-//   }
 
 

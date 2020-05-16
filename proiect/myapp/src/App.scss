@@ -15,14 +15,11 @@
 }
 
 .box{
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-top:0px;
   height: 100%;
   width: 100%;
 }
-.menu{
-  flex-basis: 100%;
-}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -40,6 +37,43 @@
 }
 
 
+
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 750px) {
+  .navBar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+  }
+/* St
+yles */
+}
+@media only screen 
+and (max-width : 750px) {
+  .navBar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+  }
+/* Styles */
+}
+
+
+
+
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1150px) {
+  .navBar{
+     display: flex;
+     flex-direction: column;
+  }
+   
+}
 
 
 

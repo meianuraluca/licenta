@@ -94,6 +94,10 @@ class Login extends React.Component {
                             {this.state.error !== '' && <ErrorMessage type_name={this.state.error}/>}
                             <div className="form-group form-button" style={{marginTop:"5%"}}>
                                 <input type="button" name="signin" id="signin" className="signin-form-submit" value="Autentificare" onClick={this.handleLogin}/>
+                                <div className="signin-link">
+                                  <Link className="changePage" to={'/register'}>Creaza cont <GiReturnArrow></GiReturnArrow></Link>
+                                  <Link className="changePage" to={'/registerAssoc'}>Creaza cont de asociatie <GiReturnArrow></GiReturnArrow></Link>
+                                </div>
                             </div>
                         </form>
                     </div>

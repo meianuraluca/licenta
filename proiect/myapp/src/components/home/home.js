@@ -20,20 +20,20 @@ function Home(){
   return (
     <div className="slide-container">
       <Slide {...properties}>
-        <div style={{marginTop:"1%"}} className="each-slide">
+        <div className="each-slide">
           <img className="imagine" src={image1} alt="carusel1"></img>
         </div>
         <div className="each-slide">
-          <img  style={{marginTop:"4%"}} className="imagine" src={image2} alt="carusel2"></img>
+          <img  className="imagine" src={image2} alt="carusel2"></img>
         </div>
         <div className="each-slide">
-          <img style={{marginTop:"1%"}} className="imagine" src={image3} alt="carusel3"></img>
+          <img  className="imagine" src={image3} alt="carusel3"></img>
         </div>
         <div className="each-slide">
           <img className="imagine" src={image4}alt="carusel4"></img>
         </div>
         <div className="each-slide">
-          <img style={{marginTop:"4%"}} className="imagine" src={image5}alt="carusel5"></img>
+          <img  className="imagine" src={image5}alt="carusel5"></img>
         </div>
       </Slide>
     </div>
