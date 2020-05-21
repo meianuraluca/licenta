@@ -6,6 +6,7 @@ import image2 from  '../../images/image2.jpg';
 import image3 from  '../../images/image3.jpg';
 import image4 from  '../../images/image5.jpg';
 import image5 from  '../../images/image6.jpg';
+import image6 from  '../../images/image8.jpg';
 
 function Home(){
    
@@ -35,6 +36,10 @@ function Home(){
         <div className="each-slide">
           <img  className="imagine" src={image5}alt="carusel5"></img>
         </div>
+        <div className="each-slide">
+          <img  className="imagine" src={image6}alt="carusel5"></img>
+        </div>
+  
       </Slide>
     </div>
   )

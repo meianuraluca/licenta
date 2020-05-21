@@ -196,10 +196,11 @@ class AddPost extends React.Component{
 
     render(){    
         return (
-        <div>
+        <div style={{marginTop:"5%",marginBottom:"5%"}}>
             {this.state.wrongAd === true
             ? <WrongAd  show={this.state.wrongAd} handleClose={this.hideModal}></WrongAd>
             :<div className="add-container">
+                <h1 className="title-add">Adauga anunt</h1>
                  <div className="add-form">
                     <form className="add-left">
                         <div className={`add-form-group${this.state.error.title}`}>
@@ -219,7 +220,7 @@ class AddPost extends React.Component{
                         {this.state.error.description !== '' && <ErrorMessage type_name={this.state.error.description}/>}
                     </form>
                     <div className="add-right">
-                        <label>Adauga fotografii:</label>
+                        <label style={{marginLeft:"5.5%"}}>Adauga fotografii:</label>
                         <AddPhoto photo={this.addImages}></AddPhoto>
                     </div>
                 </div>

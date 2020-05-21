@@ -173,6 +173,10 @@ class RegisterAssociation extends React.Component {
                             {this.state.error.againPass !== '' && <ErrorMessage type_name={this.state.error.againPass}/>}
                             <div className="form-group form-button">
                                 <input type="button" name="register" id="register" className="form-submit" onClick={this.registerAssociation} value="Inregistreaza-te"/>
+                                <div>
+                                    <Link className="changePage" to={'/register'}>Creaza cont normal <GiReturnArrow></GiReturnArrow></Link>
+                                    <Link className="changePage" to={'/login'}>Sunt deja membru <GiReturnArrow></GiReturnArrow></Link> 
+                                </div>
                             </div>
                         </form>
                     </div>

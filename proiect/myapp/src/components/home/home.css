@@ -1,47 +1,6 @@
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 480px) {
-/* Styles */
-}
-
-/* Smartphones (landscape) ----------- */
-@media only screen 
-and (min-width : 321px) {
-/* Styles */
-}
-
-/* Smartphones (portrait) ----------- */
-@media only screen 
-and (max-width : 320px) {
-/* Styles */
-}
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) {
-/* Styles */
-}
-
-/* iPads (landscape) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : landscape) {
-/* Styles */
-}
-
-/* iPads (portrait) ----------- */
-@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px) 
-and (orientation : portrait) {
-/* Styles */
-}
-
 /* Desktops and laptops ----------- */
 @media only screen 
-and (min-width : 1224px) {
+and (min-width : 1150px) {
     .slide-container{
         margin-left: 20%;
         padding: 10px 20px 10px 20px;
@@ -57,8 +16,59 @@ and (min-width : 1224px) {
     .imagine{
         text-align: center;
         margin-left: 10%;
-        width:700px;
+        width:80%;
         height: 500px;
+    }
+    
+}
+
+
+@media only screen 
+and (max-width : 1150px) {
+    .slide-container{
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-top: 10%;
+        padding: 10px 20px 10px 20px;
+        padding-left:20px;
+        padding-right: 20px;
+        width: 80%;
+        display:block;
+        background:transparent;
+        border:1px solid #ccc;
+        box-shadow:5px 5px 5px 5px #999;
+    }
+    
+    .imagine{
+        text-align: center;
+        margin-left: 10%;
+        width:80%;
+        height: 400px;
+    }
+    
+}
+
+
+@media only screen 
+and (max-width : 750px) {
+    .slide-container{
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 20%;
+        padding: 10px 10px 10px 10px;
+        width: 90%;
+        display:block;
+        background:transparent;
+        border:1px solid #ccc;
+        box-shadow:5px 5px 5px 5px #999;
+    }
+    
+    .imagine{
+        text-align: center;
+        margin-left: 6%;
+        margin-right: 6%;
+        width:88%;
+        height: 250px;
     }
     
 }

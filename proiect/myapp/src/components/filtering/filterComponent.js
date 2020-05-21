@@ -1,11 +1,14 @@
 import React from 'react';
 import './filterComponent.scss'
+import {FaFilter} from 'react-icons/fa'
 
 function FilterComponent(props){
     
 
     return(
         <React.Fragment>
+            <div className="container-filters">
+            <p className="button-filters"><FaFilter/>Filtreaza anunturile</p>   
             <ul className="filters">
                 {props.options.map((element,index)=>{
                     return(
@@ -19,6 +22,7 @@ function FilterComponent(props){
                     )
                 })}
             </ul>
+            </div>
         </React.Fragment>
     )
 }

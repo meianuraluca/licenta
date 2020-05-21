@@ -183,6 +183,11 @@ class Register extends React.Component {
                             {this.state.error.againPass !== '' && <ErrorMessage type_name={this.state.error.againPass}/>}
                             <div className="form-group form-button">
                                 <input type="button" name="signup" id="signup" className="form-submit" value="Inregistreaza-te" onClick={this.registerUser}/>
+                                <div>
+                                    <Link className="changePage" to={'/login'}>Sunt deja membru <GiReturnArrow></GiReturnArrow></Link>
+                                    <Link className="changePage" to={'/registerAssoc'}>Creaza cont de asociatie <GiReturnArrow></GiReturnArrow></Link>
+                                </div>
+
                             </div>
                         </form>
                     </div>

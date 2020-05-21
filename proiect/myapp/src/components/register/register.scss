@@ -64,11 +64,6 @@ body{
     -ms-border-radius: 20px; 
 }
 
-.signup-content{
-    padding:3% 0;
-    display: flex;
-    flex-direction: row;
-}
 
 .signup-form{
     margin-left:7%;
@@ -100,16 +95,7 @@ body{
     display: inline-block;
     text-rendering: auto;
 }
-.signup-form-title{
-    margin-bottom: 33px;
-    line-height: 1.66;
-    margin: 0;
-    padding-bottom: 3%;
-    font-weight: 700;
-    color: #222;
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 36px;
-}
+
 
 #signup{
     margin-top: 7%;
@@ -229,10 +215,103 @@ body{
 
 @media only screen 
 and (max-width : 930px) {
-
+    .signup-form-title{
+        margin-bottom: 33px;
+        line-height: 1.66;
+        margin: 0;
+        padding-bottom: 3%;
+        font-weight: 700;
+        color: #222;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 26px;
+    }
+    .form-group > div{
+        margin-top: 10%;
+        display: block;
+    }
+    .sign-up{
+        margin-top: 9%;
+        margin-bottom: 3%;
+    }
+    .register{
+        margin-top: 9%;
+        margin-bottom: 3%;
+    }
+    .register-image{
+        display: none;
+    
+    }
+    .signup-container {
+        width: 80%;
+        background: #fff;
+        margin: 0 auto;
+        box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -o-border-radius: 20px;
+        -ms-border-radius: 20px; 
+    }
+    .signup-image{
+        display: none;
+    }
+    
+.signup-content{
+    padding:3% 0;
+    display: flex;
+    flex-direction: column;
+}
 }
 
 @media only screen 
-and (min-width : 930px) {}
+and (min-width : 930px) {
+    .signup-form-title{
+        margin-bottom: 33px;
+        line-height: 1.66;
+        margin: 0;
+        padding-bottom: 3%;
+        font-weight: 700;
+        color: #222;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 36px;
+    }
+    .form-group >div{
+        display: none;
+    }
+.signup-content{
+    padding:3% 0;
+    display: flex;
+    flex-direction: row;
+}
+    .sign-up{
+        margin-top: 1%;
+    }
+    .register{
+        margin-top: 2%;
+    }
+    .register-image{
+        margin-top: 3%;
+    
+    }
+    .signup-container {
+        width: 900px;
+        background: #fff;
+        margin: 0 auto;
+        box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        -moz-border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -o-border-radius: 20px;
+        -ms-border-radius: 20px; 
+    }
+}
 
 
