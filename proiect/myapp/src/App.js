@@ -7,7 +7,7 @@ import Register from './components/register/register'
 import Home from './components/home/home'
 import Menu from './components/menu/menu';
 import RegisterAssociation from './components/register/rigisterAssociation';
-import pageAnnounce from './components/pageAnnounce/pageAnnounce';
+import pageAnnounces from './components/pageAnnounce/pageAnnounce';
 import showAd from './components/pageAnnounce/showAd/showAd'
 import Protected from './components/protected/protected';
 import showAssociations from './components/showAssociations/showAssociations';
@@ -15,7 +15,7 @@ import Contact from './components/contact/contact'
 import ProfileAssociation from './components/showAssociations/profileAssociation/profileAssociation';
 import ProfileAssociationForUser from './components/showAssociations/profileAssociation/profileAssociationForUser';
 import Modal from './components/showAssociations/profileAssociation/modal/modal';
-import PageUserAnnounce from './components/pageAnnounce/pageUserAnnounce';
+import PageUserAnnounces from './components/pageAnnounce/pageUserAnnounce';
 import Bar from './components/bar/bar';
 
 class App extends React.Component {
@@ -38,8 +38,8 @@ class App extends React.Component {
               <Route exact path='/login' component={Login}/>
               <Route exact path='/register' component={Register}/>
               <Route path='/showAdd'  component={showAd}/>
-              <Route exact path='/announces' component={pageAnnounce}/>
-              <Route exact path='/listUserAnnounces' component={PageUserAnnounce}/>
+              <Route exact path='/announces' component={pageAnnounces}/>
+              <Route exact path='/listUserAnnounces' component={PageUserAnnounces}/>
               <Route exact path='/associations' component={showAssociations}/>
               <Route exact path='/profileAssociation' component={ProfileAssociation}/>
               <Route exact path='/profileAssociationForUser' component={ProfileAssociationForUser}/>

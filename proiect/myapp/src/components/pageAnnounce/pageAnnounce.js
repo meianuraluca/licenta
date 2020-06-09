@@ -5,7 +5,7 @@ import Announce from './announce/announce';
 import Pagination from '../pagination/pagination'
 import FilterComponent from '../filtering/filterComponent';
 
-class pageAnnounce extends React.Component{
+class pageAnnounces extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -95,4 +95,4 @@ class pageAnnounce extends React.Component{
   }
 
 }
-export default pageAnnounce;
+export default pageAnnounces;

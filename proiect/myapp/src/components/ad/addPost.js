@@ -52,21 +52,39 @@ class AddPost extends React.Component{
     }
 
     componentDidMount(){
-        let access = window.localStorage.getItem("accessToken")
+        let typeUser = window.localStorage.getItem("typeUser");
+        let access = window.localStorage.getItem("accessToken");
         access  = getClaims(access)
-        axios.get('http://localhost:5000/userData', {
-            params:{email:access.identity},
-        })
-        .then(res => { console.log(res)
-            this.setState({adInfo:{...this.state.adInfo,
-                namePerson:res.data[0].username,
-                email:res.data[0].email,
-                phone:res.data[0].phone,
-                location:res.data[0].city}
- 
+        if(typeUser === 'user'){
+            axios.get('http://localhost:5000/userData', {
+                params:{email:access.identity},
             })
-        })
-        .catch(err => console.warn(err));
+            .then(res => { 
+                this.setState({adInfo:{...this.state.adInfo,
+                    namePerson:res.data[0].username,
+                    email:res.data[0].email,
+                    phone:res.data[0].phone,
+                    location:res.data[0].city}
+     
+                })
+            })
+            .catch(err => console.warn(err));
+        }
+        else{
+            axios.get('http://localhost:5000/associationData', {
+                params:{email:access.identity},
+            })
+            .then(res => {
+                this.setState({adInfo:{...this.state.adInfo,
+                    namePerson:res.data[0].associationname,
+                    email:res.data[0].associationsemail,
+                    phone:res.data[0].phone},
+                    showDateContact:true
+                })
+            })
+            .catch(err => console.warn(err));
+        }
+
 
     }
 
@@ -152,6 +170,7 @@ class AddPost extends React.Component{
 
     sendData=()=>{
         if(this.validateData() === true){
+            let typeUser = window.localStorage.getItem("typeUser")
             let access = window.localStorage.getItem("accessToken")
             access  = getClaims(access)
             let data = [this.state.adInfo.title,
@@ -161,16 +180,16 @@ class AddPost extends React.Component{
                         this.state.adInfo.email,
                         this.state.adInfo.phone,
                         this.state.adInfo.location,
-                        access.identity]            
+                        access.identity,
+                        typeUser
+                    ]            
             axios
             .post("http://localhost:5000/announce", data)
             .then(res => {
-                console.log(res)
                 if(res.data === "wrong announcement")
                     this.setState({wrongAd:true})
                 else{
                     for (let index = 0; index < this.state.photos.length; index++) {
-                        console.log("trimit poza")
                         const element = this.state.photos[index];
                         const fd = new FormData();
                         fd.append('idd',res.data);

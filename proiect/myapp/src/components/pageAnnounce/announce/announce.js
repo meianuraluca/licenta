@@ -9,11 +9,15 @@ class Announce extends React.Component{
         this.state={
             id : this.props.infoAd.announceid,
             title: this.props.infoAd.title,
-            description: this.props.infoAd.announcedescription
+            description: this.props.infoAd.announcedescription,
+            name: this.props.infoAd.personcontact,
+            email:this.props.infoAd.announceemail,
+            phone:this.props.infoAd.phone,
+            city:this.props.infoAd.userlocation
         }
     }
     render(){
-        //console.log(this.state)
+        console.log(this.state)
         return(
             <div className="col-sm-4">
             <div className="card text-center">
@@ -27,7 +31,13 @@ class Announce extends React.Component{
                 </div>  
                 <Link className="show-ad" style={{display:"block"}}  to={{
                     pathname:'/showAdd',
-                    aboutProps:{id:this.state.id,title:this.state.title,description:this.state.description}
+                    aboutProps:{id:this.state.id,
+                                title:this.state.title,
+                                description:this.state.description,
+                                name:this.state.name,
+                                email:this.state.email,
+                                phone:this.state.phone,
+                                city:this.state.city}
                 }} >Vezi anuntul </Link>
             </div>
             </div>

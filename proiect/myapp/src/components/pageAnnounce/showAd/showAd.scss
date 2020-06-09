@@ -7,30 +7,34 @@
     background-color: #e5f3f3;
     box-shadow:0px 0px 10px -2px rgba(0,0,0,0.75);
     z-index: 1;
+    font-style: italic;
+    font-size: 14px;
     display: flex;
     flex-direction: row;
 
 }
 
-h2.stars {
-    letter-spacing: 0px;
-    font-size: 1.2em;
-    }
-    
-    h2.stars span {
-    /* Stern für die linke Seite */
-    padding: 0 0 0 20px;
-    background: #F5F5DF url('../../../images/star.png');
-    background-repeat: no-repeat;
-    }
-    
-    h2.stars span span {
-    /* Stern für die rechte Seite */
-    padding: 0 20px 0 0;
-    background: transparent url('../../../images/star.png');
-    background-repeat: no-repeat;
-    }  
+.stars{
+  margin-top: 1%;
+  margin-left: 1.3%;
+  font-family: "Paytone One";
+  color: #202020;
+}
 
+.stars > span{
+  display: block;
+  font-size: 30px;
+  font-style: italic;
+  line-height: 80px;
+  color:black;
+  text-shadow:1px 1px 1px #666,
+  3px 3px 8px black;
+}
+
+.square_one_right > div >p > span{
+  font-weight: bold;
+  
+}
 
 
 
@@ -42,6 +46,9 @@ h2.stars {
     flex-basis: 50%;
     padding: 3%;
     padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
 }
 

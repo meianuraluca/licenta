@@ -135,12 +135,13 @@ class CardProfile extends React.Component{
             <div className="profile-association-card">
                 <div className="profile-association-card-additional">
                     <div className="profile-association-card-user-card">
-                        <h2 className="profile-card-name">{this.props.name}</h2>
+                        <div className="incercare"><h2 className="profile-card-name">{this.props.name}</h2>
                         {this.props.logo === null?
                               <MdPerson className="profile_logo"></MdPerson> :
                               this.state.logo=== null ? <img src={this.props.logo} alt="" className="profile_logo"></img> : <img src={this.state.logo} alt="" className="profile_logo"></img>
                               
                         }
+                        </div>
                         {this.props.isPersonLog === true &&
                         <label className="change-profile-logo">
                         <label htmlFor="logo"><MdPhotoCamera className="icon-add-photo"></MdPhotoCamera></label>

@@ -56,10 +56,16 @@ class showAd extends React.Component{
                                 <div className="square_one">
                                     <div className="square_one_left"></div>
                                     <div className="square_one_right">
-                                        <h2 class="stars"><span><span>HEADLINE STYLING</span></span></h2>
-                                        {/* <h2 className="stars">{this.props.location.aboutProps.title}</h2> */}
-                                        {/* <h2 style={{textAlign:"center",marginBottom:"10px"}}>{this.props.location.aboutProps.title}</h2> */}
-                                        <p>{this.props.location.aboutProps.description}</p>
+                                        <div>
+                                            <h2 className="stars"><span>{this.props.location.aboutProps.title}</span></h2>
+                                            <p>{this.props.location.aboutProps.description}</p>
+                                        </div>
+                                        <div style={{textAlign:"end"}}>
+                                            <p><span>Persoana de contact: </span> {this.props.location.aboutProps.name}</p>
+                                            <p><span>Adresa de email: </span>{this.props.location.aboutProps.email}</p>
+                                            <p><span>Numar de telefon: </span>{this.props.location.aboutProps.phone}</p>
+                                            <p><span>Localitate: </span>{this.props.location.aboutProps.city}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 {this.state.images.length === 0 ?

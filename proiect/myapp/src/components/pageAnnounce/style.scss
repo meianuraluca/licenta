@@ -18,6 +18,7 @@
           box-shadow: 0 10px 15px rgba(0,0,0,.1) ;
 -webkit-transition: .5s;
 transition: .5s;
+z-index: 0;
 }
 .card:hover{
   -webkit-transform: scale(1.1);

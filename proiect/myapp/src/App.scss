@@ -70,6 +70,7 @@ and (max-width : 750px) {
 and (min-width : 1150px) {
   .navBar{
      display: flex;
+     z-index: 0;
      flex-direction: column;
   }
    

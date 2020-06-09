@@ -8,7 +8,7 @@ import Loader from 'react-loader-spinner';
 import FilterComponent from '../filtering/filterComponent';
 
 
-class PageUserAnnounce extends React.Component{
+class PageUserAnnounces extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -99,4 +99,4 @@ changeCategory=(index)=>{
   }
 
 }
-export default PageUserAnnounce;
+export default PageUserAnnounces;
