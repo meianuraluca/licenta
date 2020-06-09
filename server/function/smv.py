@@ -54,8 +54,10 @@ tfidf_vect = TfidfVectorizer(max_features=5000)
 tfidf_vect.fit(corpus['text_final'])
 train_x_tfidf = tfidf_vect.transform(train_x)
 
-naive = naive_bayes.MultinomialNB()
-naive.fit(train_x_tfidf,train_y)
+SVM = svm.SVC(C=1.0, kernel='linear', degree=3, gamma='auto')
+SVM.fit(train_x_tfidf,train_y)
+# prediction_SVM = SVM.predict(test_x_tfidf)
+# print("SVM Accuracy Score -> ",accuracy_score(prediction_SVM, test_y)*100)
 
 
 def predictCategory(testData):
@@ -73,5 +75,5 @@ def predictCategory(testData):
     tfidf_vect_nou = TfidfVectorizer(max_features=5000)
     tfidf_vect_nou.fit([testData])
     test_x_tfidf_nou = tfidf_vect.transform([text_x_nou])
-    y_predicted = naive.predict(test_x_tfidf_nou)
+    y_predicted = SVM.predict(test_x_tfidf_nou)
     return y_predicted

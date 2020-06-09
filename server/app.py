@@ -135,7 +135,7 @@ def showAnnounces():
     conn = connectToDB()
     cur = conn.cursor()
     try:
-        cur.execute("Select announceId,title,announceDescription,category from announces")
+        cur.execute("Select announceId,title,announceDescription,category , personContact,announceEmail,phone,userLocation from announces")
     except:
         print("Error executing select")
     results = cur.fetchall()
@@ -152,7 +152,7 @@ def listUserAnnounces():
     idUser = getId(emailUser)
     conn = connectToDB()
     cur = conn.cursor()
-    stmt = "Select announceId,title,announceDescription,category from announces where userId=%s"
+    stmt = "Select announceId,title,announceDescription,category, personContact,announceEmail,phone,userLocation from announces where userId=%s"
     userId = (idUser,)
     result = cur.execute(stmt, userId)
     results = cur.fetchall()
