@@ -20,10 +20,8 @@ import Bar from './components/bar/bar';
 
 class App extends React.Component {
   render(){
-    
     return (
       <div className="App">
-      
         <div className="navBar">
         <Bar/>
           <Menu className="menu" ></Menu>
@@ -46,12 +44,9 @@ class App extends React.Component {
               <Route exact path='/editProfileAssociation' component={Modal}/>
               <Route exact path='/registerAssoc' component={RegisterAssociation}/>
             </Switch>
-            
             </div>
       </div>
     );
   }
-
 }
-
 export default App;

@@ -18,7 +18,8 @@ class Modal extends React.Component{
             link:"",
             email:"",
             description:"",
-            validEmail:true
+            validEmail:true,
+            phone:''
         }
     }
     changeInput=(e)=>{
@@ -103,7 +104,7 @@ class Modal extends React.Component{
                 <div className="modal-container">
                     {this.props.edit === false 
                      ? <h1 className="modal-title">Buna! Acum ca te-ai inregistrat hai sa adaugam cateva informatii ca profilul dumneavostra sa prinda contur!</h1>
-                     : <h1 style={{marginBottom:"5%"}} className="modal-title">Modifica datele profilului</h1>
+                     : <h1 style={{marginBottom:"5%",marginLeft:"40%"}} className="modal-title">Modifica datele profilului</h1>
                     }   
                     <div className="modal-container-content">
                         <div className="modal-container-content-one">
@@ -116,6 +117,7 @@ class Modal extends React.Component{
                             <input className="modal-input" type="text" id="motto" name="motto" placeholder="Motto al asociatiei.." onChange={this.changeInput}/>
     
                             <input className="modal-input" type="text" id="link" name="link" placeholder="Link catre pagina oficiala a asociatiei" onChange={this.changeInput}/>   
+                            <input className="modal-input" type="text" id="phone" name="phone" placeholder="Numar de telefon" onChange={this.changeInput}/>   
                             <input className="modal-input" style={{marginBottom:"0px"}} type="text" id="email" name="email" placeholder="Email ul de contact" onChange={this.changeInput} onBlur={this.validateEmail}/>
                             {this.state.validEmail === false && <ErrorMessage style={{paddingTop:"0px"}} type_name="email"/>}
                         </div>
@@ -130,8 +132,16 @@ class Modal extends React.Component{
                         
                     </div>    
                     <div className="modal-buttons">
-                        <button onClick={this.props.handleClose}>Mai tarziu</button>
-                        <button onClick={this.sendData}>Salveaza</button>
+                        <div className="button" >
+                            <div className="translate"></div>
+                            <a href="#" onClick={this.props.handleClose}>Mai tarziu</a>
+                        </div>
+                        <div className="button">
+                            <div className="translate"></div>
+                            <a href="#" onClick={this.sendData}>Salveaza</a>
+                        </div>
+                        {/* <button onClick={this.props.handleClose}>Mai tarziu</button>
+                        <button onClick={this.sendData}>Salveaza</button> */}
                     </div>
                     
                 </div>

@@ -7,14 +7,14 @@ from function.connectDB import *
 from function.crypto import *
 import psycopg2.extras
 
-def registerNewUser(login_json):
-    if not  login_json: 
+def registerNewUser(register_json):
+    if not  register_json: 
         return jsonify({'msg':'Missing json'}),400
-    email = login_json.get('email')
-    password = login_json.get('password')
-    phone = login_json.get('phone')
-    city = login_json.get('city')
-    name = login_json.get('name')
+    email = register_json.get('email')
+    password = register_json.get('password')
+    phone = register_json.get('phone')
+    city = register_json.get('city')
+    name = register_json.get('name')
     if not email:
         return jsonify({'msg':'Email is missing'}),400
     if not phone:

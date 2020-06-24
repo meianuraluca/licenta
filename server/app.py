@@ -49,7 +49,7 @@ def confirmEmail():
     response = request.get_json()
     email = response[0]
     msg = Message("Confirmare Email",sender='suport.sender@gmail.com', recipients=[email])
-    msg.body = "Buna ziua !\n Mesajul dumneavoastra a fost primit si inregistrat iar in cel mai scurt tip cine din echipa se va ocupa de problema dumneavoastra!\nMultumim de informare!"
+    msg.body = "Bună ziua !\n\nMesajul dumneavoastră a fost primit și înregistrat, iar în cel mai scurt tip o persoana din echipa de suport se va ocupa de problema dumneavoastră!\n\nMulțumim de informare!"
     mail.send(msg)
     return "Sent"
 

@@ -3,6 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 2%;
 }
 
 .flip-card {
@@ -10,6 +11,7 @@
     width: 270px;
     height: 270px;
     margin: 2%;
+    z-index: 0;
     perspective: 1000px;
   }
   

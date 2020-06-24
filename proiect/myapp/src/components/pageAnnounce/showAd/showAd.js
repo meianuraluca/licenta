@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import image from '../../../images/Gift Giving.jpg'
 import Loader from 'react-loader-spinner'
+import {MdPhotoLibrary, MdClose} from 'react-icons/md'
 import './showAd.scss';
 import { withRouter } from 'react-router-dom';
 
@@ -10,7 +11,8 @@ class showAd extends React.Component{
         super(props);
         this.state = {
             images:[],
-            loading:true
+            loading:true,
+            show:false
         }
     }
 
@@ -46,6 +48,13 @@ class showAd extends React.Component{
         }
     }
 
+    showImage =()=>{
+        this.setState({show:true})
+    }
+
+    closeImage=()=>{
+        this.setState({show:false})
+    }
 
     render(){
         return(
@@ -56,7 +65,8 @@ class showAd extends React.Component{
                                 <div className="square_one">
                                     <div className="square_one_left"></div>
                                     <div className="square_one_right">
-                                        <div>
+                                       <div>
+                                            {this.state.images.length !== 0 && this.state.loading === false && <div className="icon-show-photo"><MdPhotoLibrary onClick={this.showImage} className="icon2"></MdPhotoLibrary></div>}     
                                             <h2 className="stars"><span>{this.props.location.aboutProps.title}</span></h2>
                                             <p>{this.props.location.aboutProps.description}</p>
                                         </div>
@@ -68,9 +78,10 @@ class showAd extends React.Component{
                                         </div>
                                     </div>
                                 </div>
-                                {this.state.images.length === 0 ?
+                                {this.state.images.length === 0 && this.state.loading === false ?
                                 <img src={image} alt="" className="default-image"></img>
-                                :<div className="square_two">
+                                :<div className={`square_two_${this.state.show}`}>
+                                <div className="icon-close-photo"><MdClose onClick={this.closeImage} className="icon2"></MdClose></div>
                                 {this.state.loading === true ?
                                 <div style={{marginLeft:"42%" ,marginTop:'28%'}}><Loader type="Oval" color="#000" height={100} width={100}/></div>
                                 :this.state.images.map((elem,index)=>{
@@ -83,7 +94,7 @@ class showAd extends React.Component{
                                         type = 'three'
                                         return(  
                                             <div key={index} className={`card_announce_image${type}`}>
-                                                <div class="imgBx">
+                                                <div className="imgBx">
                                                     <img className="uploadImage" src={elem} alt="upload"></img>
                                                 </div>
                                             </div>

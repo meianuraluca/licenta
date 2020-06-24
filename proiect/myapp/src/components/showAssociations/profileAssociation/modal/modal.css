@@ -107,18 +107,18 @@
 }
 
 .modal-title{
+  font-style: normal;
   margin-top:2%;
-  margin-bottom:2%; 
-  margin-left:10%;
-  margin-right:10%;
-  color: white;
-  text-shadow:
-   -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+  font-size: 20px;
+  text-shadow:1px 1px 1px #666,
+  3px 3px 8px black;
 }
-
+.button > a{
+  font-style: normal;
+  font-size: 20px;
+  text-shadow:1px 1px 1px #666,
+  3px 3px 8px black;
+}
 .modal-image-profile{
   height: 100%;
   width: 100%;

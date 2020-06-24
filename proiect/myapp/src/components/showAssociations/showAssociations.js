@@ -2,6 +2,7 @@ import React from 'react';
 import './style.scss';
 import image from '../../images/charity-donation_18591-47988.jpg'
 import axios from 'axios'
+import Loader from 'react-loader-spinner';
 import {Link} from 'react-router-dom'
 import ShowMoreText from 'react-show-more-text';
 import isEmptyArrayBuffer from 'is-empty-array-buffer'
@@ -16,7 +17,7 @@ class showAssociations extends React.Component{
       associations:[],
       associationsLogo:[],
       numberAssociations:-1,
-      start:0
+      start:0,
     }
   }
   componentDidMount(){
@@ -48,10 +49,11 @@ class showAssociations extends React.Component{
 
             })
             .catch(err => console.warn(err));
-            
+ 
         }
        
       });
+      
   }
   changeStart=(data)=>{
     let next = this.state.start +(-1)*(data *12)
@@ -62,7 +64,10 @@ class showAssociations extends React.Component{
 
   render(){
     return (
-      <div>
+      <React.Fragment>
+        {this.state.numberAssociations*2 !== this.state.associationsLogo.length
+        ? <div style={{textAlign:"center", marginTop:'15%'}}><Loader type="Oval" color="#000" height={100} width={100}/></div>
+        :
         <section>
           {this.state.associationsLogo.length === (2* this.state.associations.length) &&
           <div className="associations-page">
@@ -97,12 +102,14 @@ class showAssociations extends React.Component{
                 );
                   }
             })}
-             {this.state.numberAnnounce >12 && <Pagination changeStart={this.changeStart} numberPerPage={12} numberElem={this.state.numberAnnounce} /> } 
+             
             </div>
   }
-       
+       {this.state.numberAssociations >12 && <Pagination changeStart={this.changeStart} numberPerPage={12} numberElem={this.state.numberAssociations} /> }
           </section>
-      </div>
+          
+}
+          </React.Fragment>
     )
   }
 

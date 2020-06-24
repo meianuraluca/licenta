@@ -95,7 +95,8 @@ class Contact extends React.Component {
                 if(res.data === "Sent"){
                     axios
                     .post("http://localhost:5000/confirmEmail", [this.state.email])
-                    .then(res =>{console.log(res)})
+                    .then(res =>{console.log(res)
+                        this.props.history.push('/home')})
                     .catch(err=>console.warn(err));
                 }
             })

@@ -90,21 +90,31 @@ class Register extends React.Component {
 
     validateForm =()=>{
         let ok = true;
-        for (let key in this.state) {
-            if(key !== "error")
-                if(this.state[key] === ''){
-                    ok = false;
+        let change = []
+        for(let key in this.state){
+            if(key !== 'error'){
+                if(this.state[key] ==='')
+                {   change.push('required')
+                    ok = false
                 }
-            else{
-                for(let prop in this.state.error){
-                    if(this.state.error[prop] !== ''){
-                        ok = false;
-
-                    }
+                else{
+                    if(this.state.error[key] === '')
+                        change.push('')
+                    else
+                        change.push(this.state.error[key])
                 }
-            }
         }
-        return ok;
+        }
+        this.setState({error:{...this.state.error,
+            name:change[0],
+            email:change[1],
+            phone:change[2],
+            city:change[3],
+            password:change[4],
+            againPass:change[5]
+        }})
+
+        return ok
     }
 
     registerUser =(e)=>{

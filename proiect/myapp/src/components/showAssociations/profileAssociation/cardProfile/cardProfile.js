@@ -157,6 +157,8 @@ class CardProfile extends React.Component{
                             </div>
                         </div>
                     </div>
+                    {this.state.images.length !== 0
+                    &&
                     <div className="profile-association-card-additional-photos">
                         <h1>{this.state.title}</h1>
                         <div className="associations-photos">
@@ -174,6 +176,7 @@ class CardProfile extends React.Component{
                                         </div>}
 
                     </div>
+    }
                 </div>
             <div className="profile-association-card-general">
             <div>

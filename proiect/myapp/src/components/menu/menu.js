@@ -56,7 +56,7 @@ class Menu extends React.Component {
           <Link to={'/associations'} onClick={this.closeDropdown}  className="link">Asociatii</Link>
           <Link to={'/contact'} onClick={this.closeDropdown} className="link">Contact</Link>
           <Link to={'/addPost'} onClick={this.closeDropdown} className="link">Doneaza</Link>
-         <div onClick={this.handleClick} className="dropdown" ref={node=>{this.node=node;}}>
+         <div onClick={this.handleClick}  className="dropdown" ref={node=>{this.node=node;}}>
             <a  className="sub-link">Contul meu</a>
             {this.state.show  && (<Dropdown  closeDropdown={this.closeDropdown} nameClass={this.state.show}/>)}
         </div>

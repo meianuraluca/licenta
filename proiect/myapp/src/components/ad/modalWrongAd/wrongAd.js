@@ -11,7 +11,7 @@ function WrongAd(props) {
     return (
       <div className={showHideClassname}>
         <section className="wrong-ad-main">
-          <p>Buna! Anuntul dumneavoastra a fost depistat ca anunt de vanzare. Scopul acestui site este de a dona asa ca va rugam sa il respectati!</p>
+          <p>Bună ziua! Anunțul dumneavoastră a fost depistat ca anunț de vanzare. Scopul acestei platforme este de a dona și vă rugăm să țineți cont de acest lucru!</p>
           <div className="button" style={{float:"left",marginLeft:"90px"}}>
             <div className="translate"></div>
             <a href="#" onClick={props.handleClose}>Modifica postarea</a>
