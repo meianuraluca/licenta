@@ -73,6 +73,14 @@ def addDescriptionAssociation(email, description):
     conn.commit()
     cur.close()
     conn.close()
+def addPhoneAssociation(email, phone):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "UPDATE associations SET phone = %s WHERE associationsEmail=%s;"
+    result = cur.execute(stmt, (phone,email))
+    conn.commit()
+    cur.close()
+    conn.close()
 
 def checkAssociation(email):
     conn = connectToDB()

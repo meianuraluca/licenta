@@ -2,7 +2,7 @@ import React from 'react'
 import './cardProfile.scss'
 import axios from 'axios'
 import {MdPerson, MdPhotoCamera} from 'react-icons/md'
-import {AiFillCaretRight,AiFillCaretLeft} from 'react-icons/ai'
+import {AiFillCaretRight,AiFillCaretLeft,AiOutlineDoubleRight,AiOutlineClose} from 'react-icons/ai'
 import {FaFolderPlus} from 'react-icons/fa'
 import getClaims from '../../../../utils/utils'
 import isEmptyArrayBuffer from 'is-empty-array-buffer'
@@ -17,7 +17,8 @@ class CardProfile extends React.Component{
             title:"Cateva poze cu noi",
             images:[],
             accessToken:'',
-            isPersonLog:false
+            isPersonLog:false,
+            showPhotos:false,
         }
     }
 
@@ -51,7 +52,6 @@ class CardProfile extends React.Component{
             })
             .catch(err => console.warn(err));
             }
-            console.log(response.data)
         })
         .catch(err => console.warn(err));
     
@@ -129,11 +129,17 @@ class CardProfile extends React.Component{
         }
     }
 
+    showPhoto = ()=>{
+        this.setState({showPhotos:true})
+    }
+    closePhoto = ()=>{
+        this.setState({showPhotos:false})
+    }
+
     render(){
-      console.log(this.props)
         return(
             <div className="profile-association-card">
-                <div className="profile-association-card-additional">
+                <div className={`profile-association-card-additional-${this.state.showPhotos}`}>
                     <div className="profile-association-card-user-card">
                         <div className="incercare"><h2 className="profile-card-name">{this.props.name}</h2>
                         {this.props.logo === null?
@@ -155,7 +161,12 @@ class CardProfile extends React.Component{
                             <div className="container-profile-link">
                                   <a className="profile-link" href={this.props.link}>Pagina oficiala</a>
                             </div>
+                 
                         </div>
+                        {this.state.showPhotos === false?
+                            <AiOutlineDoubleRight className="icon-close-and-open" id='profile-association-show-images' onClick={this.showPhoto}></AiOutlineDoubleRight>
+                            : <AiOutlineClose className="icon-close-and-open" onClick={this.closePhoto}></AiOutlineClose>
+                            }  
                     </div>
                     {this.state.images.length !== 0
                     &&
@@ -164,9 +175,12 @@ class CardProfile extends React.Component{
                         <div className="associations-photos">
                             <AiFillCaretLeft onClick={this.moveLeft} style={{marginLeft:"5%"}} className="arrow-icon"/>
                             {this.state.images !== [] &&
-                            this.state.images.slice(this.state.start,this.state.start+2).map((element,index)=>{
+                            <div className="only-images">
+                            {this.state.images.slice(this.state.start,this.state.start+2).map((element,index)=>{
                                 return <img className="associations-photos-style" src={element} key={index} alt=""/>
                             })}
+                            </div>
+    }
                             <AiFillCaretRight onClick={this.moveRight} className="arrow-icon"/>
                         </div> 
                         {this.props.isPersonLog === true &&
@@ -185,7 +199,7 @@ class CardProfile extends React.Component{
                     </div>
                     <div>
                     <label className="profile-association-card-general-title">Despre Asociatie</label>
-                    <p className="profile-association-card-general-info">{this.props.description}</p>
+                    <p id="profile-assoc-description" className="profile-association-card-general-info">{this.props.description}</p>
                     </div>
             </div>
           </div>

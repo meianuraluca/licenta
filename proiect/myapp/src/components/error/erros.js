@@ -10,6 +10,7 @@ function ErrorMessage(props) {
           case 'subject': return '* Subiectul trebuie sa aiba cel putin 5 caractere';
           case 'message': return '* Mesajul trebuie sa aiba cel putin 10 caractere';
           case 'email': return "* Adresa de email este invalida";
+          case 'link': return "* Link-ul este invalid"
           case 'phone': return "* Numarul de telefon este invalid"
           case 'city': return "* Numele orasului trebuie sa aiba cel putin 3 caractere";
           case 'passwordLung': return "* Parola trebuie sa aiba cel putin 8 caractere ";

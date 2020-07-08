@@ -33,6 +33,9 @@ class ProfileAssociation extends React.Component{
       
     }
     componentDidUpdate(){
+        if(this.props.location.aboutProps !== undefined){
+            localStorage.setItem('edit','true')
+        }
         if (localStorage.getItem('firstTime') === 'true') {
             this.setState({firstTime: true})
             localStorage.setItem('firstTime','false');
@@ -66,8 +69,10 @@ class ProfileAssociation extends React.Component{
                         url = URL.createObjectURL(matrixBlob);
                     }
 
-                    if(ok===1)
+                    if(ok===1){
                         this.setState({logo:url, firstTime:false });
+                        localStorage.setItem('edit','false')
+                    }
                     else
                         this.setState({logo:url})
                 })
@@ -81,6 +86,7 @@ class ProfileAssociation extends React.Component{
         this.dataFromBackend(1);
      };
     render(){
+        let edit = localStorage.getItem('edit')
         return(
             <div>
                 {this.state.firstTime === false 
@@ -95,7 +101,7 @@ class ProfileAssociation extends React.Component{
                                description ={this.state.description} 
                                contactEmail = {this.state.contactEmail}
                 ></CardProfile>
-                : this.props.location.aboutProps !== undefined ?<Modal show={this.state.firstTime} handleClose={this.hideModal} edit={true}></Modal> :<Modal show={this.state.firstTime} handleClose={this.hideModal} edit={false}></Modal>
+                : edit === 'true' ?<Modal show={this.state.firstTime} handleClose={this.hideModal} edit={true}></Modal> :<Modal show={this.state.firstTime} handleClose={this.hideModal} edit={false}></Modal>
                 }
             </div>
 

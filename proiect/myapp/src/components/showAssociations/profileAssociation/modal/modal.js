@@ -4,7 +4,7 @@ import { MdAddAPhoto} from 'react-icons/md'
 import ErrorMessage from '../../../error/erros'
 import axios from 'axios'
 import getClaims from '../../../../utils/utils'
-import {mailformat} from '../../../../utils/regex';
+import {mailformat, phoneFormat, linkFormat} from '../../../../utils/regex';
 
 
 
@@ -19,6 +19,8 @@ class Modal extends React.Component{
             email:"",
             description:"",
             validEmail:true,
+            validPhone:true,
+            validLink:true,
             phone:''
         }
     }
@@ -56,44 +58,56 @@ class Modal extends React.Component{
         let value = event.target.value;
         mailformat.test(value) === false ? this.setState({validEmail:false}) : this.setState({validEmail:true})
     }
+
+    validatePhone = (event)=>{
+        let value = event.target.value;
+        phoneFormat.test(value) === false ? this.setState({validPhone:false}) : this.setState({validPhone:true})
+    }
+    validateLink = (event)=>{
+        let value = event.target.value;
+        linkFormat.test(value) === false ? this.setState({validLink:false}) : this.setState({validLink:true})
+    }
+
     sendData = () =>{
-        console.log("trimit datete")
-        if (localStorage.getItem('accessToken') !== null) {
-            let access = window.localStorage.getItem('accessToken');
-            access = getClaims(access);
-            let result = access.identity;
-            let data = [result,
-                        this.state.motto,
-                        this.state.link,
-                        this.state.email,
-                        this.state.description]            
-            axios
-            .post("http://localhost:5000/editProfile", data)
-            .then(res => {
-                    if(this.state.logo !== null){
-                        const element = this.state.logo;
-                        const fd = new FormData();
-                        fd.append('email',result);
-                        fd.append('file',element,element.name );
-                        axios.post('http://localhost:5000/addLogo',fd , {
-                            onUploadProgress : ProgressEvent => {
-                                console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
-                            }
+        if( this.state.validEmail === true && this.state.validPhone === true){
+            if (localStorage.getItem('accessToken') !== null) {
+                let access = window.localStorage.getItem('accessToken');
+                access = getClaims(access);
+                let result = access.identity;
+                let data = [result,
+                            this.state.motto,
+                            this.state.link,
+                            this.state.email,
+                            this.state.description,
+                            this.state.phone]            
+                axios
+                .post("http://localhost:5000/editProfile", data)
+                .then(res => {
+                        if(this.state.logo !== null){
+                            const element = this.state.logo;
+                            const fd = new FormData();
+                            fd.append('email',result);
+                            fd.append('file',element,element.name );
+                            axios.post('http://localhost:5000/addLogo',fd , {
+                                onUploadProgress : ProgressEvent => {
+                                    console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
+                                }
+                            })
+                        .then(res => {
+                            res.data ==="done" && this.props.handleClose()
+                            
                         })
-                    .then(res => {
-                        res.data ==="done" && this.props.handleClose()
-                        
-                    })
-                    .catch(err => console.warn(err));
-                    }
-                    else{
-                        res.data ==="done" && this.props.handleClose()
-                    }
+                        .catch(err => console.warn(err));
+                        }
+                        else{
+                            res.data ==="done" && this.props.handleClose()
+                        }
 
-            })
-            .catch(err => console.warn(err));
+                })
+                .catch(err => console.warn(err));
 
-        }
+            }}
+
     }
 
     render(){
@@ -104,7 +118,7 @@ class Modal extends React.Component{
                 <div className="modal-container">
                     {this.props.edit === false 
                      ? <h1 className="modal-title">Buna! Acum ca te-ai inregistrat hai sa adaugam cateva informatii ca profilul dumneavostra sa prinda contur!</h1>
-                     : <h1 style={{marginBottom:"5%",marginLeft:"40%"}} className="modal-title">Modifica datele profilului</h1>
+                     : <h1 className="modal-title">Modifica datele profilului</h1>
                     }   
                     <div className="modal-container-content">
                         <div className="modal-container-content-one">
@@ -116,14 +130,16 @@ class Modal extends React.Component{
                             }
                             <input className="modal-input" type="text" id="motto" name="motto" placeholder="Motto al asociatiei.." onChange={this.changeInput}/>
     
-                            <input className="modal-input" type="text" id="link" name="link" placeholder="Link catre pagina oficiala a asociatiei" onChange={this.changeInput}/>   
-                            <input className="modal-input" type="text" id="phone" name="phone" placeholder="Numar de telefon" onChange={this.changeInput}/>   
+                            <input className={`modal-input link-${this.state.validLink}`} type="text" id="link" name="link" placeholder="Link catre pagina oficiala a asociatiei" onChange={this.changeInput}/>   
+                            {this.state.validLink === false && <ErrorMessage style={{paddingTop:"0px"}} type_name="link"/>}
+                            <input className={`modal-input phone-${this.state.validPhone}`}  type="text" id="phone" name="phone" placeholder="Numar de telefon" onChange={this.changeInput} onBlur={this.validatePhone}/>   
+                            {this.state.validPhone === false && <ErrorMessage style={{paddingTop:"0px"}} type_name="phone"/>}
                             <input className="modal-input" style={{marginBottom:"0px"}} type="text" id="email" name="email" placeholder="Email ul de contact" onChange={this.changeInput} onBlur={this.validateEmail}/>
                             {this.state.validEmail === false && <ErrorMessage style={{paddingTop:"0px"}} type_name="email"/>}
                         </div>
                         {this.props.edit === false
                             ? <div className="modal-container-content-two">
-                                <textarea className="modal-input" id="description" name="description" placeholder="Despre asociatie" rows={10} onChange={this.changeInput}></textarea>
+                                <textarea className="modal-input description" id="description" name="description" placeholder="Despre asociatie" rows={10} onChange={this.changeInput}></textarea>
                             </div>
                             :<div style={{marginTop:"0px"}} className="modal-container-content-two">
                                 <textarea className="modal-input" id="description" name="description" placeholder="Despre asociatie" rows={10} onChange={this.changeInput}></textarea>

@@ -290,16 +290,15 @@ and (min-width : 1150px) {
     }
   }
 
-.link:hover, .sub-link:hover{
-  color:black
-}
-  
-.close-dropdown{
-  display: none;
+  .link:hover, .sub-link:hover{
+    color:black
+  }
+    
+  .close-dropdown{
+    display: none;
 }
 
   .icon-dropdown{display: none;}
-  
   
   .dropdown-content- {
   margin-right: 1%;
@@ -330,6 +329,7 @@ and (min-width : 1150px) {
     background-color: #b9e2e8;
     width: 200px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 10;
   }
    
 }

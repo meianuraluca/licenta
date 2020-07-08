@@ -190,6 +190,8 @@ def editProfile():
         addEmailContactAssociation(email,response[3])
     if(response[4] !=''):
         addDescriptionAssociation(email,response[4])
+    if(response[5] !=''):
+        addPhoneAssociation(email,response[5])
     return 'done'
 
 @app.route('/addLogo', methods=['POST'])
