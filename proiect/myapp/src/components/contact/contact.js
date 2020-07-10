@@ -91,12 +91,13 @@ class Contact extends React.Component {
             axios
             .post("http://localhost:5000/contactUs", data)
             .then(res => {
+                
                 console.log(res)
                 if(res.data === "Sent"){
+                    this.props.history.push('/home')
                     axios
                     .post("http://localhost:5000/confirmEmail", [this.state.email])
-                    .then(res =>{console.log(res)
-                        this.props.history.push('/home')})
+                    .then(res =>{console.log(res)})
                     .catch(err=>console.warn(err));
                 }
             })

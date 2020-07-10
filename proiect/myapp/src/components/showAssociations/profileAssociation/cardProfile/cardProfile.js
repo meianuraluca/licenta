@@ -1,7 +1,7 @@
 import React from 'react'
 import './cardProfile.scss'
 import axios from 'axios'
-import {MdPerson, MdPhotoCamera} from 'react-icons/md'
+import {MdPerson, MdPhotoCamera, MdDelete} from 'react-icons/md'
 import {AiFillCaretRight,AiFillCaretLeft,AiOutlineDoubleRight,AiOutlineClose} from 'react-icons/ai'
 import {FaFolderPlus} from 'react-icons/fa'
 import getClaims from '../../../../utils/utils'
@@ -16,6 +16,7 @@ class CardProfile extends React.Component{
             logo:null,
             title:"Cateva poze cu noi",
             images:[],
+            idImages:[],
             accessToken:'',
             isPersonLog:false,
             showPhotos:false,
@@ -47,6 +48,7 @@ class CardProfile extends React.Component{
                 let url = URL.createObjectURL(matrixBlob)
                 console.log(url)
                 this.setState({images:[...this.state.images,url]})
+                this.setState({idImages:[...this.state.idImages,index]})
                 }
 
             })
@@ -136,6 +138,19 @@ class CardProfile extends React.Component{
         this.setState({showPhotos:false})
     }
 
+    deletePhoto = (element)=>{          
+        const fd = new FormData();
+        fd.append('file',element);
+        axios.post('http://localhost:5000/deletePhoto',fd , {
+            onUploadProgress : ProgressEvent => {
+                console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
+            }
+        })
+    .then(res => console.log(res))
+    .catch(err => console.warn(err));
+    }
+    
+
     render(){
         return(
             <div className="profile-association-card">
@@ -159,7 +174,7 @@ class CardProfile extends React.Component{
                             <p>{this.props.contactEmail}</p>
                             <p>{this.props.phone}</p>
                             <div className="container-profile-link">
-                                  <a className="profile-link" href={this.props.link}>Pagina oficiala</a>
+                                  <a className="profile-link" target="_blank" href={this.props.link}>Pagina oficiala</a>
                             </div>
                  
                         </div>
@@ -168,21 +183,27 @@ class CardProfile extends React.Component{
                             : <AiOutlineClose className="icon-close-and-open" onClick={this.closePhoto}></AiOutlineClose>
                             }  
                     </div>
-                    {this.state.images.length !== 0
-                    &&
+
                     <div className="profile-association-card-additional-photos">
                         <h1>{this.state.title}</h1>
+                        {this.state.images.length !== 0
+                    &&
                         <div className="associations-photos">
                             <AiFillCaretLeft onClick={this.moveLeft} style={{marginLeft:"5%"}} className="arrow-icon"/>
                             {this.state.images !== [] &&
                             <div className="only-images">
                             {this.state.images.slice(this.state.start,this.state.start+2).map((element,index)=>{
-                                return <img className="associations-photos-style" src={element} key={index} alt=""/>
+                                return <div className="associations-photo-container">
+                                    {this.props.isPersonLog === true && <MdDelete onClick={()=>{this.deletePhoto(element)}} className="deletePhoto"></MdDelete>}
+                                    <img className="associations-photos-style" src={element} key={index} alt=""/>
+                                    </div>
+                                
                             })}
                             </div>
     }
                             <AiFillCaretRight onClick={this.moveRight} className="arrow-icon"/>
                         </div> 
+    }
                         {this.props.isPersonLog === true &&
                                                 <div className="profil-card-add-photo-container">
                                                 <label htmlFor="photos"> <FaFolderPlus className="modal-add-icon"></FaFolderPlus></label>
@@ -190,7 +211,7 @@ class CardProfile extends React.Component{
                                         </div>}
 
                     </div>
-    }
+    
                 </div>
             <div className="profile-association-card-general">
             <div>

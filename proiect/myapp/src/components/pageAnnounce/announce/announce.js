@@ -1,6 +1,8 @@
 import React from 'react';
 import '../style.scss';
+import axios from 'axios'
 import {Link} from 'react-router-dom';
+import {MdDelete} from 'react-icons/md'
 import ShowMoreText from 'react-show-more-text';
 
 class Announce extends React.Component{
@@ -16,11 +18,23 @@ class Announce extends React.Component{
             city:this.props.infoAd.userlocation
         }
     }
+    deleteAnnouce = ()=>{          
+        axios
+            .get("http://localhost:5000/deleteAd",{
+                params:{id:this.state.id},
+            })
+            .then((response) => {
+                if(response.data === "done")
+                window.location.reload(false);
+            })
+            .catch(err => console.warn(err));
+    }
     render(){
         console.log(this.state)
         return(
             <div className="col-sm-4">
             <div className="card text-center">
+            {this.props.user === true && <MdDelete onClick={this.deleteAnnouce} className="deleteAd"></MdDelete>}
                 <div className="title">
                 <h2>{this.state.title}</h2>
                 </div>

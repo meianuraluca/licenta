@@ -87,11 +87,26 @@ def imagesAsscoc():
     file = request.files['file'].read()
     conn = connectToDB()
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO imagesAsscoc (associationId,image) VALUES(%s, %s)", (iddValue,file))
+    cursor.execute("INSERT INTO imagesAsscoc (associationId,image) VALUES(%s, %s) RETURNING imageId", (iddValue,file))
+    id_of_new_row = cursor.fetchone()[0]
     conn.commit()
     cursor.close()
     conn.close()
-    return "done"
+    return id_of_new_row
+
+@app.route('/deletePhoto', methods=["GET"])
+def deletePhoto():
+    print("intru in sterg")
+    idAd =  request.args.get('id','')
+    conn = connectToDB()
+    cursor = conn.cursor()
+    stmt = "DELETE FROM imagesAsscoc WHERE imageId=%s;"
+    param = (idAd,)
+    result = cursor.execute(stmt,param)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return 'done'
 
 @app.route('/listAnnounces')
 def showAnnounces():
@@ -178,6 +193,22 @@ def infoAssociation():
         json_data.append(dict(zip(row_headers,result)))
     return json.dumps(json_data)
 
+@app.route('/deleteAd', methods=['GET'])
+def deleteAd():
+    print(request)
+    idAd =  request.args.get('id','')
+    conn = connectToDB()
+    cursor = conn.cursor()
+    print(idAd)
+    stmt1 = "DELETE FROM imagesAdd where announceId=%s;"
+    stmt = "DELETE FROM announces WHERE announceId=%s;"
+    param = (idAd,)
+    result = cursor.execute(stmt1, param)
+    result = cursor.execute(stmt,param)
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return 'done'
 @app.route('/editProfile', methods=['POST'])
 def editProfile():
     response = request.get_json()

@@ -258,11 +258,11 @@ and (min-width : 1150px) {
     text-align: center;
     color:black;
     margin-left: 0px;
-    border:1px solid grey;
+    // border:1px solid grey;
   }
   .container-dropdown-link>a:hover{
     border-left: 2px solid black;
-    background-color: #F4F4F4;
+    background-image: linear-gradient(120deg, #B5E0E6 0%, #E6D3C2 100%);
     color:black
 
   }

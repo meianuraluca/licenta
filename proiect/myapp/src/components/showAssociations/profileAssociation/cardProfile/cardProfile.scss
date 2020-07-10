@@ -11,6 +11,18 @@ and (min-width : 1490px) {
     margin-bottom: 3%;
     // margin-left: 10%;
   }
+  .deletePhoto{
+    display: none;
+  }
+  .associations-photo-container:hover .deletePhoto{
+    display: block;
+    position: absolute;
+    margin-left: 31%;
+    margin-top:1%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
   .modal-add-icon{
     width: 40px;
     height: 40px;
@@ -79,16 +91,18 @@ and (min-width : 1490px) {
       border: 1px solid black;
       border-radius: 4px;
       padding: 5px;
-      margin-left: 3%;
-      margin-right: 3%;
-      margin-top: 10%;
-      margin-bottom: 5%;
       background-color: white;
       width:300px;
       height: 300px;
   } 
+  .associations-photo-container{
+      margin-left: 3%;
+      margin-right: 3%;
+      margin-top: 10%;
+      margin-bottom: 5%;
+  }
   .associations-photos-style:hover {
-      box-shadow: 0 0 2px 1px rgba(0, 10, 14, 0.5);
+      box-shadow: 0 0 2px 1px rgba(0, 10, 14, 0.5);     
   }
     .profile-card-name{
       margin-left: 0;
@@ -309,14 +323,16 @@ and (max-width : 700px){
       border: 1px solid black;
       border-radius: 4px;
       padding: 5px;
-      margin-left: 20%;
-      margin-right: 3%;
-      margin-top: 2%;
-      margin-bottom: 2%;
       background-color: white;
       width:120px;
       height: 120px;
   } 
+  .associations-photo-container{
+    margin-left: 0;
+    margin-right: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
   .associations-photos-style:hover {
       box-shadow: 0 0 2px 1px rgba(0, 10, 14, 0.5);
   }
@@ -366,14 +382,16 @@ and (min-width : 700px) and (max-width:1490px) {
       border: 1px solid black;
       border-radius: 4px;
       padding: 5px;
-      margin-left: 3%;
-      margin-right: 3%;
-      margin-top: 2%;
-      margin-bottom: 2%;
       background-color: white;
       width:230px;
       height: 230px;
   } 
+  .associations-photo-container{
+    margin-left: 3%;
+    margin-right: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
   .associations-photos-style:hover {
       box-shadow: 0 0 2px 1px rgba(0, 10, 14, 0.5);
   }
@@ -464,7 +482,7 @@ and (min-width : 700px) and (max-width:1490px) {
       position: absolute;
     }
     .profile-association-card-additional-true  .profile-association-card-additional-photos{
-      margin-left: 30%;
+      margin-left: 35%;
     }
     .associations-photos{
       display: flex;

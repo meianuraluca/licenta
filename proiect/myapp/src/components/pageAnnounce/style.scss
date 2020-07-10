@@ -10,7 +10,7 @@
   justify-content: space-around;
   width: 300px;
   height: 320px;
-  background: linear-gradient(-45deg,#24ff72,#9a4eff);
+  background: linear-gradient(-90deg,#929794,#bae1e6);
   border-radius: 15px;
   margin:0px 25px 40px 25px;
   padding: 5px 20px;
@@ -92,6 +92,14 @@ z-index: 0;
     color: black;
     height: 33%;
     font-size: 15px;
+}
+
+.deleteAd{
+  margin-left: 90%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  // color:grey
 }
 
 

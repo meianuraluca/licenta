@@ -73,17 +73,17 @@ class pageAnnounces extends React.Component{
                       if(this.state.filterAnnounces > 12){
                         if(index>= this.state.start && index<(this.state.start+12))
                           if(this.state.chooseCategory === 'toate')
-                            return <Announce key={index}  infoAd ={ad}/>
+                            return <Announce user={false} key={index}  infoAd ={ad}/>
                           else
                             if(this.state.chooseCategory === ad.category)
-                              return <Announce key={index} infoAd={ad}/>
+                              return <Announce user={false} key={index} infoAd={ad}/>
                       }
                       else{
                         if(this.state.chooseCategory === 'toate')
-                        return <Announce key={index}  infoAd ={ad}/>
+                        return <Announce user={false} key={index}  infoAd ={ad}/>
                       else
                         if(this.state.chooseCategory === ad.category)
-                          return <Announce key={index} infoAd={ad}/>
+                          return <Announce user={false} key={index} infoAd={ad}/>
                       }
                   })}      
                 </div>

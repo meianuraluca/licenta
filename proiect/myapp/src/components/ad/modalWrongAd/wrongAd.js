@@ -12,11 +12,11 @@ function WrongAd(props) {
       <div className={showHideClassname}>
         <section className="wrong-ad-main">
           <p>Bună ziua! Anunțul dumneavoastră a fost depistat ca anunț de vanzare. Scopul acestei platforme este de a dona și vă rugăm să țineți cont de acest lucru!</p>
-          <div className="button" style={{float:"left",marginLeft:"90px"}}>
+          <div className="button">
             <div className="translate"></div>
             <a href="#" onClick={props.handleClose}>Modifica postarea</a>
           </div>
-          <div className="button" style={{float:"right",marginRight:"90px"}} >
+          <div className="button" >
             <div className="translate"></div>
             <a href="#" onClick={closePost}>Inchide pagina</a>
           </div>

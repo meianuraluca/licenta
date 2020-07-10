@@ -42,7 +42,7 @@ class Dropdown extends React.Component {
       <div className={`dropdown-content-${this.props.nameClass}`}>
         {this.state.typeUser === '' 
         ? <React.Fragment>
-              <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link  to={'/login'} className="dropdown-link"> Contectare</Link></div>
+              <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link  to={'/login'} className="dropdown-link"> Conectare</Link></div>
               <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link to={'/register'} className="dropdown-link">Creeaza cont</Link></div>
               <div className="container-dropdown-link"  onClick={this.props.closeDropdown} ><Link to={'/registerAssoc'} className="dropdown-link">Creeaza cont de asociație</Link></div>
               </React.Fragment>

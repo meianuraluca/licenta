@@ -22,11 +22,11 @@ class App extends React.Component {
   render(){
     return (
       <div className="App">
-        <div className="navBar">
+          <div className="box">
+          <div className="navBar">
         <Bar/>
           <Menu className="menu" ></Menu>
           </div>
-          <div className="box">
           <Switch >
               <Route exact path='/' component={Home}/>
               <Route exact path='/home' component={Home}/>
