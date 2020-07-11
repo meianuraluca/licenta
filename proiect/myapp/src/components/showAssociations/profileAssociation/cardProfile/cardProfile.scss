@@ -176,6 +176,18 @@ and (min-width : 1490px) {
 }
 @media only screen 
 and (max-width : 700px){
+  .deletePhoto{
+    display: none;
+  }
+  .associations-photo-container:hover .deletePhoto{
+    display: block;
+    position: absolute;
+    margin-left: 29%;
+    margin-top:2%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
   .arrow-icon{
     width: 30px;
     height: 30px;
@@ -340,7 +352,18 @@ and (max-width : 700px){
 
 @media only screen 
 and (min-width : 700px) and (max-width:1490px) {
-
+  .deletePhoto{
+    display: none;
+  }
+  .associations-photo-container:hover .deletePhoto{
+    display: block;
+    position: absolute;
+    margin-left: 55%;
+    margin-top:2%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
     .profile-association-card {
       width: 90vw;
       height: 90vh;

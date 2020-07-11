@@ -37,8 +37,11 @@ def numberImagesAssoc(assocId):
 def idFirstImageAssoc(assocId):
     conn = connectToDB()
     cur = conn.cursor()
-    stmt = "SELECT min(imageId) FROM imagesAsscoc WHERE associationId = %s"
+    stmt = "SELECT imageId FROM imagesAsscoc WHERE associationId = %s"
     assocId = (assocId,)
     result = cur.execute(stmt, assocId)
     results = cur.fetchall()
-    return results[0][0]
+    ids = []
+    for i in range(len(results)):
+        ids.append(results[i][0])
+    return ids

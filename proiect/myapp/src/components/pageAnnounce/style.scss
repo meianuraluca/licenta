@@ -94,12 +94,29 @@ z-index: 0;
     font-size: 15px;
 }
 
+.container-icon-edit{
+  display: flex;
+  flex-direction: row;
+  margin-left: 79%;
+  cursor: pointer;
+}
+
+.editAd{
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  margin-right: 5px;
+}
+.editAd-icon{
+  width: 25px;
+  height: 25px;
+}
+
 .deleteAd{
-  margin-left: 90%;
   width: 25px;
   height: 25px;
   cursor: pointer;
-  // color:grey
+  color:black
 }
 
 

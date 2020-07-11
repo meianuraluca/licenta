@@ -55,3 +55,31 @@ def addNewAnnounce(response):
         return str(results[0][0])
     else:
         return "wrong announcement"
+
+def editAnnounce(response):
+    predict = predictCategory(response[2])
+    if predict == 0:
+        conn = connectToDB()
+        cursor = conn.cursor()
+        today = datetime.now()
+        stmt = "UPDATE announces SET title=%s,category=%s,announceDescription=%s,personContact=%s,announceEmail=%s, phone=%s,userLocation=%s WHERE announceId=%s;"
+        cursor.execute(stmt,(response[0],response[1],response[2],response[3],response[4],response[5],response[6],response[7]))
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return 'done'
+    else:
+        return "wrong announcement"
+
+def infoAboutAd(idAd):
+    conn = connectToDB()
+    cur = conn.cursor()
+    stmt = "SELECT title,announceDescription,category,personContact,announceEmail,phone,userLocation FROM announces WHERE announceId = %s"
+    idd = (idAd,)
+    result = cur.execute(stmt, idd)
+    results = cur.fetchall()
+    json_data = [] 
+    row_headers=[x[0] for x in cur.description]
+    for result in results:
+        json_data.append(dict(zip(row_headers,result)))
+    return json.dumps(json_data)

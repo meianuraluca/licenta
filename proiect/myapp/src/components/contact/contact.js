@@ -112,7 +112,7 @@ class Contact extends React.Component {
                     <div className="contact-child child1">
 
                         <p>
-                            <i className="fas fa-phone-alt"></i> Hai sa vorbim: <br />
+                            <i className="fas fa-phone-alt"></i> Hai să vorbim: <br />
                             <span> 0787878787</span>
                         </p>
 
@@ -124,7 +124,7 @@ class Contact extends React.Component {
 
                     <div className="contact-child child2">
                         <div className="inside-contact">
-                            <h2>Contact Us</h2>
+                            <h2>Contactați-ne</h2>
                             <h3>
                                <span id="confirm"/>
                             </h3>
@@ -137,7 +137,7 @@ class Contact extends React.Component {
                             <input id="txt_email" type="text" name = "email" onBlur={this.validateField} onChange={this.changeInput}/>
                             {this.state.error.email !== '' && <ErrorMessage type_name={this.state.error.email}/>}
 
-                            <p className={`label-contact-${this.state.error.email}`}>Numar de telefon:</p>
+                            <p className={`label-contact-${this.state.error.email}`}>Număr de telefon:</p>
                             <input id="txt_phone" type="text" name = "phone" onBlur={this.validateField} onChange={this.changeInput}/>
                             {this.state.error.phone !== '' && <ErrorMessage type_name={this.state.error.phone}/>}
 

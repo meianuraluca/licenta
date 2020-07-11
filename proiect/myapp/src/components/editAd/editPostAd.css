@@ -4,14 +4,17 @@
     outline: none;
 }
 
-.add-left{
+.edit-add-left{
     margin-left: 5%;
     margin-right: 10%;
 }
-.add-right{
+.edit-add-right{
     margin-top: 3%;
 }
-.title-add{
+#description{
+    margin-top: 60px;
+}
+.title-edit-add{
     text-align: center;
     line-height: 1.66;
     margin: 0;
@@ -22,28 +25,20 @@
     font-size: 26px;
 }
 
-.add-form-grouprequired{
+.edit-add-form-grouprequired{
     position: relative;
     margin-bottom: 1%;
     overflow: hidden;
 }
 
-.add-form-group > label{
+.edit-add-form-group > label{
     
     position:absolute;
     left: 0;
     color:#222;
 }
 
-/* .add-form-grouprequired > label{
-    
-    position:absolute;
-    left: 0;
-    color:#222;
-} */
-
-
-.add-form-group >input,textarea{
+.edit-add-form-group >input,textarea{
     width: 100%;
     display: block;
     border: none;
@@ -52,7 +47,7 @@
     box-sizing: border-box;
     margin-top:5%;
 }
-.add-form-grouptitle >input,textarea{
+.edit-add-form-grouptitle >input,textarea{
     width: 100%;
     display: block;
     border: none;
@@ -60,7 +55,7 @@
     padding-top:10px;
     box-sizing: border-box;
 }
-.add-form-groupdescription >input,textarea{
+.edit-add-form-groupdescription >input,textarea{
     width: 100%;
     display: block;
     border: none;
@@ -68,18 +63,18 @@
     padding-top:10px;
     box-sizing: border-box;
 }
-.add-form-group >textarea{
+.edit-add-form-group >textarea{
    margin-top: 40px;
    resize: none;
 }
-.add-form-grouprequired >textarea{
+.edit-add-form-grouprequired >textarea{
     margin-top: 0px;
     resize: none;
  }
-.add-form-groupdescription > #description{
+.edit-add-form-groupdescription > #description{
 margin-top: 0px;
 }
-.add-form-grouprequired >input,textarea{
+.edit-add-form-grouprequired >input,textarea{
     width: 100%;
     display: block;
     border: none;
@@ -91,12 +86,12 @@ margin-top: 0px;
     margin-top: 20px;
 
 }
-.add-contact{
+.edit-add-contact{
     margin-left: 35px;
-    margin-top: 7%;
+    margin-top: 2%;
 }
 
-.add-form-submit{
+.edit-add-form-submit{
     
     display: inline-block;
     background:#6dabe4;
@@ -109,10 +104,10 @@ margin-top: 0px;
     margin-top: 5%;
 }
 
-.add-button-submit{
+.edit-add-button-submit{
     text-align: center;
 }
-.add-form-submit:hover{
+.edit-add-form-submit:hover{
     background:#4292dc;
 }
 
@@ -128,15 +123,12 @@ margin-top: 0px;
 
 @media only screen 
 and (max-width : 750px) {
-    .add-form-group{
+    .edit-add-form-group{
         position: relative;
         margin-bottom: 5%;
         overflow: hidden;
     }
-    #description{
-        margin-top:40px;
-    }
-    .add-container{
+    .edit-add-container{
         margin-top: 10%;
         padding: 3%;
         margin-left: 5%;
@@ -158,7 +150,7 @@ and (max-width : 750px) {
         -ms-border-radius: 20px;
     
     }
-    .add-form{
+    .edit-add-form{
         display: flex;
         flex-direction: column;
     }
@@ -169,12 +161,12 @@ and (max-width : 750px) {
 
 @media only screen 
 and (min-width : 750px) {
-    .add-form-group{
+    .edit-add-form-group{
         position: relative;
         margin-bottom: 5%;
         overflow: hidden;
     }
-    .add-container{
+    .edit-add-container{
         margin-top: 10%;
         padding: 3%;
         margin-left: 5%;
@@ -196,7 +188,7 @@ and (min-width : 750px) {
         -ms-border-radius: 20px;
     
     }
-    .add-form{
+    .edit-add-form{
         display: flex;
         flex-direction: column;
     }
@@ -205,12 +197,12 @@ and (min-width : 750px) {
 
 @media only screen 
 and (min-width : 1400px) {
-    .add-form-group{
+    .edit-add-form-group{
         position: relative;
         margin-bottom: 5%;
         overflow: hidden;
     }
-    .add-container{
+    .edit-add-container{
         margin-top: 10%;
         padding: 3%;
         margin-left: 5%;
@@ -232,7 +224,7 @@ and (min-width : 1400px) {
         -ms-border-radius: 20px;
     
     }
-    .add-form{
+    .edit-add-form{
         display: flex;
         flex-direction: column;
     }

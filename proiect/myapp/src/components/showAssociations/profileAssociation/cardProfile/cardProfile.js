@@ -34,10 +34,10 @@ class CardProfile extends React.Component{
             params:{id:this.props.id},
         })
         .then(response => {
-            let n = response.data.minId+response.data.numberImage;
-            for (let index= response.data.minId; index < n; index++) {
+            let n = response.data.numberImage;
+            for (let index =0; index < n; index++) {
                 axios.get('http://localhost:5000/oneImageAssociation', {
-                    params:{id:index},
+                    params:{id:response.data.ids[index]},
                     responseType:'arraybuffer'  
                 })
             .then(res => {
@@ -46,9 +46,8 @@ class CardProfile extends React.Component{
                 else{
                 let matrixBlob = new Blob([res.data], {type:"image/jpg"}); 
                 let url = URL.createObjectURL(matrixBlob)
-                console.log(url)
                 this.setState({images:[...this.state.images,url]})
-                this.setState({idImages:[...this.state.idImages,index]})
+                this.setState({idImages:[...this.state.idImages,res.config.params.id]})
                 }
 
             })
@@ -69,7 +68,6 @@ class CardProfile extends React.Component{
         fileReader.readAsDataURL(element);
     }
     moveRight = () => {
-        console.log(this.state.images.length)
         if(this.state.start+2 < this.state.images.length) 
             this.setState({start:this.state.start+2})
     }
@@ -78,21 +76,16 @@ class CardProfile extends React.Component{
             this.setState({start:this.state.start-2})
     }
 
-    addImageToState=(images)=>{
-        console.log(images);
-        let newImages = [];
-        for(let i=0;i<images.length;i++){
-            let matrixBlob = new Blob([images[i]], {type:"image/jpg"}); 
-            newImages.push(URL.createObjectURL(matrixBlob))
-
-        }
-        this.setState({images:[...this.state.images,...newImages]})
+    addImageToState=(image,id)=>{
+        let matrixBlob = new Blob([image],{type:"image/jpg"});
+        let url = URL.createObjectURL(matrixBlob)
+        console.log(matrixBlob)
+        this.setState({images:[...this.state.images,url], idImages:[...this.state.idImages,id]})
 
     }
 
     sendImages = (event) =>{
         const images = event.target.files
-        this.addImageToState(images)
         if (this.state.accessToken !== '') {
             for (let index = 0; index < images.length; index++) {
                 console.log("trimit poza")
@@ -105,7 +98,9 @@ class CardProfile extends React.Component{
                         console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
                     }
                 })
-            .then(res => console.log(res))
+            .then(res => {
+                this.addImageToState(images[index],res.data.id)
+            })
             .catch(err => console.warn(err));
             }
         }
@@ -138,20 +133,21 @@ class CardProfile extends React.Component{
         this.setState({showPhotos:false})
     }
 
-    deletePhoto = (element)=>{          
-        const fd = new FormData();
-        fd.append('file',element);
-        axios.post('http://localhost:5000/deletePhoto',fd , {
-            onUploadProgress : ProgressEvent => {
-                console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
-            }
-        })
-    .then(res => console.log(res))
-    .catch(err => console.warn(err));
+    deletePhoto = (element)=>{   
+        console.log(this.state.idImages[element])       
+        axios
+            .get("http://localhost:5000/deletePhoto",{
+                params:{id:this.state.idImages[element]},
+            })
+            .then((response) => {
+                if(response.data === "done")
+                    window.location.reload(false);
+            })
+            .catch(err => console.warn(err));
     }
-    
 
     render(){
+        console.log(this.state)
         return(
             <div className="profile-association-card">
                 <div className={`profile-association-card-additional-${this.state.showPhotos}`}>
@@ -193,8 +189,8 @@ class CardProfile extends React.Component{
                             {this.state.images !== [] &&
                             <div className="only-images">
                             {this.state.images.slice(this.state.start,this.state.start+2).map((element,index)=>{
-                                return <div className="associations-photo-container">
-                                    {this.props.isPersonLog === true && <MdDelete onClick={()=>{this.deletePhoto(element)}} className="deletePhoto"></MdDelete>}
+                                return <div key={index} className="associations-photo-container">
+                                    {this.props.isPersonLog === true && <MdDelete onClick={()=>{this.deletePhoto(this.state.start+index)}} className="deletePhoto"></MdDelete>}
                                     <img className="associations-photos-style" src={element} key={index} alt=""/>
                                     </div>
                                 

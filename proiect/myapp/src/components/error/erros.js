@@ -4,25 +4,25 @@ import './erros.css'
 function ErrorMessage(props) {
     function displayError(name){
       switch(name){
-          case 'name': return '* Numele trebuie sa aiba cel putin 5 caractere';
-          case 'title': return '* Titlul trebuie sa aiba cel putin 5 caractere';
-          case 'description': return '* Descrierea trebuie sa aiba cel putin 10 caractere';
-          case 'subject': return '* Subiectul trebuie sa aiba cel putin 5 caractere';
-          case 'message': return '* Mesajul trebuie sa aiba cel putin 10 caractere';
-          case 'email': return "* Adresa de email este invalida";
+          case 'name': return '* Numele trebuie să aibă cel puțin 5 caractere';
+          case 'title': return '* Titlul trebuie să aibă cel puțin 5 caractere';
+          case 'description': return '* Descrierea trebuie să aibă cel puțin 10 caractere';
+          case 'subject': return '* Subiectul trebuie să aibă cel puțin 5 caractere';
+          case 'message': return '* Mesajul trebuie să aibă cel puțin 10 caractere';
+          case 'email': return "* Adresa de email este invalidă";
           case 'link': return "* Link-ul este invalid"
-          case 'phone': return "* Numarul de telefon este invalid"
-          case 'city': return "* Numele orasului trebuie sa aiba cel putin 3 caractere";
-          case 'passwordLung': return "* Parola trebuie sa aiba cel putin 8 caractere ";
-          case 'passwordMaj': return "* Parola trebuie sa contina cel putin o litera mare ";
-          case 'passwordMin': return "* Parola trebuie sa contina cel putin o litera mica ";
-          case 'passwordNr': return "* Parola trebuie sa contina cel putin o cifra ";
+          case 'phone': return "* Numărul de telefon este invalid"
+          case 'city': return "* Numele orașului trebuie să aibă cel puțin 3 caractere";
+          case 'passwordLung': return "* Parola trebuie să aibă cel puțin 8 caractere ";
+          case 'passwordMaj': return "* Parola trebuie să conțină cel puțin o literă mare ";
+          case 'passwordMin': return "* Parola trebuie să conțină cel puțin o literă mică ";
+          case 'passwordNr': return "* Parola trebuie să conțină cel puțin o cifră ";
           case 'againPass': return "* Parolele nu se potrivesc";
-          case 'required': return "* Campul este obligatoriu";
-          case 'missing' : return "* Parola sau email-ul lipseste";
-          case 'bad': return "* Parola sau email-ul este gresit";
-          case 'emailExist': return "* Exista deja un user cu acest email"
-          default: return "Campul este obligatoriu"
+          case 'required': return "* Câmpul este obligatoriu";
+          case 'missing' : return "* Parola sau email-ul lipsește";
+          case 'bad': return "* Parola sau email-ul este greșit";
+          case 'emailExist': return "* Existî deja un user cu acest email"
+          default: return "Câmpul este obligatoriu"
       }
   }
   return (

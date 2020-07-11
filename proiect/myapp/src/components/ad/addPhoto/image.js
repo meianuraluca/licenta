@@ -16,14 +16,6 @@ class Image extends React.Component{
         var file = event.target.files[0]
         this.props.addImage(file)
     }
-    // displayImage(file){
-    //     var reader = new FileReader();
-    //     var url = reader.readAsDataURL(file);
-    //     console.log(url)
-    //     reader.onloadend = function (e) {
-    //         return <img className="uploadImage" src={[reader.result]} alt="upload"></img>
-    //     }
-    // }
     displayImage=()=>{
         if(this.props.photo!== undefined){
             var fileReader = new FileReader();

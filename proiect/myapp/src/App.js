@@ -17,6 +17,7 @@ import ProfileAssociationForUser from './components/showAssociations/profileAsso
 import Modal from './components/showAssociations/profileAssociation/modal/modal';
 import PageUserAnnounces from './components/pageAnnounce/pageUserAnnounce';
 import Bar from './components/bar/bar';
+import EditPostAd from './components/editAd/editPostAd';
 
 class App extends React.Component {
   render(){
@@ -36,6 +37,7 @@ class App extends React.Component {
               <Route exact path='/login' component={Login}/>
               <Route exact path='/register' component={Register}/>
               <Route path='/showAdd'  component={showAd}/>
+              <Route path='/editAd' component={EditPostAd}/>
               <Route exact path='/announces' component={pageAnnounces}/>
               <Route exact path='/listUserAnnounces' component={PageUserAnnounces}/>
               <Route exact path='/associations' component={showAssociations}/>

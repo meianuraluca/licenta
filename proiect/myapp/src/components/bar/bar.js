@@ -7,7 +7,7 @@ function Bar(){
         <div className="name-and-logo-bar">
             <img src={image}/>
             <h1><span>Oferă  &nbsp;speranță!</span></h1>
-            <p> "Ce faci pentru tine dispare odata cu tine, ce faci pentru altii ramane pentru eterninate." Albert Einstein</p>
+            <p> "Ce faci pentru tine dispare odată cu tine, ce faci pentru alții rămâne pentru eterninate." Albert Einstein</p>
         </div>
     )
 }

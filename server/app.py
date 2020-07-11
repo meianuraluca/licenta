@@ -64,6 +64,11 @@ def addAnnouce():
     response = request.get_json()
     return addNewAnnounce(response)
 
+@app.route('/editAnnounce',methods=['POST'])
+def editAd():
+    response = request.get_json()
+    return editAnnounce(response)
+
 
 @app.route('/images', methods=["POST"])
 def index():
@@ -92,7 +97,8 @@ def imagesAsscoc():
     conn.commit()
     cursor.close()
     conn.close()
-    return id_of_new_row
+    response = dict(id=id_of_new_row)
+    return response
 
 @app.route('/deletePhoto', methods=["GET"])
 def deletePhoto():
@@ -156,8 +162,9 @@ def backImage():
 def showImagesAssoc():
     iddAssoc = request.args.get('id', '')
     idd = idFirstImageAssoc(iddAssoc)
+    print(idd)
     num = numberImagesAssoc(iddAssoc)
-    response = dict(minId=idd,numberImage=num)
+    response = dict(ids=idd,numberImage=num)
     return response
 
 @app.route('/oneImageAssociation',methods=['GET'])
@@ -256,6 +263,11 @@ def profileLogoAssociation():
 def userData():    
     emailUser = request.args.get('email','')
     return infoAboutUser(emailUser)
+
+@app.route('/announceInfo', methods=['GET'])
+def announceInfo():
+    idAd = request.args.get('id','')
+    return infoAboutAd(idAd)
 
 @app.route('/associationData',methods=['GET'])
 def associationData():    

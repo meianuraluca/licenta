@@ -14,7 +14,7 @@ function WrongAd(props) {
           <p>Bună ziua! Anunțul dumneavoastră a fost depistat ca anunț de vanzare. Scopul acestei platforme este de a dona și vă rugăm să țineți cont de acest lucru!</p>
           <div className="button">
             <div className="translate"></div>
-            <a href="#" onClick={props.handleClose}>Modifica postarea</a>
+            <a href="#" onClick={props.handleClose}>Modifică postarea</a>
           </div>
           <div className="button" >
             <div className="translate"></div>

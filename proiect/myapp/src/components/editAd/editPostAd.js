@@ -1,19 +1,17 @@
 import React from 'react';
-import './addPost.css';
+import './editPostAd.css';
 import Select from 'react-select'
-import AddPhoto from './addPhoto/addPhoto'
-import ContactData from './contactData';
 import getClaims from '../../utils/utils'
 import axios from 'axios';
 import ErrorMessage from '../error/erros'
-import { withRouter } from 'react-router-dom';
-import WrongAd from './modalWrongAd/wrongAd';
+import WrongAd from '../ad/modalWrongAd/wrongAd'
 import {mailformat,phoneFormat} from '../../utils/regex';
+import ContactData from '../ad/contactData';
 
 
 
 
-class AddPost extends React.Component{
+class EditPostAd extends React.Component{
     constructor(props){
         super(props)
         this.state={
@@ -52,38 +50,24 @@ class AddPost extends React.Component{
     }
 
     componentDidMount(){
-        let typeUser = window.localStorage.getItem("typeUser");
-        let access = window.localStorage.getItem("accessToken");
-        access  = getClaims(access)
-        if(typeUser === 'user'){
-            axios.get('http://localhost:5000/userData', {
-                params:{email:access.identity},
+        axios.get('http://localhost:5000/announceInfo', {
+            params:{id:this.props.location.aboutProps.id},
+        })
+        .then(res => { 
+            this.setState({adInfo:{...this.state.adInfo,
+                title:res.data[0].title,
+                description:res.data[0].announcedescription,
+                category:res.data[0].category,
+                namePerson:res.data[0].personcontact,
+                email:res.data[0].announceemail,
+                phone:res.data[0].phone,
+                location:res.data[0].userlocation}
+    
             })
-            .then(res => { 
-                this.setState({adInfo:{...this.state.adInfo,
-                    namePerson:res.data[0].username,
-                    email:res.data[0].email,
-                    phone:res.data[0].phone,
-                    location:res.data[0].city}
-     
-                })
-            })
-            .catch(err => console.warn(err));
-        }
-        else{
-            axios.get('http://localhost:5000/associationData', {
-                params:{email:access.identity},
-            })
-            .then(res => {
-                this.setState({adInfo:{...this.state.adInfo,
-                    namePerson:res.data[0].associationname,
-                    email:res.data[0].associationsemail,
-                    phone:res.data[0].phone},
-                    showDateContact:true
-                })
-            })
-            .catch(err => console.warn(err));
-        }
+        })
+        .catch(err => console.warn(err));
+        
+
 
 
     }
@@ -106,9 +90,10 @@ class AddPost extends React.Component{
     }
 
     errorContact = (name,value) =>{
+        console.log(value)
         if(value === '')
-            this.setState({error:{...this.state.error,[name]:'required'}})
-            else{
+        this.setState({error:{...this.state.error,[name]:'required'}})
+        else{
                 switch(name){
                     case 'namePerson':
                         value.length < 5 ? this.setState({error:{...this.state.error,namePerson:'name'}}) : this.setState({error:{...this.state.error,namePerson:''}})
@@ -125,6 +110,7 @@ class AddPost extends React.Component{
                     default:  this.setState({error:{...this.state.error,[name]:''}})
                 }
             }
+            
     }
 
     changeInput=(e)=>{
@@ -137,9 +123,6 @@ class AddPost extends React.Component{
     }
     showContact=(e)=>{
         this.setState({showDateContact:e.target.checked})
-    }
-    addImages = (image)=>{
-        this.setState({photos:[...this.state.photos,image]})
     }
 
     validateData = ()=>{
@@ -180,29 +163,15 @@ class AddPost extends React.Component{
                         this.state.adInfo.email,
                         this.state.adInfo.phone,
                         this.state.adInfo.location,
-                        access.identity,
-                        typeUser
+                        this.props.location.aboutProps.id
                     ]            
             axios
-            .post("http://localhost:5000/announce", data)
+            .post("http://localhost:5000/editAnnounce", data)
             .then(res => {
                 if(res.data === "wrong announcement")
                     this.setState({wrongAd:true})
                 else{
-                    for (let index = 0; index < this.state.photos.length; index++) {
-                        const element = this.state.photos[index];
-                        const fd = new FormData();
-                        fd.append('idd',res.data);
-                        fd.append('file',element,element.name );
-                        axios.post('http://localhost:5000/images',fd , {
-                            onUploadProgress : ProgressEvent => {
-                                console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total *100) + '%')
-                            }
-                        })
-                    .then(res => console.log(res))
-                    .catch(err => console.warn(err));
-                }
-                this.props.history.push('/home') 
+                    this.props.history.push('/listUserAnnounces') 
                 }
             })
             .catch(err => console.warn(err));
@@ -214,15 +183,16 @@ class AddPost extends React.Component{
       };
 
     render(){    
+        console.log(this.state)
         return (
         <div style={{marginTop:"5%",marginBottom:"5%"}}>
             {this.state.wrongAd === true
             ? <WrongAd  show={this.state.wrongAd} handleClose={this.hideModal}></WrongAd>
-            :<div className="add-container">
-                <h1 className="title-add">Adaugă anunț</h1>
-                 <div className="add-form">
-                    <form className="add-left">
-                        <div className={`add-form-group${this.state.error.title}`}>
+            :<div className="edit-add-container">
+                <h1 className="title-edit-add">Modifică anunțul</h1>
+                 <div className="edit-add-form">
+                    <form className="edit-add-left">
+                        <div className={`edit-add-form-group${this.state.error.title}`}>
                             <label htmlFor="title">Titlu:</label>
                             <input type="text" name="title" id="title" defaultValue={this.state.adInfo.title} onBlur={this.validateField} onChange={this.changeInput}/>
                         </div>
@@ -232,25 +202,23 @@ class AddPost extends React.Component{
                             <Select style={{marginBottom:"0px"}} options={this.state.categoryOp}  onChange={this.handleChange} />
                         </div>
                         {this.state.error.category !== "" && <ErrorMessage style={{marginBottom:"10px"}} type_name={this.state.error.category}/>}
-                        <div className={`add-form-group${this.state.error.description}`}>
+                        <div className={`edit-add-form-group${this.state.error.description}`}>
                             <label style={{marginTop:"20px"}} htmlFor="description">Descriere:</label>
                             <textarea  rows="2" cols="50"  name="description" id="description" onBlur={this.validateField} defaultValue={this.state.adInfo.description} onChange={this.changeInput}/>
                         </div>
                         {this.state.error.description !== '' && <ErrorMessage type_name={this.state.error.description}/>}
                     </form>
-                    <div className="add-right">
-                        <label style={{marginLeft:"5.5%"}}>Adaugă fotografii:</label>
-                        <AddPhoto photo={this.addImages}></AddPhoto>
-                    </div>
                 </div>
-                <div className="add-contact">
+                <div className="edit-add-contact">
                     <input type="checkbox" id="check" onChange={this.showContact} checked={this.state.showDateContact}/>
                     <label htmlFor="check">Vreau să îmi modific datele de contact</label><br/>
                     {this.state.showDateContact === true && 
-                    <ContactData isError={this.state.error} namePerson={this.state.adInfo.namePerson} phone={this.state.adInfo.phone} location={this.state.adInfo.location} email={this.state.adInfo.email} changeInput ={this.changeInput} error={this.errorContact}/> }
+                    <ContactData isError={this.state.error} namePerson={this.state.adInfo.namePerson} 
+                    phone={this.state.adInfo.phone} location={this.state.adInfo.location} email={this.state.adInfo.email}
+                     changeInput ={this.changeInput} error={this.errorContact}/> }
                 </div>
-                <div className="add-button-submit">
-                     <input type="submit" name="add" id="add" className="add-form-submit" value="Adauga anunt" onClick={this.sendData}/>
+                <div className="edit-add-button-submit">
+                     <input type="submit" name="edit-add" id="edit-add" className="edit-add-form-submit" value="Salvează" onClick={this.sendData}/>
                 </div>
             </div>
     }
@@ -258,4 +226,4 @@ class AddPost extends React.Component{
           )
     }
 }
-export default withRouter(AddPost);
+export default EditPostAd;

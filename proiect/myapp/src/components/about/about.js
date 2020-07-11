@@ -9,12 +9,11 @@ function About(){
         <div className="about-content">
             <div className="about-content-text">
                 <br/>
-                <br/>
-                <br/>
-                Aici o sa scriu despre scopul site ului
-                I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double click me to add your own content and make changes to the font. Feel free to drag and drop me anywhere you like on your page. I’m a great place for you to tell a story and let your users know a little more about you.
-    ​            This is a great space to write a long text about your company and your services. You can use this space to go into a little more detail about your company. Talk about your team and what services you provide. Tell your visitors the story of how you came up with the idea for your business and what makes you different from your competitors. Make your company stand out and show your visitors who you are.
-            </div>
+                 <p>Platforma online ”Oferă Speranță!„ are ca scop îmbunătățirea procesul de donație. Multe obiecte ajung să fie uitate în diferite zone de depozitare sau chiar mai rău să fie aruncate deși sunt într-o stare bună
+                 și ar mai putea fi folosite. Astfel prin acest site poți să găsești noi propietari pentru lucrurile care nu îți mai folosesc.
+                 Pe lângă posibilitatea de a face o postarea despre ce dorești să donezi poți găsi și o listă de asociații din această ramură.Dacă îți dorești să te implici mai mult în acest proces poți afla cum să le vi în ajutor întrând pe profilul acestora. Prin construirea acestui site ne dorim să creștem dorința de a dona și a ajuta persoanele din jurul nostru astfel că te rugăm să respecți scopul proiectului ”Oferă Speranță!” și să nu încerci să adaugi alte tipuri de anunțuri.
+                </p>
+                </div>
             <img src={image} alt="hand" className="about-content-image"></img>
 
         </div>
