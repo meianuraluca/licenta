@@ -84,7 +84,7 @@ class showAssociations extends React.Component{
                     <div className="flip-card-back-without-description">
                         <h1 style={{marginBottom:"15px", marginTop:"10px"}}>{element.associationname}</h1> 
                         <div className="container-profile-link">
-                          <Link className="profile-link" to={{ pathname:'/profileAssociationForUser',aboutProps:{id:element.associationid}}}>Vezi profilul asociatiei </Link>
+                          <Link className="profile-link" to={{ pathname:'/profileAssociationForUser',aboutProps:{id:element.associationid}}}>Vezi profilul asociației </Link>
                         </div>
                     </div>:
                     <div className="flip-card-back">
@@ -94,7 +94,7 @@ class showAssociations extends React.Component{
                                 {element.associationsdescription}
                         </ShowMoreText>
                         <div className="container-profile-link">
-                          <Link className="profile-link" to={{ pathname:'/profileAssociationForUser',aboutProps:{id:element.associationid}}}>Vezi profilul asociatiei </Link>
+                          <Link className="profile-link" to={{ pathname:'/profileAssociationForUser',aboutProps:{id:element.associationid}}}>Vezi profilul asociației </Link>
                         </div>
                     </div>}
                   </div>

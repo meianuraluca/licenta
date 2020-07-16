@@ -153,7 +153,7 @@ class RegisterAssociation extends React.Component {
             <div className="signup-container">
                 <div className="signup-content">
                     <div className="signup-form">
-                        <h2 className="signup-form-title">Creare cont</h2>
+                        <h2 className="signup-form-title">Creaază cont</h2>
                         <form method="POST" className="register-form" id="signup-form">
                             <div className="signup-form-group">
                                 <label htmlFor="name" className="lab-"><MdPerson className="signup-icons"></MdPerson></label>
@@ -183,7 +183,7 @@ class RegisterAssociation extends React.Component {
                             <div className="form-group form-button">
                                 <input type="button" name="register" id="register" className="form-submit" onClick={this.registerAssociation} value="Inregistreaza-te"/>
                                 <div>
-                                    <Link className="changePage" to={'/register'}>Creaza cont normal <GiReturnArrow></GiReturnArrow></Link>
+                                    <Link className="changePage" to={'/register'}>Crează cont normal <GiReturnArrow></GiReturnArrow></Link>
                                     <Link className="changePage" to={'/login'}>Sunt deja membru <GiReturnArrow></GiReturnArrow></Link> 
                                 </div>
                             </div>
@@ -192,7 +192,7 @@ class RegisterAssociation extends React.Component {
                     <div className="register-image">
                         <figure><img src={signup} alt="sing up"/></figure>
                         <div>
-                            <Link className="changePage" to={'/register'}>Creaza cont normal <GiReturnArrow></GiReturnArrow></Link>
+                            <Link className="changePage" to={'/register'}>Creează cont normal <GiReturnArrow></GiReturnArrow></Link>
                             <Link className="changePage" to={'/login'}>Sunt deja membru <GiReturnArrow></GiReturnArrow></Link> 
                         </div>
                     </div>

@@ -76,8 +76,8 @@ class Login extends React.Component {
                     <div className="signin-image">
                         <figure><img src={signin} alt="sing in"/></figure>
                         <div className="signin-link">
-                            <Link className="changePage" to={'/register'}>Creaza cont <GiReturnArrow></GiReturnArrow></Link>
-                            <Link className="changePage" to={'/registerAssoc'}>Creaza cont de asociatie <GiReturnArrow></GiReturnArrow></Link>
+                            <Link className="changePage" to={'/register'}>Creează cont <GiReturnArrow></GiReturnArrow></Link>
+                            <Link className="changePage" to={'/registerAssoc'}>Creează cont de asociație <GiReturnArrow></GiReturnArrow></Link>
                         </div>
                     </div>
                     <div className="signin-form">
@@ -95,8 +95,8 @@ class Login extends React.Component {
                             <div className="form-group form-button" style={{marginTop:"5%"}}>
                                 <input type="button" name="signin" id="signin" className="signin-form-submit" value="Autentificare" onClick={this.handleLogin}/>
                                 <div className="signin-link">
-                                  <Link className="changePage" to={'/register'}>Creaza cont <GiReturnArrow></GiReturnArrow></Link>
-                                  <Link className="changePage" to={'/registerAssoc'}>Creaza cont de asociatie <GiReturnArrow></GiReturnArrow></Link>
+                                  <Link className="changePage" to={'/register'}>Creează cont <GiReturnArrow></GiReturnArrow></Link>
+                                  <Link className="changePage" to={'/registerAssoc'}>Creează cont de asociație <GiReturnArrow></GiReturnArrow></Link>
                                 </div>
                             </div>
                         </form>

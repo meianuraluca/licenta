@@ -73,7 +73,7 @@ class showAd extends React.Component{
                                         <div style={{textAlign:"end"}}>
                                             <p><span>Persoana de contact: </span> {this.props.location.aboutProps.name}</p>
                                             <p><span>Adresa de email: </span>{this.props.location.aboutProps.email}</p>
-                                            <p><span>Numar de telefon: </span>{this.props.location.aboutProps.phone}</p>
+                                            <p><span>Număr de telefon: </span>{this.props.location.aboutProps.phone}</p>
                                             <p><span>Localitate: </span>{this.props.location.aboutProps.city}</p>
                                         </div>
                                     </div>

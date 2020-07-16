@@ -19,7 +19,7 @@ nltk.download('averaged_perceptron_tagger')
 
 np.random.seed(500)
 
-corpus = pd.read_csv(r"E:\FMI\Anul III\Licenta\chesti\DateNoi.csv",encoding ="latin-1")
+corpus = pd.read_csv(r"E:\FMI\Anul III\Licenta\chesti\DateFinale.csv",encoding ="latin-1")
 
 corpus['text'].dropna(inplace=True)
 

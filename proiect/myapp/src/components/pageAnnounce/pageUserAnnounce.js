@@ -20,11 +20,11 @@ class PageUserAnnounces extends React.Component{
       start:0,
       categoryOp:[
         { value:'toate',label:'Toate'},
-        { value: 'jucarii', label:'Jucarii'},
-        { value: 'mobila', label: 'Mobila' },
+        { value: 'jucarii', label:'Jucării'},
+        { value: 'mobila', label: 'Mobilă' },
         { value: 'electronice', label: 'Electronice' },
         { value: 'haine', label: 'Haine' },
-        { value: 'ingrijire', label:'Ingrijire personala'},
+        { value: 'ingrijire', label:'Ingrijire personală'},
         { value: 'altele', label: 'Altele'},
 
       ]

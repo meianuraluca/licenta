@@ -192,10 +192,10 @@ class Register extends React.Component {
                             </div>
                             {this.state.error.againPass !== '' && <ErrorMessage type_name={this.state.error.againPass}/>}
                             <div className="form-group form-button">
-                                <input type="button" name="signup" id="signup" className="form-submit" value="Inregistreaza-te" onClick={this.registerUser}/>
+                                <input type="button" name="signup" id="signup" className="form-submit" value="Inregistrează-te" onClick={this.registerUser}/>
                                 <div>
                                     <Link className="changePage" to={'/login'}>Sunt deja membru <GiReturnArrow></GiReturnArrow></Link>
-                                    <Link className="changePage" to={'/registerAssoc'}>Creaza cont de asociatie <GiReturnArrow></GiReturnArrow></Link>
+                                    <Link className="changePage" to={'/registerAssoc'}>Creează cont de asociație <GiReturnArrow></GiReturnArrow></Link>
                                 </div>
 
                             </div>
@@ -205,7 +205,7 @@ class Register extends React.Component {
                         <figure><img src={signup} alt="sing up"/></figure>
                         <div>
                             <Link className="changePage" to={'/login'}>Sunt deja membru <GiReturnArrow></GiReturnArrow></Link>
-                            <Link className="changePage" to={'/registerAssoc'}>Creaza cont de asociatie <GiReturnArrow></GiReturnArrow></Link>
+                            <Link className="changePage" to={'/registerAssoc'}>Creaază cont de asociație <GiReturnArrow></GiReturnArrow></Link>
                         </div>
                     </div>
                 </div>

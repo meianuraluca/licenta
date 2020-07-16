@@ -65,7 +65,7 @@ class Announce extends React.Component{
                                     email:this.state.email,
                                     phone:this.state.phone,
                                     city:this.state.city}
-                    }} >Vezi anuntul </Link>
+                    }} >Vezi anunțul </Link>
                 </div>
                 </div>
             </React.Fragment>

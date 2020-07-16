@@ -50,12 +50,12 @@ class Menu extends React.Component {
        <div className={`overlay-${this.state.height}`}>
        <MdClose onClick={this.closeDropdown} className="close-dropdown"></MdClose>
           <div className="container">
-          <Link to={'/home'} onClick={this.closeDropdown} className="link">Acasa</Link>
+          <Link to={'/home'} onClick={this.closeDropdown} className="link">Acasă</Link>
           <Link to={'/about'} onClick={this.closeDropdown} className="link">Despre noi</Link>
-          <Link to={'/announces'} onClick={this.closeDropdown} className="link">Anunturi</Link>
-          <Link to={'/associations'} onClick={this.closeDropdown}  className="link">Asociatii</Link>
+          <Link to={'/announces'} onClick={this.closeDropdown} className="link">Anunțuri</Link>
+          <Link to={'/associations'} onClick={this.closeDropdown}  className="link">Asociații</Link>
           <Link to={'/contact'} onClick={this.closeDropdown} className="link">Contact</Link>
-          <Link to={'/addPost'} onClick={this.closeDropdown} className="link">Doneaza</Link>
+          <Link to={'/addPost'} onClick={this.closeDropdown} className="link">Donează</Link>
          <div onClick={this.handleClick}  className="dropdown" ref={node=>{this.node=node;}}>
             <a  className="sub-link">Contul meu</a>
             {this.state.show  && (<Dropdown  closeDropdown={this.closeDropdown} nameClass={this.state.show}/>)}

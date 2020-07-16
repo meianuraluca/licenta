@@ -43,20 +43,20 @@ class Dropdown extends React.Component {
         {this.state.typeUser === '' 
         ? <React.Fragment>
               <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link  to={'/login'} className="dropdown-link"> Conectare</Link></div>
-              <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link to={'/register'} className="dropdown-link">Creeaza cont</Link></div>
-              <div className="container-dropdown-link"  onClick={this.props.closeDropdown} ><Link to={'/registerAssoc'} className="dropdown-link">Creeaza cont de asociație</Link></div>
+              <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link to={'/register'} className="dropdown-link">Creează cont</Link></div>
+              <div className="container-dropdown-link"  onClick={this.props.closeDropdown} ><Link to={'/registerAssoc'} className="dropdown-link">Creează cont de asociație</Link></div>
               </React.Fragment>
         : this.state.typeUser === 'user' 
         ?  <React.Fragment>    
-              <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link to={'/listUserAnnounces'} className="dropdown-link">Anunturile tale</Link></div>
-              <div className="container-dropdown-link" onClick={this.logout}><Link to={'/'} className="dropdown-link">Iesi din cont</Link></div>
+              <div className="container-dropdown-link" onClick={this.props.closeDropdown}><Link to={'/listUserAnnounces'} className="dropdown-link">Anunțurile tale</Link></div>
+              <div className="container-dropdown-link" onClick={this.logout}><Link to={'/'} className="dropdown-link">Ieși din cont</Link></div>
               </React.Fragment>
         :<React.Fragment>
             <div className="container-dropdown-link"  onClick={this.props.closeDropdown}><Link to={'/profileAssociation'} className="dropdown-link">Profil</Link></div>
             <div className="container-dropdown-link" onClick={this.editProfile}><Link to={{
                                                   pathname:'/profileAssociation',
-                                                  aboutProps:{show:true}}} className="dropdown-link">Setari profil</Link></div>
-            <div className="container-dropdown-link" onClick={this.logout}><Link to={'/'} className="dropdown-link">Iesi din cont</Link></div>
+                                                  aboutProps:{show:true}}} className="dropdown-link">Setări profil</Link></div>
+            <div className="container-dropdown-link" onClick={this.logout}><Link to={'/'} className="dropdown-link">Ieși din cont</Link></div>
             </React.Fragment>
     }
     </div>

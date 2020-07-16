@@ -8,7 +8,7 @@ function FilterComponent(props){
     return(
         <React.Fragment>
             <div className="container-filters">
-            <p className="button-filters"><FaFilter/>Filtreaza anunturile</p>   
+            <p className="button-filters"><FaFilter/>Filtrează anunțurile</p>   
             <ul className="filters">
                 {props.options.map((element,index)=>{
                     return(

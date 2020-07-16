@@ -117,8 +117,8 @@ class Modal extends React.Component{
               <section className="modal-main">
                 <div className="modal-container">
                     {this.props.edit === false 
-                     ? <h1 className="modal-title">Buna! Acum ca te-ai inregistrat hai sa adaugam cateva informatii ca profilul dumneavostra sa prinda contur!</h1>
-                     : <h1 className="modal-title">Modifica datele profilului</h1>
+                     ? <h1 className="modal-title">Bună! Acum că te-ai înregistrat adaugă câteva informații ca profilul dumneavoastră să prindă contur!</h1>
+                     : <h1 className="modal-title">Modifică datele profilului</h1>
                     }   
                     <div className="modal-container-content">
                         <div className="modal-container-content-one">
@@ -150,14 +150,12 @@ class Modal extends React.Component{
                     <div className="modal-buttons">
                         <div className="button" >
                             <div className="translate"></div>
-                            <a href="#" onClick={this.props.handleClose}>Mai tarziu</a>
+                            <a href="#" onClick={this.props.handleClose}>Închide</a>
                         </div>
                         <div className="button">
                             <div className="translate"></div>
-                            <a href="#" onClick={this.sendData}>Salveaza</a>
+                            <a href="#" onClick={this.sendData}>Salvează</a>
                         </div>
-                        {/* <button onClick={this.props.handleClose}>Mai tarziu</button>
-                        <button onClick={this.sendData}>Salveaza</button> */}
                     </div>
                     
                 </div>

@@ -14,7 +14,7 @@ class CardProfile extends React.Component{
         this.state={
             start:0,
             logo:null,
-            title:"Cateva poze cu noi",
+            title:"Câteva poze cu noi",
             images:[],
             idImages:[],
             accessToken:'',
@@ -147,7 +147,7 @@ class CardProfile extends React.Component{
     }
 
     render(){
-        console.log(this.state)
+        console.log(this.props)
         return(
             <div className="profile-association-card">
                 <div className={`profile-association-card-additional-${this.state.showPhotos}`}>
@@ -162,7 +162,7 @@ class CardProfile extends React.Component{
                         {this.props.isPersonLog === true &&
                         <label className="change-profile-logo">
                         <label htmlFor="logo"><MdPhotoCamera className="icon-add-photo"></MdPhotoCamera></label>
-                        <label htmlFor="logo"><p>Schimba imaginea</p></label>
+                        <label htmlFor="logo"><p>Schimbă imaginea</p></label>
                         <input id="logo" name="logo" type="file" onChange={this.changeInput} />
                         </label>}
 
@@ -170,7 +170,7 @@ class CardProfile extends React.Component{
                             <p>{this.props.contactEmail}</p>
                             <p>{this.props.phone}</p>
                             <div className="container-profile-link">
-                                  <a className="profile-link" target="_blank" href={this.props.link}>Pagina oficiala</a>
+                                  <a className="profile-link" target="_blank" href={this.props.link}>Pagina oficială</a>
                             </div>
                  
                         </div>
@@ -211,11 +211,11 @@ class CardProfile extends React.Component{
                 </div>
             <div className="profile-association-card-general">
             <div>
-                    <label className="profile-association-card-general-title">Motto Asociatie</label>
+                    {this.props.motto !== null && <label className="profile-association-card-general-title">Motto Asociație</label>}
                     <p className="profile-association-card-general-info">{this.props.motto}</p>
                     </div>
                     <div>
-                    <label className="profile-association-card-general-title">Despre Asociatie</label>
+                    {this.props.description !== null && <label className="profile-association-card-general-title">Despre Asociație</label>}
                     <p id="profile-assoc-description" className="profile-association-card-general-info">{this.props.description}</p>
                     </div>
             </div>
